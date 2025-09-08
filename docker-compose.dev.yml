@@ -1,0 +1,17 @@
+services:
+  api:
+    env_file:
+      - .env.dev
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - .:/app:cached
+    environment:
+      ENVIRONMENT: dev
+    restart: unless-stopped
+
+  db:
+    env_file:
+      - .env.dev
+    ports:
+      - "5432:5432" # expose for local DB client
+    restart: unless-stopped

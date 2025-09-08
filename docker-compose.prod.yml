@@ -1,0 +1,14 @@
+services:
+  api:
+    env_file:
+      - .env.prod
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 2
+    environment:
+      ENVIRONMENT: prod
+    restart: always
+
+  db:
+    env_file:
+      - .env.prod
+    # No port mapping for security in production
+    restart: always
