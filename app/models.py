@@ -13,7 +13,7 @@ class PromptExample(Base):
 class Word(Base):
     __tablename__ = "words"
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    word: Mapped[str] = mapped_column(String(100))
+    word: Mapped[str] = mapped_column(String(150), nullable=True) # if ite's verb - infinitive, noun - singular form with definite article, adjective - het form w/o e at the end
     part_of_speech: Mapped[str] = mapped_column(String(25)) # e.g adjective, noun, verb
     meaning: Mapped[str] = mapped_column(String(100))
     
@@ -23,12 +23,14 @@ class Word(Base):
     # Relationship to Level
     level: Mapped["Level"] = relationship("Level", back_populates="words")
     
-    # 1-to-1 relationship with VerbForm (optional - only for verbs)
-    verb_form: Mapped["VerbForm"] = relationship("VerbForm", back_populates="word", uselist=False)
-    # 1-to-1 relationship with NounForm (optional - only for nouns)
-    noun_form: Mapped["NounForm"] = relationship("NounForm", back_populates="word", uselist=False)
+    # 1-to-1 relationship with Verb (optional - only for verbs)
+    verb_form: Mapped["Verb"] = relationship("Verb", back_populates="word", uselist=False)
+    # 1-to-1 relationship with Noun (optional - only for nouns)
+    noun_form: Mapped["Noun"] = relationship("Noun", back_populates="word", uselist=False)
+    # 1-to-1 relationship with Numeral (optional - only for numerals)
+    numeral_form: Mapped["Numeral"] = relationship("Numeral", back_populates="word", uselist=False)
      # 1-to-1 relationship with AdjectiveForm (optional - only for adjectives)
-    adjective_form: Mapped["AdjectiveForm"] = relationship("AdjectiveForm", back_populates="word", uselist=False)
+    adjective_form: Mapped["Adjective"] = relationship("Adjective", back_populates="word", uselist=False)
     
     # Many-to-many relationship with Category
     category_words: Mapped[List["CategoryWord"]] = relationship("CategoryWord", back_populates="word")
@@ -36,16 +38,10 @@ class Word(Base):
     # Many-to-many relationship with AppUser
     app_user_words: Mapped[List["AppUserWord"]] = relationship("AppUserWord", back_populates="word")
 
-class VerbForm(Base):
-    __tablename__ = "verb_forms"
+class Verb(Base):
+    __tablename__ = "verbs"
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    
-    # 1-to-1 relationship with Word
-    word_id: Mapped[int] = mapped_column(ForeignKey("words.id"), unique=True)
-    word: Mapped["Word"] = relationship("Word", back_populates="verb_form")
-    
     infinitive: Mapped[str] = mapped_column(String(100))
-    modal: Mapped[bool] = mapped_column(default=False)
     
     # Present Simple (Onvoltooid Tegenwoordige Tijd)
     present_simple_1st_singular: Mapped[str] = mapped_column(String(100), nullable=True)  # ik
@@ -69,25 +65,49 @@ class VerbForm(Base):
     # Irregular verb indicators
     is_irregular: Mapped[bool] = mapped_column(default=False)
     is_strong_verb: Mapped[bool] = mapped_column(default=False)  # strong vs weak verbs
-    
+    is_modal: Mapped[bool] = mapped_column(default=False)
+
+    # 1-to-1 relationship with Word
+    word_id: Mapped[int] = mapped_column(ForeignKey("words.id"), unique=True)
+    word: Mapped["Word"] = relationship("Word", back_populates="verb_form")
+
     created_at: Mapped[DateTime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     
-class NounForm(Base):
-    __tablename__ = "noun_forms"
+class Noun(Base):
+    __tablename__ = "nouns"
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    indefinite_article: Mapped[str] = mapped_column(String(5), nullable=True)
-    definite_article: Mapped[str] = mapped_column(String(5), nullable=True)
-    diminutive: Mapped[str] = mapped_column(String(100))
-    plural: Mapped[str] = mapped_column(String(100))
+    noun: Mapped[str] = mapped_column(String(150), nullable=True) # with - de/het article
+    indefinite_article: Mapped[str] = mapped_column(String(5), nullable=True) # if possible
+    diminutive: Mapped[str] = mapped_column(String(100), nullable=True)
+    plural: Mapped[str] = mapped_column(String(100), nullable=True)
+    possessive_form_singular: Mapped[str] = mapped_column(String(150), nullable=True) # if possible with 's 
+    possessive_form_plural: Mapped[str] = mapped_column(String(150), nullable=True) # if possible
     # 1-to-1 relationship with Word
     word_id: Mapped[int] = mapped_column(ForeignKey("words.id"), unique=True)
     word: Mapped["Word"] = relationship("Word", back_populates="noun_form")
 
-class AdjectiveForm(Base):
-    __tablename__ = "adjective_forms"
+    created_at: Mapped[DateTime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+class Numeral(Base):
+    __tablename__ = "numerals"
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    comparison: Mapped[str] = mapped_column(String(100))
-    superlative: Mapped[str] = mapped_column(String(100))
+    numeral: Mapped[str] = mapped_column(String(150), nullable=True) # the number word (e.g. "drie", "twintig")
+    numeric_value: Mapped[int] = mapped_column(Integer, nullable=True) # the actual number (e.g. 3, 20)
+    ordinal_form: Mapped[str] = mapped_column(String(100), nullable=True) # ordinal form (e.g. "derde", "twintigste")
+    
+    # 1-to-1 relationship with Word
+    word_id: Mapped[int] = mapped_column(ForeignKey("words.id"), unique=True)
+    word: Mapped["Word"] = relationship("Word", back_populates="numeral_form")
+
+    created_at: Mapped[DateTime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+class Adjective(Base):
+    __tablename__ = "adjectives"
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    adjective: Mapped[str] = mapped_column(String(150), nullable=True)
+    de_form: Mapped[str] = mapped_column(String(150), nullable=True) # if applicable
+    comparison: Mapped[str] = mapped_column(String(100), nullable=True)
+    superlative: Mapped[str] = mapped_column(String(100), nullable=True)
      # 1-to-1 relationship with Word
     word_id: Mapped[int] = mapped_column(ForeignKey("words.id"), unique=True)
     word: Mapped["Word"] = relationship("Word", back_populates="adjective_form")
@@ -142,7 +162,7 @@ class Level(Base):
     __tablename__ = "levels"
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     level: Mapped[str] = mapped_column(String(15)) # A2, B1
-    
+    count: Mapped[int] = mapped_column(Integer, default=0) 
     # One-to-many relationship with AppUser
     users: Mapped[List["AppUser"]] = relationship("AppUser", back_populates="level")
     
