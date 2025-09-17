@@ -26,7 +26,7 @@ async def get_app_user_words(user_id: int, limit: int, session: AsyncSession = D
             for item in words_only
         ]
         # await save_user_words(rows, session)
-        return [serialize(item, 0) for item in words_only]
+        return [serialize(item[0], item[1]) for item in result]
             
     if len(app_user.app_user_words):
         print("user has words")
