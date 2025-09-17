@@ -1,8 +1,14 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query, Path
+from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, delete, func
+from sqlalchemy import select, delete, func, and_
+from sqlalchemy.orm import joinedload, selectinload
+from sqlalchemy.dialects.postgresql import insert as pg_insert
+
+from ..services.word import get_random_words, save_user_words
+from ..controllers.word import get_user_ranked_words
 from ..db import get_session
-from ..models import PromptExample, Word, Level, Category
+from ..models import AppUserWord, PromptExample, Word, Level, Category, AppUser
 from ..schemas import PromptExampleCreate, PromptExampleRead, ChatRequest, ChatResponse
 from ..services.ai import AIService
 
@@ -144,3 +150,63 @@ async def get_sample_words_by_level(level_name: str, limit: int = 10, session: A
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
+
+# Test routes return users
+@router.get("/test/users")
+async def get_app_user_list(session: AsyncSession = Depends(get_session)):
+    """Get user list"""
+    try:
+        result = await session.execute(
+            select(AppUser).options(joinedload(AppUser.level)).order_by(AppUser.id)
+        )
+        users = result.scalars().all()
+        return [
+            {
+                "id": u.id,
+                # "username": u.username,
+                # "email": u.email,
+                "level": u.level.level if u.level else None,
+            }
+            for u in users
+        ]
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
+    
+@router.get("/words/app-user/{user_id}")
+async def get_app_user_words(user_id: int = Path(..., gt=0), limit: int = Query(15, ge=1, le=100), session: AsyncSession = Depends(get_session)):
+    # check user exist 
+    # get user level
+    # check user has 10 words with rank <= limit
+    # return 10 randow words of hiw level
+    try: 
+         # 1) load the user (and level)
+        app_user = await session.get(AppUser, user_id, options=[selectinload(AppUser.app_user_words).joinedload(AppUserWord.word)])
+        if not app_user:
+            raise HTTPException(404, "User not found")
+        
+        words = []
+        rows = []
+        if len(app_user.app_user_words) == 0:
+            print("user doesn't have words")
+            # 2) fetch random words for that level when user has no words
+            words = await get_random_words([Word.level_id == app_user.level_id], limit, session)
+            rows = [
+                {"app_user_id": user_id, "word_id": item['word'].id, "rank": 0}
+                for item in words
+            ]
+            await save_user_words(rows, session)
+
+            return [
+                {"id": item['word'].id, "word": item['word'].word, "part_of_speech": item['word'].part_of_speech, "meaning": item['word'].meanin, "rank": item['rank']}
+                for item in words
+            ]
+            
+        if len(app_user.app_user_words):
+            print("user has words")
+            # 3) return words for the user
+            result = await get_user_ranked_words(limit, app_user, session)
+            return result
+        
+    except SQLAlchemyError:
+        await session.rollback()
+        raise HTTPException(500, "Database error")

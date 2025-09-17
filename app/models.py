@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import String, Text, DateTime, func, ForeignKey, Integer
+from sqlalchemy import CheckConstraint, String, Text, DateTime, UniqueConstraint, func, ForeignKey, Integer
 from typing import List
 from .db import Base
 
@@ -12,17 +12,15 @@ class PromptExample(Base):
 
 class Word(Base):
     __tablename__ = "words"
+    __table_args__ = (UniqueConstraint("word", "part_of_speech", name="uq_words_token_pos"), CheckConstraint("part_of_speech IN ('verb','noun','adjective','numeral')", name="ck_pos"),)
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    word: Mapped[str] = mapped_column(String(150), nullable=True) # if ite's verb - infinitive, noun - singular form with definite article, adjective - het form w/o e at the end
-    part_of_speech: Mapped[str] = mapped_column(String(25)) # e.g adjective, noun, verb
-    meaning: Mapped[str] = mapped_column(String(100))
+    word: Mapped[str] = mapped_column(String(150), nullable=False) # if ite's verb - infinitive, noun - singular form with definite article, adjective - het form w/o e at the end
+    part_of_speech: Mapped[str] = mapped_column(String(25), nullable=False) # e.g adjective, noun, verb
     
     # Foreign key to Level (many words can have the same level)
     level_id: Mapped[int] = mapped_column(ForeignKey("levels.id"))
-    
     # Relationship to Level
     level: Mapped["Level"] = relationship("Level", back_populates="words")
-    
     # 1-to-1 relationship with Verb (optional - only for verbs)
     verb_form: Mapped["Verb"] = relationship("Verb", back_populates="word", uselist=False)
     # 1-to-1 relationship with Noun (optional - only for nouns)
@@ -31,12 +29,24 @@ class Word(Base):
     numeral_form: Mapped["Numeral"] = relationship("Numeral", back_populates="word", uselist=False)
      # 1-to-1 relationship with AdjectiveForm (optional - only for adjectives)
     adjective_form: Mapped["Adjective"] = relationship("Adjective", back_populates="word", uselist=False)
-    
     # Many-to-many relationship with Category
     category_words: Mapped[List["CategoryWord"]] = relationship("CategoryWord", back_populates="word")
-    
     # Many-to-many relationship with AppUser
     app_user_words: Mapped[List["AppUserWord"]] = relationship("AppUserWord", back_populates="word")
+    # One-to-many relationship with Meaning
+    meanings:  Mapped[List["Meaning"]] = relationship("Meaning", back_populates="word", cascade="all, delete-orphan")
+
+class Meaning(Base):
+    __tablename__ = "meanings"
+    __table_args__ = (UniqueConstraint("word_id", "meaning", name="uq_meaning_per_word"),)
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    meaning = mapped_column(String(200), nullable=False)
+    usage = mapped_column(Text, nullable=True) # context
+    example = mapped_column(Text, nullable=True)
+    example_translation = mapped_column(Text, nullable=True)
+    # One-to-many relationship with Word
+    word_id: Mapped[int] = mapped_column(ForeignKey("words.id"), nullable=False, index=True)
+    word: Mapped["Word"] = relationship("Word", back_populates="meanings")
 
 class Verb(Base):
     __tablename__ = "verbs"
@@ -138,10 +148,8 @@ class AppUser(Base):
     
     # Foreign key to Level (many users can have the same level)
     level_id: Mapped[int] = mapped_column(ForeignKey("levels.id"))
-    
     # Relationship to Level
     level: Mapped["Level"] = relationship("Level", back_populates="users")
-    
     # Many-to-many relationship with Word through AppUserWord
     app_user_words: Mapped[List["AppUserWord"]] = relationship("AppUserWord", back_populates="app_user")
 

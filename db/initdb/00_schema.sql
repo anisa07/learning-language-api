@@ -28,10 +28,20 @@ CREATE TABLE IF NOT EXISTS words (
     id SERIAL PRIMARY KEY,
     word VARCHAR(150),
     part_of_speech VARCHAR(25) NOT NULL,
-    meaning VARCHAR(100) NOT NULL,
     level_id INTEGER REFERENCES levels(id),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-    UNIQUE(word, meaning) -- Allow same word with different meanings
+    UNIQUE(word, part_of_speech) -- Allow same word with different meanings
+);
+
+-- Create meanings table 1-to-many connection with word
+CREATE TABLE IF NOT EXISTS meanings (
+  id SERIAL PRIMARY KEY,
+  word_id INTEGER NOT NULL REFERENCES words(id) ON DELETE CASCADE,
+  meaning VARCHAR(200) NOT NULL,
+  usage TEXT,
+  example TEXT,
+  example_translation Text,
+  CONSTRAINT uq_meaning_per_word UNIQUE (word_id, meaning)
 );
 
 -- Create verbs table (1-to-1 with words where part_of_speech = 'verb')
@@ -140,3 +150,4 @@ CREATE INDEX IF NOT EXISTS idx_category_words_category_id ON category_words(cate
 CREATE INDEX IF NOT EXISTS idx_category_words_word_id ON category_words(word_id);
 CREATE INDEX IF NOT EXISTS idx_app_user_words_user_id ON app_user_words(app_user_id);
 CREATE INDEX IF NOT EXISTS idx_app_user_words_word_id ON app_user_words(word_id);
+CREATE INDEX IF NOT EXISTS idx_meanings_word_id ON meanings(word_id);
