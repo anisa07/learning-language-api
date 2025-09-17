@@ -5,7 +5,7 @@ from sqlalchemy import ColumnElement, case, exists, select, delete, func, and_, 
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload, selectinload
 from sqlalchemy.dialects.postgresql import insert as pg_insert
-from typing import Optional, List
+from typing import List
 
 from app.schemas import WordRank
 from ..db import get_session
