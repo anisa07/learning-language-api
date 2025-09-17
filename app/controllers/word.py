@@ -1,10 +1,13 @@
 from fastapi import Depends, HTTPException
 from enum import Enum
+from sqlalchemy import case, select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 from math import floor
 
-from ..services.word import bucket_rank, count_bucket, get_random_words, pick_from_bucket, save_user_words, select_new_words, serialize, get_user_words
-from ..models import AppUser, Word
+from app.schemas import BatchSetRanks
+
+from ..services.word import bucket_rank, count_bucket, get_random_words, get_words_rank, pick_from_bucket, save_user_words, select_new_words, serialize, get_user_words, update_words_ranks
+from ..models import AppUser, AppUserWord, Word
 from ..db import get_session
 
 async def get_app_user_words(user_id: int, limit: int, session: AsyncSession = Depends(get_session)):
@@ -25,7 +28,7 @@ async def get_app_user_words(user_id: int, limit: int, session: AsyncSession = D
             {"app_user_id": user_id, "word_id": item.id, "rank": 0}
             for item in words_only
         ]
-        # await save_user_words(rows, session)
+        await save_user_words(rows, session)
         return [serialize(item[0], item[1]) for item in result]
             
     if len(app_user.app_user_words):
@@ -94,3 +97,17 @@ async def get_user_ranked_words(limit: int, app_user: AppUser, session: AsyncSes
         selected_ids.update(w.id for w in new_words)
         
     return [serialize(item['word'], item['rank']) for item in selected[:limit]]
+
+async def update_user_words_ranks(user_id: int, body: BatchSetRanks = [], session: AsyncSession = Depends(get_session)):
+    app_user = await get_user_words(user_id, session)
+    
+    if not app_user:
+        raise HTTPException(404, "User not found")
+    
+    if not body.items:
+        return []
+    
+    word_ids = await update_words_ranks(user_id, body.items, session)
+    items = await  get_words_rank(user_id, word_ids, session)
+    
+    return items

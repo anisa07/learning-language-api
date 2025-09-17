@@ -1,12 +1,54 @@
 from enum import Enum
 from fastapi import Depends
 from math import floor
-from sqlalchemy import ColumnElement, exists, select, delete, func, and_
+from sqlalchemy import ColumnElement, case, exists, select, delete, func, and_, update
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload, selectinload
 from sqlalchemy.dialects.postgresql import insert as pg_insert
+from typing import Optional, List
+
+from app.schemas import WordRank
 from ..db import get_session
 from ..models import AppUser, AppUserWord, PromptExample, Word, Level, Category
+
+async def update_words_ranks(user_id: int, items: List[WordRank], session: AsyncSession = Depends(get_session)):
+     # de-dup by word_id (keep last) do we really need it?
+    dedup = {}
+    for it in items:
+        dedup[it.word_id] = it.rank
+        
+    word_ids = list(dedup.keys())
+    rank_map = dedup  # {word_id: rank}
+    
+     # CASE over word_id to set different ranks in one UPDATE
+    rank_case = case(rank_map, value=AppUserWord.word_id)
+    
+    stmt = (
+        update(AppUserWord)
+        .where(
+            AppUserWord.app_user_id == user_id,
+            AppUserWord.word_id.in_(word_ids),
+        )
+        .values(rank=rank_case)
+    )
+    
+    await session.execute(stmt)
+    await session.commit()
+    
+    return word_ids
+
+async def get_words_rank(user_id: int, word_ids: List, session: AsyncSession = Depends(get_session)):
+    # Read back the updated rows (portable across DBs)
+    sel = (
+        select(AppUserWord.word_id, AppUserWord.rank)
+        .where(
+            AppUserWord.app_user_id == user_id,
+            AppUserWord.word_id.in_(word_ids),
+        )
+    )
+    res = await session.execute(sel)
+    items = [{"user_id": user_id, "word_id": wid, "rank": r} for (wid, r) in res.all()]
+    return items
 
 async def get_user_words(user_id: int, session: AsyncSession = Depends(get_session)):
     return await session.get(AppUser, user_id, options=[selectinload(AppUser.app_user_words).joinedload(AppUserWord.word)])

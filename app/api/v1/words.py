@@ -1,10 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException, Query, Path
-from sqlalchemy import select, func
+from sqlalchemy import case, select, func, update
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload, selectinload
-from app.models import AppUser, Category, Level, Word
-from ...controllers.word import get_app_user_words as get_user_words
+from app.models import AppUser, AppUserWord, Category, Level, Word
+from app.schemas import BatchSetRanks
+from ...controllers.word import get_app_user_words as get_user_words, update_user_words_ranks
 from ...db import get_session
 from ...services.ai import AIService
 
@@ -27,7 +28,23 @@ async def get_app_user_words(user_id: int = Path(..., gt=0), limit: int = Query(
     except SQLAlchemyError:
         await session.rollback()
         raise HTTPException(500, "Database error")
-    
+
+@router.patch("/words/app-user/{user_id}")
+async def update_app_user_words_rank(user_id: int = Path(..., gt=0), body: BatchSetRanks = [], session: AsyncSession = Depends(get_session)):
+    """
+    - update list of user's word's ranks
+    - check user exist
+    - body is list of dict {items: [{ "word_id": int, "rank": int }]}
+    - return back updated list
+    """
+    try:
+        return await update_user_words_ranks(user_id, body, session)
+        
+    except SQLAlchemyError:
+        await session.rollback()
+        raise HTTPException(500, "Database error")
+    pass
+
 # Test routes return users
 @router.get("/test/users")
 async def get_app_user_list(session: AsyncSession = Depends(get_session)):
@@ -40,8 +57,6 @@ async def get_app_user_list(session: AsyncSession = Depends(get_session)):
         return [
             {
                 "id": u.id,
-                # "username": u.username,
-                # "email": u.email,
                 "level": u.level.level if u.level else None,
             }
             for u in users

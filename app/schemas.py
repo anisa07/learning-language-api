@@ -174,3 +174,10 @@ class ChatResponse(BaseModel):
     output: str
     provider: str
     model: str
+    
+class WordRank(BaseModel):
+    word_id: int
+    rank: int
+
+class BatchSetRanks(BaseModel):
+    items: List[WordRank]
