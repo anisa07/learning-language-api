@@ -83,11 +83,11 @@ async def pick_from_bucket(cond, n: int, user_id: int, selected_ids: set, sessio
     """Pick users words"""
     if n <= 0:
         return []
-                
+    print(cond)            
     stmt = (
         select(Word, AppUserWord.rank)
-        .join(AppUserWord, and_(AppUserWord.word_id == Word.id, AppUserWord.app_user_id == user_id, cond), isouter=True)
-        .where(~Word.id.in_(selected_ids))
+        .join(AppUserWord, AppUserWord.word_id == Word.id)
+        .where(AppUserWord.app_user_id == user_id, cond, ~Word.id.in_(selected_ids))
         .options(
             selectinload(Word.meanings), 
             selectinload(Word.verb_form),

@@ -38,6 +38,11 @@ async def get_app_user_words(user_id: int, limit: int, session: AsyncSession = D
         return result
 
 async def get_user_ranked_words(limit: int, app_user: AppUser, session: AsyncSession = Depends(get_session)):
+    user_words = await session.execute(
+        select(AppUserWord.word_id, AppUserWord.rank).where(AppUserWord.app_user_id == app_user.id)
+    )
+    print("User assigned words:", user_words.all())
+    
     buckets = bucket_rank()
     
     for b in buckets.values():
