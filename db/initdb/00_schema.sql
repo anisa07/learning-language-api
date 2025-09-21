@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS meanings (
   meaning VARCHAR(200) NOT NULL,
   usage TEXT,
   example TEXT,
-  example_translation Text,
+  example_translation TEXT,
   CONSTRAINT uq_meaning_per_word UNIQUE (word_id, meaning)
 );
 

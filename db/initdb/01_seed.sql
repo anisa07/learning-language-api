@@ -161,13 +161,13 @@ BEGIN
     ('er', 'adverb', a2_level_id),
     ('er', 'pronoun', a2_level_id),
     ('eruit', 'adverb', a2_level_id),
-    ('de ervaringen', 'noun', a2_level_id),
+    ('de ervaring', 'noun', a2_level_id),
     ('europees', 'adjective', a2_level_id),
     ('even', 'adverb', a2_level_id),
     ('even', 'adjective',  a2_level_id),
     ('eveneens', 'adverb', a2_level_id),
     ('het examen', 'noun', a2_level_id),
-    ('de fases', 'noun', a2_level_id),
+    ('de fase', 'noun', a2_level_id),
     ('de foto', 'noun', a2_level_id),
     ('frans', 'adjective', a2_level_id),
     ('de fransman', 'noun', a2_level_id),
@@ -800,7 +800,7 @@ WITH data(word, pos, meaning, "usage", example, example_translation) AS (
     ('er','pronoun','it',NULL,NULL,NULL),
     ('eruit','adverb','out of it',NULL,NULL,NULL),
     ('eruit','adverb','from it',NULL,NULL,NULL),
-    ('de ervaringen','noun','experiences',NULL,NULL,NULL),
+    ('de ervaring','noun','experience',NULL,NULL,NULL),
     ('europees','adjective','European',NULL,NULL,NULL),
     ('even','adverb','just',NULL,NULL,NULL),
     ('even','adverb','for a moment',NULL,NULL,NULL),
@@ -810,8 +810,6 @@ WITH data(word, pos, meaning, "usage", example, example_translation) AS (
     ('eveneens','adverb','as well',NULL,NULL,NULL),
     ('het examen','noun','exam',NULL,NULL,NULL),
     ('het examen','noun','examination',NULL,NULL,NULL),
-    ('de fases','noun','phases',NULL,NULL,NULL),
-    ('de fases','noun','stages',NULL,NULL,NULL),
     ('de foto','noun','photo',NULL,NULL,NULL),
     ('de foto','noun','picture',NULL,NULL,NULL),
     ('frans','adjective','French',NULL,NULL,NULL),
@@ -1218,6 +1216,7 @@ ON CONFLICT (word_id, meaning) DO NOTHING;
 INSERT INTO nouns
 (word_id, noun, indefinite_article, diminutive, plural, possessive_form_singular, possessive_form_plural)
 VALUES
+((SELECT id FROM words WHERE word='de druif' AND part_of_speech='noun' LIMIT 1), 'de druif', 'een', 'het druifje', 'druiven', NULL, NULL),
 ((SELECT id FROM words WHERE word='de stad' AND part_of_speech='noun' LIMIT 1), 'de stad', 'een', 'het stadje', 'steden', NULL, NULL),
 ((SELECT id FROM words WHERE word='het huis' AND part_of_speech='noun' LIMIT 1), 'het huis', 'een', 'het huisje', 'huizen', NULL, NULL),
 ((SELECT id FROM words WHERE word='de vriend' AND part_of_speech='noun' LIMIT 1), 'de vriend', 'een', 'het vriendje', 'vrienden', NULL, NULL),
@@ -1504,6 +1503,8 @@ INSERT INTO verbs (
     word_id
 )
 VALUES
+('gelden', 'geld','geldt','geldt','geldt','gelden','gold','golden','gegolden','hebben', NULL,false,true,false,false,(SELECT id FROM words WHERE word='gelden' AND part_of_speech='verb' LIMIT 1)),
+('houden', 'houd','houdt','houdt','houdt','houden','hield','hielden','gehouden','hebben', NULL,false,true,false,false,(SELECT id FROM words WHERE word='houden' AND part_of_speech='verb' LIMIT 1)),
 ('zijn',    'ben','bent','bent','is','zijn','was','waren','geweest','zijn',   NULL,false,true, true, false,(SELECT id FROM words WHERE word='zijn'    AND part_of_speech='verb' LIMIT 1)),
 ('hebben',  'heb','hebt','hebt','heeft','hebben','had','hadden','gehad','hebben',NULL,false,true, false,false,(SELECT id FROM words WHERE word='hebben'  AND part_of_speech='verb' LIMIT 1)),
 ('gaan',    'ga', 'gaat','gaat','gaat','gaan','ging','gingen','gegaan','zijn', NULL,false,true, true, false,(SELECT id FROM words WHERE word='gaan'    AND part_of_speech='verb' LIMIT 1)),

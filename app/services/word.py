@@ -9,7 +9,7 @@ from typing import List
 
 from app.schemas import WordRank
 from ..db import get_session
-from ..models import AppUser, AppUserWord, PromptExample, Word, Level, Category
+from ..models import AppUser, AppUserWord, CategoryWord, PromptExample, Word, Level, Category
 
 async def update_words_ranks(user_id: int, items: List[WordRank], session: AsyncSession = Depends(get_session)):
      # de-dup by word_id (keep last) do we really need it?
@@ -50,13 +50,15 @@ async def get_words_rank(user_id: int, word_ids: List, session: AsyncSession = D
     items = [{"user_id": user_id, "word_id": wid, "rank": r} for (wid, r) in res.all()]
     return items
 
-async def get_user_words(user_id: int, session: AsyncSession = Depends(get_session)):
+async def get_user_words(user_id: int, session: AsyncSession):
     return await session.get(AppUser, user_id, options=[selectinload(AppUser.app_user_words).joinedload(AppUserWord.word)])
 
 async def get_random_words(conditions: list[ColumnElement[bool]], limit: int, session: AsyncSession = Depends(get_session)):
     stmt = (
-        select(Word, AppUserWord.rank)
+        select(Word, AppUserWord.rank, Category.category)
         .join(AppUserWord, AppUserWord.word_id == Word.id, isouter=True)
+        .join(CategoryWord, CategoryWord.word_id == Word.id, isouter=True)
+        .join(Category, CategoryWord.category_id == Category.id, isouter=True)
         .where(*conditions)
         .options(
             selectinload(Word.meanings),
@@ -85,8 +87,10 @@ async def pick_from_bucket(cond, n: int, user_id: int, selected_ids: set, sessio
         return []
     print(cond)            
     stmt = (
-        select(Word, AppUserWord.rank)
-        .join(AppUserWord, AppUserWord.word_id == Word.id)
+        select(Word, AppUserWord.rank, Category.category)
+        .join(AppUserWord, AppUserWord.word_id == Word.id, isouter=True)
+        .join(CategoryWord, CategoryWord.word_id == Word.id, isouter=True)
+        .join(Category, CategoryWord.category_id == Category.id, isouter=True)
         .where(AppUserWord.app_user_id == user_id, cond, ~Word.id.in_(selected_ids))
         .options(
             selectinload(Word.meanings), 
@@ -123,49 +127,28 @@ async def select_new_words(app_user: AppUser, limit: int, selected_ids: set, ses
     
     return await get_random_words(conditions, limit, session)
                                           
-async def count_bucket(cond, user_id: int, session: AsyncSession = Depends(get_session)):
-    """Count how many user words exist in each bucket satisfying condtion"""
-    q = select(func.count()).select_from(AppUserWord).where(
-        AppUserWord.app_user_id == user_id, cond
-    )
-    return (await session.execute(q)).scalar_one()
+# class POS(str, Enum):
+#     verb = "verb"
+#     noun = "noun"
+#     adjective = "adjective"
+#     numeral = "numeral"
 
-def bucket_rank():
-    """
-    Define non-overlapping rank buckets + target shares
-        5% from rank = 15
-        30% from rank 10–14
-        30% from rank 5–9
-        the remainder from rank 0–4
-    """
-    return {
-        "r15":  dict(cond=(AppUserWord.rank == 15), share=0.05, want=0, have=0),
-        "r10":  dict(cond=and_(AppUserWord.rank >= 10, AppUserWord.rank <= 14), share=0.30, want=0, have=0),
-        "r5":   dict(cond=and_(AppUserWord.rank >= 5,  AppUserWord.rank <= 9),  share=0.30, want=0, have=0),
-        "r0":   dict(cond=and_(AppUserWord.rank >= 0,  AppUserWord.rank <= 4),  share=None, want=0, have=0),  # gets the remainder
-    }
+# RELATION_BY_POS = {
+#     POS.verb: Word.verb_form,
+#     POS.noun: Word.noun_form,
+#     POS.adjective: Word.adjective_form,
+#     POS.numeral: Word.numeral_form,
+# }
 
-class POS(str, Enum):
-    verb = "verb"
-    noun = "noun"
-    adjective = "adjective"
-    numeral = "numeral"
-
-RELATION_BY_POS = {
-    POS.verb: Word.verb_form,
-    POS.noun: Word.noun_form,
-    POS.adjective: Word.adjective_form,
-    POS.numeral: Word.numeral_form,
-}
-
-def serialize(w: Word, rank: int):
+def serialize(w: Word, rank: int, category: str):
     out = {
         "id": w.id,
         "word": w.word,
         "part_of_speech": w.part_of_speech,
         # "meaning": w.meaning,
-        "meanings": [m.meaning for m in w.meanings],
+        "meanings": [m for m in w.meanings],
         "rank": rank,  # 0 if user doesn't have it yet
+        "category": category
     }
     pos = w.part_of_speech
     print(pos)

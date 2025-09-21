@@ -15,19 +15,19 @@ router = APIRouter()
 ai = AIService()
     
 @router.get("/words/app-user/{user_id}")
-async def get_app_user_words(user_id: int = Path(..., gt=0), limit: int = Query(15, ge=1, le=100), session: AsyncSession = Depends(get_session)):
+async def get_app_user_words(user_id: int = Path(..., gt=0), limit: int = Query(15, ge=1, le=100)):
     """
     - check user exist 
     - get user level
     - check user has {{ limit }} words
     - return {{ limit }} randow words of hiw level
     """
-    try: 
-        return await get_user_words(user_id, limit, session)
+    # try: 
+    return await get_user_words(user_id, limit)
         
-    except SQLAlchemyError:
-        await session.rollback()
-        raise HTTPException(500, "Database error")
+    # except SQLAlchemyError:
+    #     # await session.rollback()
+    #     raise HTTPException(500, "Database error")
 
 @router.patch("/words/app-user/{user_id}")
 async def update_app_user_words_rank(user_id: int = Path(..., gt=0), body: BatchSetRanks = [], session: AsyncSession = Depends(get_session)):
