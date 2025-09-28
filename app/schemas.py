@@ -181,3 +181,6 @@ class WordRank(BaseModel):
 
 class BatchSetRanks(BaseModel):
     items: List[WordRank]
+
+class AppUserWords(BaseModel):
+    words: List[int]

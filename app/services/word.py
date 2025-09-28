@@ -53,6 +53,70 @@ async def get_words_rank(user_id: int, word_ids: List, session: AsyncSession = D
 async def get_user_words(user_id: int, session: AsyncSession):
     return await session.get(AppUser, user_id, options=[selectinload(AppUser.app_user_words).joinedload(AppUserWord.word)])
 
+async def get_word_list(limit: int, session: AsyncSession = Depends(get_session)):
+    stmt = (
+        select(Word, Category.category)
+        .join(CategoryWord, CategoryWord.word_id == Word.id, isouter=True)
+        .join(Category, CategoryWord.category_id == Category.id, isouter=True)
+        .options(
+            selectinload(Word.meanings),
+            selectinload(Word.verb_form),
+            selectinload(Word.noun_form),
+            selectinload(Word.adjective_form),
+            selectinload(Word.numeral_form),
+        )
+    )
+    if limit and limit > 0:
+        stmt = stmt.limit(limit)
+        
+    result = await session.execute(stmt)
+    return result.all()
+
+async def update_app_user_word_list(user_id: int, words: List[int], session: AsyncSession = Depends(get_session)):
+    # Prepare all words for insertion
+    new_words = [
+        {
+            "app_user_id": user_id,
+            "word_id": word_id,
+            "rank": 0
+        }
+        for word_id in words
+    ]
+    
+    # Insert all words, duplicates will be ignored by on_conflict_do_nothing
+    if new_words:
+        insert_stmt = pg_insert(AppUserWord).values(new_words)
+        insert_stmt = insert_stmt.on_conflict_do_nothing(
+            index_elements=[AppUserWord.app_user_id, AppUserWord.word_id]
+        )
+        result = await session.execute(insert_stmt)
+        await session.commit()
+        
+        # Return number of rows actually inserted (new words only)
+        return result.rowcount
+    
+    return 0
+
+async def remove_app_user_word_list(user_id: int, words: List[int], session: AsyncSession = Depends(get_session)):
+    """Remove word IDs from user's word list (doesn't delete the actual words)"""
+    if not words:
+        return 0
+    
+    # Delete from AppUserWord table only
+    stmt = (
+        delete(AppUserWord)
+        .where(
+            AppUserWord.app_user_id == user_id,
+            AppUserWord.word_id.in_(words)
+        )
+    )
+    
+    result = await session.execute(stmt)
+    await session.commit()
+    
+    # Return number of rows deleted
+    return result.rowcount
+
 async def get_random_words(conditions: list[ColumnElement[bool]], limit: int, session: AsyncSession = Depends(get_session)):
     stmt = (
         select(Word, AppUserWord.rank, Category.category)
@@ -68,8 +132,11 @@ async def get_random_words(conditions: list[ColumnElement[bool]], limit: int, se
             selectinload(Word.numeral_form),
         )
         .order_by(func.random())           # PostgreSQL random order
-        .limit(limit)
     )
+    
+    if limit and limit > 0:
+        stmt = stmt.limit(limit)
+    
     result = await session.execute(stmt)
     return result.all()
 
@@ -85,7 +152,7 @@ async def pick_from_bucket(cond, n: int, user_id: int, selected_ids: set, sessio
     """Pick users words"""
     if n <= 0:
         return []
-    print(cond)            
+     
     stmt = (
         select(Word, AppUserWord.rank, Category.category)
         .join(AppUserWord, AppUserWord.word_id == Word.id, isouter=True)
@@ -100,8 +167,11 @@ async def pick_from_bucket(cond, n: int, user_id: int, selected_ids: set, sessio
             selectinload(Word.numeral_form),
         )
         .order_by(func.random())  # PostgreSQL
-        .limit(n)
     )
+    
+    if n and n > 0:
+        stmt = stmt.limit(n)
+        
     res = await session.execute(stmt)
     return res.all() #res.scalars().all()
   
@@ -126,6 +196,29 @@ async def select_new_words(app_user: AppUser, limit: int, selected_ids: set, ses
         conditions.append(~Word.id.in_(selected_ids))  # not already selected in this call
     
     return await get_random_words(conditions, limit, session)
+
+async def select_user_words_from_list(user_id: int, limit: int, session: AsyncSession = Depends(get_session)):
+    # Get the user's words directly from database after insertion
+    stmt = (
+        select(Word, AppUserWord.rank, Category.category)
+        .join(AppUserWord, AppUserWord.word_id == Word.id)
+        .join(CategoryWord, CategoryWord.word_id == Word.id, isouter=True)
+        .join(Category, CategoryWord.category_id == Category.id, isouter=True)
+        .where(AppUserWord.app_user_id == user_id)
+        .options(
+            selectinload(Word.meanings),
+            selectinload(Word.verb_form),
+            selectinload(Word.noun_form),
+            selectinload(Word.adjective_form),
+            selectinload(Word.numeral_form),
+        )
+    )
+        
+    if limit and limit > 0:
+        stmt = stmt.limit(limit)
+            
+    result = await session.execute(stmt)
+    return result.all()
                                           
 # class POS(str, Enum):
 #     verb = "verb"

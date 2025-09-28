@@ -4,8 +4,8 @@ from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload, selectinload
 from app.models import AppUser, AppUserWord, Category, Level, Word
-from app.schemas import BatchSetRanks
-from ...controllers.word import get_app_user_words as get_user_words, update_user_words_ranks
+from app.schemas import AppUserWords, BatchSetRanks
+from ...controllers.word import get_app_user_words as get_user_words, get_app_words, remove_app_user_words, update_app_words, update_user_words_ranks
 from ...db import get_session
 from ...services.ai import AIService
 
@@ -22,78 +22,35 @@ async def get_app_user_words(user_id: int = Path(..., gt=0), limit: int = Query(
     - check user has {{ limit }} words
     - return {{ limit }} randow words of hiw level
     """
-    # try: 
     return await get_user_words(user_id, limit)
-        
-    # except SQLAlchemyError:
-    #     # await session.rollback()
-    #     raise HTTPException(500, "Database error")
 
 @router.patch("/words/app-user/{user_id}")
-async def update_app_user_words_rank(user_id: int = Path(..., gt=0), body: BatchSetRanks = [], session: AsyncSession = Depends(get_session)):
+async def update_app_user_words_rank(user_id: int = Path(..., gt=0), body: BatchSetRanks = []):
     """
     - update list of user's word's ranks
     - check user exist
     - body is list of dict {items: [{ "word_id": int, "rank": int }]}
     - return back updated list
     """
-    try:
-        return await update_user_words_ranks(user_id, body, session)
-        
-    except SQLAlchemyError:
-        await session.rollback()
-        raise HTTPException(500, "Database error")
-    pass
+    return await update_user_words_ranks(user_id, body)
 
-# Test routes return users
-@router.get("/test/users")
-async def get_app_user_list(session: AsyncSession = Depends(get_session)):
-    """Get user list"""
-    try:
-        result = await session.execute(
-            select(AppUser).options(joinedload(AppUser.level)).order_by(AppUser.id)
-        )
-        users = result.scalars().all()
-        return [
-            {
-                "id": u.id,
-                "level": u.level.level if u.level else None,
-            }
-            for u in users
-        ]
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
- 
-@router.get("/test/stats")
-async def get_vocabulary_stats(session: AsyncSession = Depends(get_session)):
-    """Get vocabulary statistics for testing."""
-    try:
-        # Count words by level
-        level_stats = await session.execute(
-            select(Level.level, func.count(Word.id).label('word_count'))
-            .join(Word, Level.id == Word.level_id)
-            .group_by(Level.level)
-            .order_by(Level.level)
-        )
-        
-        # Count words by part of speech
-        pos_stats = await session.execute(
-            select(Word.part_of_speech, func.count(Word.id).label('word_count'))
-            .group_by(Word.part_of_speech)
-            .order_by(func.count(Word.id).desc())
-        )
-        
-        # Total counts
-        total_words = await session.execute(select(func.count(Word.id)))
-        total_levels = await session.execute(select(func.count(Level.id)))
-        total_categories = await session.execute(select(func.count(Category.id)))
-        
-        return {
-            "total_words": total_words.scalar(),
-            "total_levels": total_levels.scalar(),
-            "total_categories": total_categories.scalar(),
-            "words_by_level": {level: count for level, count in level_stats},
-            "words_by_part_of_speech": {pos: count for pos, count in pos_stats}
-        }
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
+@router.get("/words/list")
+async def get_app_word_list(limit: int = 0):
+    """
+    - retrun words form the system
+    """
+    return await get_app_words(limit)
+
+@router.post("/words/list/{user_id}")
+async def add_user_word_list(user_id: int = Path(..., gt=0), body: AppUserWords = { "words": [] }, limit: int = Query(0, ge=0, le=100)):
+    """
+    - push user new word list
+    """
+    return await update_app_words(user_id, body, limit)
+
+@router.delete("/words/list/{user_id}")
+async def remove_user_word_from_list(user_id: int = Path(..., gt=0), body: AppUserWords = { "words": [] }, limit: int = Query(0, ge=0, le=100)):
+    """
+    - remove list of words from of users words
+    """
+    return await remove_app_user_words(user_id, body, limit)

@@ -1,11 +1,13 @@
 from fastapi import Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy import select
+from sqlalchemy.orm import selectinload
 
-from app.schemas import BatchSetRanks
+from ..schemas import AppUserWords, BatchSetRanks
 
-from ..services.word import get_random_words, get_words_rank, save_user_words, serialize, get_user_words, update_words_ranks
-from ..models import AppUser, AppUserWord, Word
+from ..services.word import get_random_words, get_word_list, get_words_rank, remove_app_user_word_list, save_user_words, select_new_words, select_user_words_from_list, serialize, get_user_words, update_app_user_word_list, update_words_ranks
+from ..models import AppUser, AppUserWord, Word, Category, CategoryWord
 from ..db import get_session
 from ..services.word_pool import WordPool
 
@@ -41,7 +43,6 @@ async def get_app_user_words(user_id: int, limit: int):
        await session.rollback()
        raise HTTPException(500, "Database error")
     
-
 async def get_user_ranked_words(limit: int, app_user: AppUser, session: AsyncSession = Depends(get_session)):
     # user_words = await session.execute(
     #     select(AppUserWord.word_id, AppUserWord.rank).where(AppUserWord.app_user_id == app_user.id)
@@ -114,16 +115,77 @@ async def get_user_ranked_words(limit: int, app_user: AppUser, session: AsyncSes
     
     return [serialize(item['word'], item['rank'] or 0, item['category']) for item in selected[:limit]]
 
-async def update_user_words_ranks(user_id: int, body: BatchSetRanks = [], session: AsyncSession = Depends(get_session)):
-    app_user = await get_user_words(user_id, session)
+async def update_user_words_ranks(user_id: int, body: BatchSetRanks = []):
+    try:
+        session = await get_session()
+        app_user = await get_user_words(user_id, session)
+        
+        if not app_user:
+            raise HTTPException(404, "User not found")
+        
+        if not body.items:
+            return []
+        
+        word_ids = await update_words_ranks(user_id, body.items, session)
+        items = await get_words_rank(user_id, word_ids, session)
+        
+        return items
+    except SQLAlchemyError:
+        await session.rollback()
+
+async def get_app_words(limit: int):
+    try:
+        session = await get_session()
+        list = await get_word_list(limit, session)
+        
+        return [serialize(item[0], 0, item[1]) for item in list]
     
-    if not app_user:
-        raise HTTPException(404, "User not found")
+    except SQLAlchemyError:
+        await session.rollback()
+    pass
+
+async def update_app_words(user_id: int, body: AppUserWords, limit: int):
+    try:
+        session = await get_session()
+        app_user = await get_user_words(user_id, session)
+        
+        if not app_user:
+            raise HTTPException(404, "User not found")
+        
+        if not len(body.words):
+            return []
+        
+        # Add words to user's list
+        await update_app_user_word_list(user_id, body.words, session)
+        words = await select_user_words_from_list(user_id, limit, session)
+        
+        return [serialize(item[0], item[1] or 0, item[2]) for item in words]
     
-    if not body.items:
-        return []
+    except SQLAlchemyError as e:
+        await session.rollback()
+        await session.close()
+        raise HTTPException(500, f"Database error: {str(e)}")
     
-    word_ids = await update_words_ranks(user_id, body.items, session)
-    items = await  get_words_rank(user_id, word_ids, session)
     
-    return items
+async def remove_app_user_words(user_id: int, body: AppUserWords, limit: int):
+    try:
+        session = await get_session()
+        app_user = await get_user_words(user_id, session)
+        
+        if not app_user:
+            raise HTTPException(404, "User not found")
+        
+        if not len(body.words):
+            return []
+        
+        # Remove words from user's list
+        await remove_app_user_word_list(user_id, body.words, session)
+        
+        words = await select_user_words_from_list(user_id, limit, session)
+        
+        return [serialize(item[0], item[1] or 0, item[2]) for item in words]
+    
+    except SQLAlchemyError as e:
+        await session.rollback()
+        await session.close()
+        raise HTTPException(500, f"Database error: {str(e)}")
