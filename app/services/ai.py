@@ -1,4 +1,6 @@
 import httpx
+from huggingface_hub import InferenceClient
+from openai import AsyncOpenAI
 from ..config import settings
 
 class AIService:
@@ -15,40 +17,71 @@ class AIService:
             raise ValueError("Unsupported provider: " + provider)
 
     async def _chat_openai(self, prompt: str, system: str | None, model: str) -> tuple[str, str, str]:
-        base = settings.OPENAI_API_BASE or "https://api.openai.com/v1"
-        url = f"{base}/chat/completions"
-        headers = {"Authorization": f"Bearer {settings.OPENAI_API_KEY}"}
-        payload = {
-            "model": model,
-            "messages": ([{"role": "system", "content": system}] if system else []) +
-                        [{"role": "user", "content": prompt}],
-            "temperature": 0.2,
-        }
-        async with httpx.AsyncClient(timeout=60) as client:
-            r = await client.post(url, headers=headers, json=payload)
-            r.raise_for_status()
-            data = r.json()
-            text = data["choices"][0]["message"]["content"].strip()
-            return text, "openai", model
+        # Uses official OpenAI client
+        client = AsyncOpenAI(
+            api_key=settings.OPENAI_API_KEY,
+            base_url=settings.OPENAI_API_BASE or None,  # None uses default
+        )
+        
+        # Build messages array
+        messages = []
+        if system:
+            messages.append({"role": "system", "content": system})
+        messages.append({"role": "user", "content": prompt})
+        
+        try:
+            completion = await client.chat.completions.create(
+                model=model,
+                messages=messages,
+                temperature=0.2,
+                max_tokens=5000,
+            )
+            
+            response_text = completion.choices[0].message.content.strip()
+            return response_text, "openai", model
+            
+        except Exception as e:
+            raise Exception(f"OpenAI Client Error: {str(e)}")
 
     async def _chat_hf(self, prompt: str, system: str | None, model: str) -> tuple[str, str, str]:
-        # Uses text-generation (instruct) endpoint
-        url = f"https://api-inference.huggingface.co/models/{model}"
-        headers = {"Authorization": f"Bearer {settings.HF_API_KEY}"}
-        system_part = system + '\n' if system else ''
-        full_prompt = f"<s>[INST] {system_part}{prompt} [/INST]"
-        payload = {"inputs": full_prompt, "parameters": {"temperature": 0.2, "max_new_tokens": 512}}
-        async with httpx.AsyncClient(timeout=120) as client:
-            r = await client.post(url, headers=headers, json=payload)
-            r.raise_for_status()
-            data = r.json()
-            # HF responses can be a list or dict depending on model/router
-            if isinstance(data, list) and data and "generated_text" in data[0]:
-                out = data[0]["generated_text"]
-                # strip the prompt prefix if returned
-                return out.replace(full_prompt, "").strip(), "hf", model
-            elif isinstance(data, dict) and "generated_text" in data:
-                return data["generated_text"].strip(), "hf", model
+        # Uses Hugging Face InferenceClient with Nebius provider
+        client = InferenceClient(
+            provider="nebius",
+            api_key=settings.HF_API_KEY,
+        )
+        
+        # Build messages array
+        messages = []
+        if system:
+            messages.append({"role": "system", "content": system})
+        messages.append({"role": "user", "content": prompt})
+        
+        try:
+            completion = client.chat.completions.create(
+                model=model,
+                messages=messages,
+                temperature=0.2,
+                max_tokens=5000,
+            )
+            
+            # Check if we got a valid response
+            if completion and completion.choices and len(completion.choices) > 0:
+                message = completion.choices[0].message
+                if message and message.content:
+                    response_text = message.content.strip()
+                    return response_text, "hf", model
+                else:
+                    raise Exception("HF API returned empty message content")
             else:
-                # fallback
-                return str(data), "hf", model
+                raise Exception("HF API returned no choices or invalid completion")
+            
+        except AttributeError as e:
+            raise Exception(f"HF API response format error: {str(e)}")
+        except Exception as e:
+            if "HF InferenceClient Error:" in str(e):
+                raise e  # Re-raise our custom errors
+            else:
+                raise Exception(f"HF InferenceClient Error: {str(e)}")
+            
+        except Exception as e:
+            raise Exception(f"HF InferenceClient Error: {str(e)}")

@@ -1,12 +1,6 @@
-from fastapi import APIRouter, Depends, HTTPException, Query, Path
-from sqlalchemy import case, select, func, update
-from sqlalchemy.exc import SQLAlchemyError
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import joinedload, selectinload
-from app.models import AppUser, AppUserWord, Category, Level, Word
+from fastapi import APIRouter, Query, Path
 from app.schemas import AppUserWords, BatchSetRanks
-from ...controllers.word import get_app_user_words as get_user_words, get_app_words, remove_app_user_words, update_app_words, update_user_words_ranks
-from ...db import get_session
+from ...controllers.word import get_app_user_words as get_user_words, get_app_words, remove_app_user_words, sentences_with_app_user_words, update_app_words, update_user_words_ranks
 from ...services.ai import AIService
 
 router = APIRouter(prefix="/words", tags=["words"])
@@ -54,3 +48,10 @@ async def remove_user_word_from_list(user_id: int = Path(..., gt=0), body: AppUs
     - remove list of words from of users words
     """
     return await remove_app_user_words(user_id, body, limit)
+
+@router.get("/words/senetences-with-user-words/{user_id}")
+async def get_app_user_sentences(user_id: int = Path(..., gt=0), limit: int = Query(10, ge=1, le=100)):
+    """
+    - return list of sentences with user words
+    """
+    return await sentences_with_app_user_words(user_id, limit)

@@ -50,7 +50,7 @@ async def get_words_rank(user_id: int, word_ids: List, session: AsyncSession = D
     items = [{"user_id": user_id, "word_id": wid, "rank": r} for (wid, r) in res.all()]
     return items
 
-async def get_user_words(user_id: int, session: AsyncSession):
+async def get_app_user(user_id: int, session: AsyncSession):
     return await session.get(AppUser, user_id, options=[selectinload(AppUser.app_user_words).joinedload(AppUserWord.word)])
 
 async def get_word_list(limit: int, session: AsyncSession = Depends(get_session)):

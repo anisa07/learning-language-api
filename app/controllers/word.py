@@ -1,13 +1,12 @@
 from fastapi import Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.exc import SQLAlchemyError
-from sqlalchemy import select
-from sqlalchemy.orm import selectinload
 
+from app.services.ai import AIService
 from ..schemas import AppUserWords, BatchSetRanks
 
-from ..services.word import get_random_words, get_word_list, get_words_rank, remove_app_user_word_list, save_user_words, select_new_words, select_user_words_from_list, serialize, get_user_words, update_app_user_word_list, update_words_ranks
-from ..models import AppUser, AppUserWord, Word, Category, CategoryWord
+from ..services.word import get_random_words, get_word_list, get_words_rank, remove_app_user_word_list, save_user_words, select_user_words_from_list, serialize, get_app_user, update_app_user_word_list, update_words_ranks
+from ..models import AppUser, Word
 from ..db import get_session
 from ..services.word_pool import WordPool
 
@@ -15,7 +14,7 @@ async def get_app_user_words(user_id: int, limit: int):
    try:
         # 1) load the user (and level)
         session = await get_session()
-        app_user = await get_user_words(user_id, session)
+        app_user = await get_app_user(user_id, session)
         
         if not app_user:
             raise HTTPException(404, "User not found")
@@ -118,7 +117,7 @@ async def get_user_ranked_words(limit: int, app_user: AppUser, session: AsyncSes
 async def update_user_words_ranks(user_id: int, body: BatchSetRanks = []):
     try:
         session = await get_session()
-        app_user = await get_user_words(user_id, session)
+        app_user = await get_app_user(user_id, session)
         
         if not app_user:
             raise HTTPException(404, "User not found")
@@ -147,7 +146,7 @@ async def get_app_words(limit: int):
 async def update_app_words(user_id: int, body: AppUserWords, limit: int):
     try:
         session = await get_session()
-        app_user = await get_user_words(user_id, session)
+        app_user = await get_app_user(user_id, session)
         
         if not app_user:
             raise HTTPException(404, "User not found")
@@ -165,12 +164,11 @@ async def update_app_words(user_id: int, body: AppUserWords, limit: int):
         await session.rollback()
         await session.close()
         raise HTTPException(500, f"Database error: {str(e)}")
-    
-    
+       
 async def remove_app_user_words(user_id: int, body: AppUserWords, limit: int):
     try:
         session = await get_session()
-        app_user = await get_user_words(user_id, session)
+        app_user = await get_app_user(user_id, session)
         
         if not app_user:
             raise HTTPException(404, "User not found")
@@ -184,6 +182,86 @@ async def remove_app_user_words(user_id: int, body: AppUserWords, limit: int):
         words = await select_user_words_from_list(user_id, limit, session)
         
         return [serialize(item[0], item[1] or 0, item[2]) for item in words]
+    
+    except SQLAlchemyError as e:
+        await session.rollback()
+        await session.close()
+        raise HTTPException(500, f"Database error: {str(e)}")
+ 
+async def sentences_with_app_user_words(user_id: int, limit: int):
+    try:
+        session = await get_session()
+        app_user = await get_app_user(user_id, session)
+        
+        if not app_user:
+            raise HTTPException(404, "User not found")
+        
+        user_words = await select_user_words_from_list(user_id, limit, session)
+        
+        if not user_words:
+            return []
+        
+        ai_service = AIService()
+        
+        # Create a list of words for the AI prompt
+        words_list = [f"- {item[0].word}" for item in user_words]
+        words_text = "\n".join(words_list)
+        
+        system_prompt = """You are a Dutch language teacher helping students learn Dutch vocabulary. 
+Create simple, clear example sentences that demonstrate how to use Dutch words in context. 
+Each sentence should be appropriate for language learners and show the word's meaning clearly. 
+Word can be in any form e.g. noun in plural form, verb in past tense, adjective in de form 
+"""
+        
+        user_prompt = f"""Please create one simple Dutch sentence example for each of these words, mark word with _:
+
+{words_text}
+
+Return your response in this exact JSON format:
+[
+  {{"word": "word1", "example_sentence": "Dutch sentence with _word1_"}},
+  {{"word": "word2", "example_sentence": "Dutch sentence with _word2_"}}
+]
+
+Make sure:
+- Each sentence is simple and clear
+- Use proper Dutch grammar
+- Show the word in a natural context
+- Keep sentences short (5-10 words)"""
+
+        response, provider, model = await ai_service.chat(
+            prompt=user_prompt,
+            system=system_prompt,
+            provider="hf"
+        )
+        
+        print(response)
+        # Parse AI response and match with word IDs
+        import json
+        try:
+            ai_sentences = json.loads(response)
+            result = []
+            
+            # Create a mapping from word to word_id
+            word_to_id = {item[0].word: item[0].id for item in user_words}
+            
+            for sentence_data in ai_sentences:
+                word = sentence_data.get("word")
+                example = sentence_data.get("example_sentence")
+                
+                if word in word_to_id:
+                    result.append({
+                        "word_id": word_to_id[word],
+                        "word": word,
+                        "example_sentence": example
+                    })
+            
+            return result
+            
+        except json.JSONDecodeError as e:
+            # Fallback: return basic structure if AI doesn't return valid JSON
+            print(f"JSON parsing error: {e}")
+            return [{"word_id": item[0].id, "example_sentence": f"AI response parsing failed for: {item[0].word}"} for item in user_words]
     
     except SQLAlchemyError as e:
         await session.rollback()
