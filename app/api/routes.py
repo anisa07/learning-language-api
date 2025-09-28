@@ -173,7 +173,7 @@ async def get_app_user_list(session: AsyncSession = Depends(get_session)):
         raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
     
 @router.get("/words/app-user/{user_id}")
-async def get_app_user_words(user_id: int = Path(..., gt=0), limit: int = Query(15, ge=1, le=100), session: AsyncSession = Depends(get_session)):
+async def get_app_user_words(user_id: int = Path(..., gt=0), limit: int = Query(0, ge=0, le=100), session: AsyncSession = Depends(get_session)):
     # check user exist 
     # get user level
     # check user has 10 words with rank <= limit

@@ -9,7 +9,7 @@ router = APIRouter()
 ai = AIService()
     
 @router.get("/words/app-user/{user_id}")
-async def get_app_user_words(user_id: int = Path(..., gt=0), limit: int = Query(15, ge=1, le=100)):
+async def get_app_user_words(user_id: int = Path(..., gt=0), limit: int = Query(0, ge=0, le=100)):
     """
     - check user exist 
     - get user level

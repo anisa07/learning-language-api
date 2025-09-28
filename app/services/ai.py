@@ -1,4 +1,3 @@
-import httpx
 from huggingface_hub import InferenceClient
 from openai import AsyncOpenAI
 from ..config import settings
@@ -33,8 +32,7 @@ class AIService:
             completion = await client.chat.completions.create(
                 model=model,
                 messages=messages,
-                temperature=0.2,
-                max_tokens=5000,
+                max_completion_tokens=5000,
             )
             
             response_text = completion.choices[0].message.content.strip()

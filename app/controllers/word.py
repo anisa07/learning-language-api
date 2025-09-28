@@ -110,9 +110,12 @@ async def get_user_ranked_words(limit: int, app_user: AppUser, session: AsyncSes
     #     selected_ids.update(w.id for w in new_words)
     
     word_pool = WordPool()
-    selected = await word_pool.get_user_words(app_user.id, limit, session)
+    if limit > 0:
+        selected = await word_pool.get_user_words(app_user.id, limit, session)
+        return [serialize(item['word'], item['rank'] or 0, item['category']) for item in selected[:limit]]
+    selected = await select_user_words_from_list(app_user.id, 0, session)
+    return [serialize(item[0], item[1] or 0, item[2]) for item in selected]
     
-    return [serialize(item['word'], item['rank'] or 0, item['category']) for item in selected[:limit]]
 
 async def update_user_words_ranks(user_id: int, body: BatchSetRanks = []):
     try:
@@ -232,7 +235,7 @@ Make sure:
         response, provider, model = await ai_service.chat(
             prompt=user_prompt,
             system=system_prompt,
-            provider="hf"
+            provider="openai"
         )
         
         print(response)
