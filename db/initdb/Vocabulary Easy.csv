@@ -1,0 +1,489 @@
+number,dutch,english,part_of_speech,category,example_dutch,example_english
+1,de,the
+2,en,and
+3,een,a
+4,het,it
+5,in,in
+6,te,too
+7,ik,I
+8,hebben,to have
+9,hij,he
+10,niet,not
+11,op,on
+12,dat,that
+13,voor,before
+14,er,there
+15,je,you
+16,zullen,shall
+17,kunnen,can/to be able to
+18,haar,her
+19,of,or
+20,wat,what
+21,gaan,to go
+22,hem,him
+23,komen,come
+24,dan,then
+25,zo,so
+26,moeten,should
+27,mijn,my
+28,zij,she
+29,deze,this
+30,we,we
+31,meer,more
+32,dit,this
+33,maken,to make
+34,staan,stand
+35,goed,good
+36,ander,other
+37,doen,to do
+38,me,me
+39,u,you
+40,mij,me
+41,laten,to let
+42,al,already
+43,daar,there
+44,denken,to think
+45,toen,then (past)
+46,geven,to give
+47,hoe,how
+48,nu,now
+49,vinden,find
+50,man,man
+51,jaar,year
+52,hier,here
+53,wij,we
+54,houden,to keep
+55,zitten,to sit
+56,hand,hand
+57,lang,long
+58,twee,two
+59,dag,day
+60,eerst,first
+61,alleen,only
+62,brengen,bring
+63,beginnen,to begin
+64,zelf,self
+65,horen,to hear
+66,nieuw,new
+67,laat,late
+68,voelen,to feel
+69,plaats,place
+70,leven,life
+71,huis,house
+72,vallen,fall
+73,moeder,mother
+74,spreken,to speak
+75,woord,word
+76,ja,yes
+77,wanneer,when
+78,vader,father
+79,werk,work
+80,elk,each
+81,ver,far
+82,later,later
+83,vertellen,to tell
+84,jij,you
+85,drie,three
+86,oud,old
+87,soms,sometimes
+88,wereld,world
+89,uur,hour
+90,naam,name
+91,soort,kind
+92,werken,to work
+93,vol,full
+94,welk,which
+95,boek,book
+96,deur,door
+97,ding,thing
+98,nee,no
+99,water,water
+100,feit,fact
+101,wachten,to wait
+102,leren,to learn
+103,open,open
+104,probleem,problem
+105,groep,group
+106,jong,young
+107,wit,white
+108,zodat,so that
+109,lachen,laugh
+110,bed,bed
+111,verder,further
+112,moment,moment
+113,staat,state
+114,vriend,friend
+115,week,week
+116,laatste,last
+117,helpen,to help
+118,licht,light
+119,diep,deep
+120,nacht,night
+121,langs,along
+122,beide,both
+123,jullie,you
+124,vrij,free
+125,gevoel,feeling
+126,half,half
+127,tafel,table
+128,school,school
+129,vier,four
+130,dood,death
+131,sociaal,social
+132,hard,hard
+133,wijn,wine
+134,maand,month
+135,mond,mouth
+136,reden,reason
+137,voet,foot
+138,idee,idea
+139,rol,role
+140,jou,you
+141,antwoord,answer
+142,slapen,to sleep
+143,plan,plan
+144,meestal,mostly
+145,straat,street
+146,persoon,person
+147,schouder,shoulder
+148,luisteren,listen
+149,invloed,influence
+150,hart,heart
+151,zoon,son
+152,bezig,busy
+153,arm,arm
+154,tien,ten
+155,los,loose
+156,vijf,five
+157,minuut,minute
+158,liefde,love
+159,sommige,some
+160,direct,directly
+161,relatie,relationship
+162,systeem,system
+163,proces,process
+164,menen,mean
+165,derde,third
+166,drinken,drink
+167,contact,contact
+168,functie,function
+169,warm,warm
+170,vinger,finger
+171,kleur,color
+172,pijn,pain
+173,glas,glass
+174,artikel,article
+175,eind,end
+176,persoonlijk,personally
+177,rood,red
+178,dokter,doctor
+179,zee,sea
+180,groeien,to grow
+181,koud,cold
+182,leiden,to lead
+183,staan,to stand
+184,familie,family
+185,periode,period
+186,sinds,since
+187,resultaat,result
+188,normaal,normal
+189,rond,round
+190,organisatie,organization
+191,speciaal,special
+192,patiënt,patient
+193,broer,brother
+194,leveren,to deliver
+195,hopen,to hope
+196,totaal,total
+197,zes,six
+198,blauw,blue
+199,stap,step
+200,karakter,character
+201,theorie,theory
+202,bloed,blood
+203,beter,better
+204,dochter,daughter
+205,stappen,to step
+206,droom,dream
+207,meter,meter
+208,steen,stone
+209,hulp,help
+210,rust,rest
+211,muziek,music
+212,maaltijd,meal
+213,openen,to open
+214,bank,bank
+215,papier,paper
+216,hoop,hope
+217,minister,minister
+218,wind,wind
+219,koffie,coffee
+220,stoppen,stop
+221,oor,ear
+222,informatie,information
+223,methode,method
+224,lip,lip
+225,positie,position
+226,alle,all
+227,enorm,enormous
+228,foto,photo
+229,film,movie
+230,activiteit,activity
+231,modern,modern
+232,geluk,luck
+233,basis,base
+234,zuster,sister
+235,wakker,awake
+236,tante,aunt
+237,vuur,fire
+238,prijs,price
+239,reactie,reaction
+240,praktijk,practice
+241,neus,nose
+242,terrein,terrain
+243,koning,king
+244,zingen,to sing
+245,vliegen,fly
+246,cultuur,culture
+247,missen,to miss
+248,politie,law enforcement
+249,wensen,to wish
+250,factor,factor
+251,begin,get started
+252,succes,good luck
+253,kosten,to cost
+254,natuur,nature
+255,hotel,hotel
+256,studie,study
+257,vriendelijk,friendly
+258,aspect,aspect
+259,figuur,figure
+260,ontbreken,lack
+261,nationaal,national
+262,ziek,sick
+263,term,term
+264,geef,give
+265,rennen,To run
+266,engels,english
+267,effect,effect
+268,plant,plant
+269,product,product
+270,slaap,sleep
+271,tekst,text
+272,knie,knee
+273,geboren,born
+274,telefoon,phone
+275,individueel,individually
+276,structuur,structure
+277,helft,half
+278,trein,train
+279,praktisch,practical
+280,zomer,summer
+281,winnen,to win
+282,conclusie,conclusion
+283,baby,baby
+284,internationaal,international
+285,eiland,island
+286,meester,master
+287,kwaliteit,quality
+288,vullen,to fill
+289,individu,individual
+290,vervullen,fulfill
+291,plaatsen,place
+292,bespreken,discuss
+293,discussie,discussion
+294,sigaret,cigarette
+295,vis,fish
+296,absoluut,absolutely
+297,historisch,historical
+298,nummer,number
+299,schaduw,shadow
+300,leiding,leadership
+301,kat,cat
+302,universiteit,university
+303,mezelf,myself
+304,fase,phase
+305,technisch,technical
+306,positief,positive
+307,programma,program
+308,leider,leader
+309,wapen,weapon
+310,literatuur,literature
+311,brood,bread
+312,medisch,medical
+313,officier,officer
+314,rivier,river
+315,dansen,to dance
+316,interessant,interesting
+317,markt,market
+318,officieel,officially
+319,baas,boss
+320,schoen,shoe
+321,boot,boat
+322,vloer,floor
+323,dromen,to dream
+324,winter,winter
+325,maan,moon
+326,kilometer,kilometers
+327,wens,wish
+328,miljoen,million
+329,seconde,second
+330,rijk,rich
+331,bier,beer
+332,collega,colleague
+333,actie,action
+334,plezier,pleasure
+335,psychologie,psychology
+336,techniek,technic
+337,vechten,to fight
+338,gras,grass
+339,pad,path
+340,financieel,financial
+341,beïnvloeden,to influence
+342,actief,active
+343,ster,star
+344,machine,machine
+345,energie,energy
+346,gouden,golden
+347,nek,neck
+348,rusten,to rest
+349,auteur,author
+350,procent,per cent
+351,museum,museum
+352,realiseren,realize
+353,cultureel,cultural
+354,bus,bus
+355,directeur,director
+356,materiaal,material
+357,produceren,to produce
+358,veld,field
+359,gast,guest
+360,dubbel,double
+361,zand,sand
+362,centrum,centre
+363,productie,production
+364,westen,west
+365,specifiek,specific
+366,koel,cool
+367,wassen,To wash
+368,klant,client
+369,tong,tongue
+370,argument,argument
+371,negatief,negative
+372,kaas,cheese
+373,titel,title
+374,visie,vision
+375,persoonlijkheid,personality
+376,kust,coast
+377,danken,to thank
+378,radio,radio
+379,wijd,wide
+380,jezelf,yourself
+381,interesseren,to be interested
+382,olie,oil
+383,thee,tea
+384,risico,risk
+385,president,president
+386,groen,green
+387,honger,hungry
+388,traditioneel,traditional
+389,adres,address
+390,experiment,experiment
+391,fundamenteel,fundamentally
+392,advies,advice
+393,klimmen,to climb
+394,typisch,typical
+395,stijl,style
+396,top,top
+397,traditie,tradition
+398,heet,hot
+399,psychologisch,psychological
+400,computer,computer
+401,generatie,generation
+402,bodem,bottom
+403,student,student
+404,relatief,relatively
+405,categorie,category
+406,kalm,calm
+407,eindigen,to end
+408,goederen,goods
+409,formuleren,to formulate
+410,instrument,instrument
+411,klas,class
+412,combinatie,combination
+413,publiceren,to publish
+414,landschap,landscape
+415,warmte,warmth
+416,televisie,television
+417,organiseren,to organize
+418,patroon,pattern
+419,agent,agent
+420,emotie,emotion
+421,orgaan,organ
+422,provincie,province
+423,detail,detail
+424,restaurant,restaurant
+425,wild,wild
+426,pijnlijk,painful
+427,station,station
+428,klassiek,classic
+429,sector,sector
+430,eindeloos,endless
+431,emotioneel,emotional
+432,studeren,to study
+433,symbool,symbol
+434,luitenant,lieutenant
+435,passeren,pass
+436,motief,motive
+437,fabriek,factory
+438,lijst,list
+439,serieus,serious
+440,logisch,logical
+441,mama,mom
+442,vluchten,to flee
+443,noorden,north
+444,bijten,to bite
+445,vorming,formation
+446,café,cafe
+447,object,object
+448,holland,Holland
+449,kamp,camp
+450,dun,thin
+451,ideaal,ideal
+452,juni,june
+453,accepteren,to accept
+454,initiatief,initiative
+455,bitter,bitter
+456,verspreiden,to spread
+457,verbieden,to forbid
+458,consequentie,consequence
+459,oktober,October
+460,westers,western
+461,jongeman,young man
+462,hoed,hat
+463,zenden,to send
+464,zondag,sunday
+465,theoretisch,theoretically
+466,psycholoog,psychologist
+467,pers,press
+468,terras,terrace
+469,dood,dead
+470,crisis,crisis
+471,pot,pot
+472,operatie,operation
+473,partner,partner
+474,suiker,sugar
+475,gemeen,mean
+476,plaat,plate
+477,stijf,stiff
+478,economie,economy
+479,bruin,brown
+480,sneeuw,snow
+481,kruis,cross
+482,automatisch,automatically
+483,project,project
+484,hut,hut
+485,fruit,fruit
+486,communicatie,communication
+487,dom,dumb
+488,afwasmachine,dishwasher
