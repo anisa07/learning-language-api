@@ -90,8 +90,6 @@ class Noun(Base):
     indefinite_article: Mapped[str] = mapped_column(String(5), nullable=True) # if possible
     diminutive: Mapped[str] = mapped_column(String(100), nullable=True)
     plural: Mapped[str] = mapped_column(String(100), nullable=True)
-    possessive_form_singular: Mapped[str] = mapped_column(String(150), nullable=True) # if possible with 's 
-    possessive_form_plural: Mapped[str] = mapped_column(String(150), nullable=True) # if possible
     # 1-to-1 relationship with Word
     word_id: Mapped[int] = mapped_column(ForeignKey("words.id"), unique=True)
     word: Mapped["Word"] = relationship("Word", back_populates="noun_form")

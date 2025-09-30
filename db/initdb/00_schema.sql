@@ -81,12 +81,9 @@ CREATE TABLE IF NOT EXISTS verbs (
 CREATE TABLE IF NOT EXISTS nouns (
     id SERIAL PRIMARY KEY,
     word_id INTEGER UNIQUE REFERENCES words(id) ON DELETE CASCADE,
-    noun VARCHAR(150), -- with de/het article
-    indefinite_article VARCHAR(5), -- if possible
+    indefinite_article VARCHAR(5), -- de/het article
     diminutive VARCHAR(100), -- -je, -tje endings
     plural VARCHAR(100), -- plural form
-    possessive_form_singular VARCHAR(150), -- if possible with 's
-    possessive_form_plural VARCHAR(150), -- if possible
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 

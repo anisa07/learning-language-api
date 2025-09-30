@@ -12,7 +12,7 @@ from ..db import get_session
 from ..models import AppUser, AppUserWord, CategoryWord, PromptExample, Word, Level, Category
 
 async def update_words_ranks(user_id: int, items: List[WordRank], session: AsyncSession = Depends(get_session)):
-     # de-dup by word_id (keep last) do we really need it?
+    # de-dup by word_id (keep last) do we really need it?
     dedup = {}
     for it in items:
         dedup[it.word_id] = it.rank
@@ -20,7 +20,7 @@ async def update_words_ranks(user_id: int, items: List[WordRank], session: Async
     word_ids = list(dedup.keys())
     rank_map = dedup  # {word_id: rank}
     
-     # CASE over word_id to set different ranks in one UPDATE
+    # CASE over word_id to set different ranks in one UPDATE
     rank_case = case(rank_map, value=AppUserWord.word_id)
     
     stmt = (
@@ -268,7 +268,7 @@ def serialize(w: Word, rank: int, category: str):
     elif pos == "noun" and w.noun_form:
         n = w.noun_form
         out["noun_form"] = {
-            "noun": n.noun,
+            "noun": w.word,
             "indefinite_article": n.indefinite_article,
             "diminutive": n.diminutive,
             "plural": n.plural,
