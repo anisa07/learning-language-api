@@ -1,489 +1,572 @@
 number,dutch,english,part_of_speech,category,example_dutch,example_english
-1,de,the
-2,en,and
-3,een,a
-4,het,it
-5,in,in
-6,te,too
-7,ik,I
-8,hebben,to have
-9,hij,he
-10,niet,not
-11,op,on
-12,dat,that
-13,voor,before
-14,er,there
-15,je,you
-16,zullen,shall
-17,kunnen,can/to be able to
-18,haar,her
-19,of,or
-20,wat,what
-21,gaan,to go
-22,hem,him
-23,komen,come
-24,dan,then
-25,zo,so
-26,moeten,should
-27,mijn,my
-28,zij,she
-29,deze,this
-30,we,we
-31,meer,more
-32,dit,this
-33,maken,to make
-34,staan,stand
-35,goed,good
-36,ander,other
-37,doen,to do
-38,me,me
-39,u,you
-40,mij,me
-41,laten,to let
-42,al,already
-43,daar,there
-44,denken,to think
-45,toen,then (past)
-46,geven,to give
-47,hoe,how
-48,nu,now
-49,vinden,find
-50,man,man
-51,jaar,year
-52,hier,here
-53,wij,we
-54,houden,to keep
-55,zitten,to sit
-56,hand,hand
-57,lang,long
-58,twee,two
-59,dag,day
-60,eerst,first
-61,alleen,only
-62,brengen,bring
-63,beginnen,to begin
-64,zelf,self
-65,horen,to hear
-66,nieuw,new
-67,laat,late
-68,voelen,to feel
-69,plaats,place
-70,leven,life
-71,huis,house
-72,vallen,fall
-73,moeder,mother
-74,spreken,to speak
-75,woord,word
-76,ja,yes
-77,wanneer,when
-78,vader,father
-79,werk,work
-80,elk,each
-81,ver,far
-82,later,later
-83,vertellen,to tell
-84,jij,you
-85,drie,three
-86,oud,old
-87,soms,sometimes
-88,wereld,world
-89,uur,hour
-90,naam,name
-91,soort,kind
-92,werken,to work
-93,vol,full
-94,welk,which
-95,boek,book
-96,deur,door
-97,ding,thing
-98,nee,no
-99,water,water
-100,feit,fact
-101,wachten,to wait
-102,leren,to learn
-103,open,open
-104,probleem,problem
-105,groep,group
-106,jong,young
-107,wit,white
-108,zodat,so that
-109,lachen,laugh
-110,bed,bed
-111,verder,further
-112,moment,moment
-113,staat,state
-114,vriend,friend
-115,week,week
-116,laatste,last
-117,helpen,to help
-118,licht,light
-119,diep,deep
-120,nacht,night
-121,langs,along
-122,beide,both
-123,jullie,you
-124,vrij,free
-125,gevoel,feeling
-126,half,half
-127,tafel,table
-128,school,school
-129,vier,four
-130,dood,death
-131,sociaal,social
-132,hard,hard
-133,wijn,wine
-134,maand,month
-135,mond,mouth
-136,reden,reason
-137,voet,foot
-138,idee,idea
-139,rol,role
-140,jou,you
-141,antwoord,answer
-142,slapen,to sleep
-143,plan,plan
-144,meestal,mostly
-145,straat,street
-146,persoon,person
-147,schouder,shoulder
-148,luisteren,listen
-149,invloed,influence
-150,hart,heart
-151,zoon,son
-152,bezig,busy
-153,arm,arm
-154,tien,ten
-155,los,loose
-156,vijf,five
-157,minuut,minute
-158,liefde,love
-159,sommige,some
-160,direct,directly
-161,relatie,relationship
-162,systeem,system
-163,proces,process
-164,menen,mean
-165,derde,third
-166,drinken,drink
-167,contact,contact
-168,functie,function
-169,warm,warm
-170,vinger,finger
-171,kleur,color
-172,pijn,pain
-173,glas,glass
-174,artikel,article
-175,eind,end
-176,persoonlijk,personally
-177,rood,red
-178,dokter,doctor
-179,zee,sea
-180,groeien,to grow
-181,koud,cold
-182,leiden,to lead
-183,staan,to stand
-184,familie,family
-185,periode,period
-186,sinds,since
-187,resultaat,result
-188,normaal,normal
-189,rond,round
-190,organisatie,organization
-191,speciaal,special
-192,patiënt,patient
-193,broer,brother
-194,leveren,to deliver
-195,hopen,to hope
-196,totaal,total
-197,zes,six
-198,blauw,blue
-199,stap,step
-200,karakter,character
-201,theorie,theory
-202,bloed,blood
-203,beter,better
-204,dochter,daughter
-205,stappen,to step
-206,droom,dream
-207,meter,meter
-208,steen,stone
-209,hulp,help
-210,rust,rest
-211,muziek,music
-212,maaltijd,meal
-213,openen,to open
-214,bank,bank
-215,papier,paper
-216,hoop,hope
-217,minister,minister
-218,wind,wind
-219,koffie,coffee
-220,stoppen,stop
-221,oor,ear
-222,informatie,information
-223,methode,method
-224,lip,lip
-225,positie,position
-226,alle,all
-227,enorm,enormous
-228,foto,photo
-229,film,movie
-230,activiteit,activity
-231,modern,modern
-232,geluk,luck
-233,basis,base
-234,zuster,sister
-235,wakker,awake
-236,tante,aunt
-237,vuur,fire
-238,prijs,price
-239,reactie,reaction
-240,praktijk,practice
-241,neus,nose
-242,terrein,terrain
-243,koning,king
-244,zingen,to sing
-245,vliegen,fly
-246,cultuur,culture
-247,missen,to miss
-248,politie,law enforcement
-249,wensen,to wish
-250,factor,factor
-251,begin,get started
-252,succes,good luck
-253,kosten,to cost
-254,natuur,nature
-255,hotel,hotel
-256,studie,study
-257,vriendelijk,friendly
-258,aspect,aspect
-259,figuur,figure
-260,ontbreken,lack
-261,nationaal,national
-262,ziek,sick
-263,term,term
-264,geef,give
-265,rennen,To run
-266,engels,english
-267,effect,effect
-268,plant,plant
-269,product,product
-270,slaap,sleep
-271,tekst,text
-272,knie,knee
-273,geboren,born
-274,telefoon,phone
-275,individueel,individually
-276,structuur,structure
-277,helft,half
-278,trein,train
-279,praktisch,practical
-280,zomer,summer
-281,winnen,to win
-282,conclusie,conclusion
-283,baby,baby
-284,internationaal,international
-285,eiland,island
-286,meester,master
-287,kwaliteit,quality
-288,vullen,to fill
-289,individu,individual
-290,vervullen,fulfill
-291,plaatsen,place
-292,bespreken,discuss
-293,discussie,discussion
-294,sigaret,cigarette
-295,vis,fish
-296,absoluut,absolutely
-297,historisch,historical
-298,nummer,number
-299,schaduw,shadow
-300,leiding,leadership
-301,kat,cat
-302,universiteit,university
-303,mezelf,myself
-304,fase,phase
-305,technisch,technical
-306,positief,positive
-307,programma,program
-308,leider,leader
-309,wapen,weapon
-310,literatuur,literature
-311,brood,bread
-312,medisch,medical
-313,officier,officer
-314,rivier,river
-315,dansen,to dance
-316,interessant,interesting
-317,markt,market
-318,officieel,officially
-319,baas,boss
-320,schoen,shoe
-321,boot,boat
-322,vloer,floor
-323,dromen,to dream
-324,winter,winter
-325,maan,moon
-326,kilometer,kilometers
-327,wens,wish
-328,miljoen,million
-329,seconde,second
-330,rijk,rich
-331,bier,beer
-332,collega,colleague
-333,actie,action
-334,plezier,pleasure
-335,psychologie,psychology
-336,techniek,technic
-337,vechten,to fight
-338,gras,grass
-339,pad,path
-340,financieel,financial
-341,beïnvloeden,to influence
-342,actief,active
-343,ster,star
-344,machine,machine
-345,energie,energy
-346,gouden,golden
-347,nek,neck
-348,rusten,to rest
-349,auteur,author
-350,procent,per cent
-351,museum,museum
-352,realiseren,realize
-353,cultureel,cultural
-354,bus,bus
-355,directeur,director
-356,materiaal,material
-357,produceren,to produce
-358,veld,field
-359,gast,guest
-360,dubbel,double
-361,zand,sand
-362,centrum,centre
-363,productie,production
-364,westen,west
-365,specifiek,specific
-366,koel,cool
-367,wassen,To wash
-368,klant,client
-369,tong,tongue
-370,argument,argument
-371,negatief,negative
-372,kaas,cheese
-373,titel,title
-374,visie,vision
-375,persoonlijkheid,personality
-376,kust,coast
-377,danken,to thank
-378,radio,radio
-379,wijd,wide
-380,jezelf,yourself
-381,interesseren,to be interested
-382,olie,oil
-383,thee,tea
-384,risico,risk
-385,president,president
-386,groen,green
-387,honger,hungry
-388,traditioneel,traditional
-389,adres,address
-390,experiment,experiment
-391,fundamenteel,fundamentally
-392,advies,advice
-393,klimmen,to climb
-394,typisch,typical
-395,stijl,style
-396,top,top
-397,traditie,tradition
-398,heet,hot
-399,psychologisch,psychological
-400,computer,computer
-401,generatie,generation
-402,bodem,bottom
-403,student,student
-404,relatief,relatively
-405,categorie,category
-406,kalm,calm
-407,eindigen,to end
-408,goederen,goods
-409,formuleren,to formulate
-410,instrument,instrument
-411,klas,class
-412,combinatie,combination
-413,publiceren,to publish
-414,landschap,landscape
-415,warmte,warmth
-416,televisie,television
-417,organiseren,to organize
-418,patroon,pattern
-419,agent,agent
-420,emotie,emotion
-421,orgaan,organ
-422,provincie,province
-423,detail,detail
-424,restaurant,restaurant
-425,wild,wild
-426,pijnlijk,painful
-427,station,station
-428,klassiek,classic
-429,sector,sector
-430,eindeloos,endless
-431,emotioneel,emotional
-432,studeren,to study
-433,symbool,symbol
-434,luitenant,lieutenant
-435,passeren,pass
-436,motief,motive
-437,fabriek,factory
-438,lijst,list
-439,serieus,serious
-440,logisch,logical
-441,mama,mom
-442,vluchten,to flee
-443,noorden,north
-444,bijten,to bite
-445,vorming,formation
-446,café,cafe
-447,object,object
-448,holland,Holland
-449,kamp,camp
-450,dun,thin
-451,ideaal,ideal
-452,juni,june
-453,accepteren,to accept
-454,initiatief,initiative
-455,bitter,bitter
-456,verspreiden,to spread
-457,verbieden,to forbid
-458,consequentie,consequence
-459,oktober,October
-460,westers,western
-461,jongeman,young man
-462,hoed,hat
-463,zenden,to send
-464,zondag,sunday
-465,theoretisch,theoretically
-466,psycholoog,psychologist
-467,pers,press
-468,terras,terrace
-469,dood,dead
-470,crisis,crisis
-471,pot,pot
-472,operatie,operation
-473,partner,partner
-474,suiker,sugar
-475,gemeen,mean
-476,plaat,plate
-477,stijf,stiff
-478,economie,economy
-479,bruin,brown
-480,sneeuw,snow
-481,kruis,cross
-482,automatisch,automatically
-483,project,project
-484,hut,hut
-485,fruit,fruit
-486,communicatie,communication
-487,dom,dumb
-488,afwasmachine,dishwasher
+1,absoluut,absolutely,adverb,emphasis,"Dit verhaal is absoluut waar gebeurd","This story ... happened for real"
+2,accepteren,to accept,verb,agreement,"Ik kan deze situatie niet accepteren","I cannot ... this situation"
+3,achter,behind,preposition,position,"De tuin is achter het huis","The garden is ... the house"
+4,actie,action,noun,activity,"De politie moet snel in actie komen","The police must take ... quickly"
+5,actief,active,adjective,state,"Mijn oma is 80 maar nog steeds actief","My grandma is 80 but still ..."
+6,activiteit,activity,noun,action,"Zwemmen is een gezonde activiteit","Swimming is a healthy ..."
+7,adres,address,noun,location,"Schrijf je naam en adres op het formulier","Write your name and ... on the form"
+8,advies,advice,noun,guidance,"De dokter gaf me medisch advies","The doctor gave me medical ..."
+9,afwasmachine,dishwasher,noun,kitchen,"Ik zet de borden na de lunch in de afwasmachine","I put the plates in the ... after lunch"
+10,agent,agent,noun,profession,"De agent in uniform regelt het verkeer","The ... in uniform directs traffic"
+11,al,already,adverb,time,"Het is pas acht uur maar ik ben al moe","It's only eight but I'm ... tired"
+12,al,all,adjective,quantity,"Al het eten is op, niets meer over","... the food is gone, nothing left"
+13,alle,all,adjective,quantity,"Alle kinderen moeten naar school","... children must go to school"
+14,alleen,only,adverb,quantity,"Ik heb geen thee, alleen water","I have no tea, ... water"
+15,alleen,alone,adjective,state,"Mijn ouders zijn weg, ik ben alleen thuis","My parents are away, I am ... at home"
+16,als,if,conjunction,condition,"Als het regent blijf ik binnen","... it rains I stay inside"
+17,ander,other,adjective,comparison,"De andere dag kom ik","The ... day I will come"
+18,antwoord,answer,noun,response,"Ik ken het antwoord op deze vraag","I know the ... to this question"
+19,argument,argument,noun,reasoning,"Hij heeft een sterk argument in het debat","He has a strong ... in the debate"
+20,arm,arm,noun,body,"De arm verbindt de hand met de schouder","The ... connects the hand to the shoulder"
+21,arm,poor,adjective,wealth,"Hij heeft geen geld en is arm","He has no money and is ..."
+22,artikel,article,noun,writing,"Ik lees een artikel","I read an ..."
+23,aspect,aspect,noun,feature,"Een belangrijk aspect van dit probleem is de prijs","An important ... of this problem is the price"
+24,au,ouch,interjection,pain,"Au, dat doet pijn!","..., that hurts!"
+25,auteur,author,noun,writing,"De auteur schreef tien boeken","The ... wrote ten books"
+26,automatisch,automatically,adverb,manner,"De deur sluit automatisch na 5 seconden","The door closes ... after 5 seconds"
+27,baas,boss,noun,work,"Mijn baas is aardig","My ... is nice"
+28,baby,baby,noun,family,"De baby huilt en heeft honger","The ... cries and is hungry"
+29,bank,bank,noun,finance,"Ik ga naar de bank om geld te storten","I go to the ... to deposit money"
+30,bank,couch,noun,furniture,"Ik zit op de bank","I sit on the ..."
+31,basis,base,noun,foundation,"De basis van alles","The ... of everything"
+32,bed,bed,noun,furniture,"'s Avonds ga ik slapen in mijn bed","In the evening I sleep in my ..."
+33,begin,beginning,noun,start,"Het begin van het jaar","The ... of the year"
+34,beginnen,to begin,verb,action,"We beginnen om negen uur","We ... at nine o'clock"
+35,beide,both,adjective,quantity,"Beide kinderen zijn ziek","... children are sick"
+36,bespreken,to discuss,verb,communication,"We bespreken het probleem","We ... the problem"
+37,beter,better,adjective,comparison,"Deze oplossing is beter dan de vorige","This solution is ... than the previous one"
+38,bezig,busy,adjective,state,"Ik ben bezig met koken in de keuken","I am ... cooking in the kitchen"
+39,beïnvloeden,to influence,verb,impact,"Hij kan me beïnvloeden","He can ... me"
+40,bier,beer,noun,drinks,"Hij drinkt een koud bier in de kroeg","He drinks a cold ... in the pub"
+41,bij,at,preposition,location,"Ik ben bij mijn ouders thuis","I am ... my parents' house"
+42,bijten,to bite,verb,action,"De hond kan bijten","The dog can ..."
+43,bitter,bitter,adjective,taste,"Deze medicijn heeft een bittere smaak","This medicine has a ... taste"
+44,blauw,blue,adjective,color,"De lucht is blauw en de zon schijnt","The sky is ... and the sun shines"
+45,bloed,blood,noun,body,"De dokter neemt een monster van je bloed","The doctor takes a sample of your ..."
+46,bodem,bottom,noun,position,"De bodem van de zee","The ... of the sea"
+47,boek,book,noun,education,"Ik lees een boek","I read a ..."
+48,boot,boat,noun,transportation,"We varen met de boot over het water","We sail with the ... on the water"
+49,brengen,to bring,verb,movement,"Breng me naar huis","... me home"
+50,broer,brother,noun,family,"Mijn broer en zus zijn mijn broers en zussen","My ... and sister are my siblings"
+51,brood,bread,noun,food,"'s Ochtends eet ik brood met kaas","In the morning I eat ... with cheese"
+52,bruin,brown,adjective,color,"Chocolade en hout zijn bruin van kleur","Chocolate and wood are ... in color"
+53,bus,bus,noun,transportation,"De bus stopt bij het station","The ... stops at the station"
+54,café,cafe,noun,food,"We drinken koffie in het café","We drink coffee in the ..."
+55,categorie,category,noun,classification,"Appels en peren zijn in de categorie fruit","Apples and pears are in the ... fruit"
+56,centrum,center,noun,location,"Het centrum is het midden van de stad","The ... is the middle of the city"
+57,collega,colleague,noun,work,"Mijn collega werkt samen met mij op kantoor","My ... works together with me at the office"
+58,combinatie,combination,noun,mixture,"Kaas en wijn zijn een goede combinatie samen","Cheese and wine are a good ... together"
+59,communicatie,communication,noun,interaction,"Goede communicatie is belangrijk tussen mensen","Good ... is important between people"
+60,computer,computer,noun,technology,"Ik typ op de computer met een toetsenbord","I type on the ... with a keyboard"
+61,conclusie,conclusion,noun,ending,"De conclusie is duidelijk","The ... is clear"
+62,consequentie,consequence,noun,result,"Een consequentie van roken is slechte gezondheid","A ... of smoking is bad health"
+63,contact,contact,noun,communication,"Ik heb telefonisch contact met mijn vriend","I have phone ... with my friend"
+64,crisis,crisis,noun,emergency,"Een financiële crisis is een economisch probleem","A financial ... is an economic problem"
+65,cultureel,cultural,adjective,society,"Musea bewaren cultureel erfgoed voor de maatschappij","Museums preserve ... heritage for society"
+66,cultuur,culture,noun,society,"De Nederlandse cultuur heeft windmolens en tulpen","The Dutch ... has windmills and tulips"
+67,daar,there,adverb,location,"Ik woon hier en jij woont daar","I live here and you live ..."
+68,dag,day,noun,time,"Een week heeft zeven dagen","A week has seven ..."
+69,dag,bye,interjection,farewell,"Dag, tot morgen!","..., see you tomorrow!"
+70,dan,then,adverb,time,"Eerst eten, dan werken","First eat, ... work"
+71,danken,to thank,verb,gratitude,"Ik dank je voor je hulp en steun","I ... you for your help and support"
+72,dansen,to dance,verb,movement,"Ik dans graag op muziek in de disco","I like to ... to music in the disco"
+73,dat,that,pronoun,grammar,"Dat is mijn fiets","... is my bicycle"
+74,dat,that,conjunction,grammar,"Ik denk dat hij komt","I think ... he is coming"
+75,de,the,article,grammar,"De kat zit op de tafel","... cat sits on the table"
+76,denken,to think,verb,mental,"Ik denk aan jou","I ... about you"
+77,derde,third,numeral,order,"De derde keer na de eerste en tweede","The ... time after the first and second"
+78,detail,detail,noun,specifics,"Een klein detail is een specifiek onderdeel","A small ... is a specific part"
+79,deur,door,noun,building,"Ik open de deur om binnen te gaan","I open the ... to go inside"
+80,deze,this,pronoun,grammar,"Deze auto is nieuw","... car is new"
+81,diep,deep,adjective,dimension,"Het water is diep","The water is ..."
+82,ding,thing,noun,object,"Wat is dat vreemde ding op de tafel?","What is that strange ... on the table?"
+83,direct,directly,adverb,manner,"Kom direct hier zonder te wachten","Come ... here without waiting"
+84,direct,direct,adjective,manner,"Een directe vraag is open en eerlijk","A ... question is open and honest"
+85,directeur,director,noun,management,"De directeur leidt het bedrijf en neemt beslissingen","The ... leads the company and makes decisions"
+86,discussie,discussion,noun,conversation,"Een goede discussie gaat over verschillende meningen","A good ... is about different opinions"
+87,dit,this,pronoun,grammar,"Dit boek hier is belangrijk om te lezen","... book here is important to read"
+88,dochter,daughter,noun,family,"Mijn dochter en zoon zijn mijn kinderen","My ... and son are my children"
+89,doen,to do,verb,action,"Wat moet ik doen?","What should I ...?"
+90,doen,matter,verb,importance,"Dat doet er niet toe","That does not matter"
+91,dokter,doctor,noun,profession,"Ik ga naar de dokter als ik ziek ben","I go to the ... when I am sick"
+92,dom,dumb,adjective,intelligence,"Het is dom om zonder jas in de regen te lopen","It is ... to walk in the rain without a coat"
+93,dood,death,noun,life,"De dood van een vriend","The ... of a friend"
+94,dood,dead,adjective,state,"De plant is dood","The plant is ..."
+95,door,through,preposition,movement,"We lopen door het park naar huis","We walk ... the park home"
+96,drie,three,numeral,numbers,"Drie is het getal tussen twee en vier","... is the number between two and four"
+97,drinken,to drink,verb,consumption,"Ik drink water en koffie uit een glas","I ... water and coffee from a glass"
+98,drinken,drink,noun,beverage,"Een koud drinken op een warme dag","A cold drink on a hot day"
+99,dromen,to dream,verb,sleep,"Ik droom 's nachts over vliegen in de lucht","I ... at night about flying in the air"
+100,droom,dream,noun,sleep,"Een droom is wat je ziet tijdens je slaap","A ... is what you see during your sleep"
+101,dubbel,double,adjective,quantity,"Een dubbele portie is twee keer zoveel","A ... portion is twice as much"
+102,dun,thin,adjective,dimension,"Een dunne lijn is smal en niet dik","A ... line is narrow and not thick"
+103,economie,economy,noun,finance,"De economie is het financiële systeem van een land","The ... is the financial system of a country"
+104,een,a,article,grammar,"Ik heb een boek, niet twee of drie","I have ... book, not two or three"
+105,eens,just,particle,suggestion,"Kom eens hier kijken","Come ... look here"
+106,eerst,first,adverb,order,"Eerst de winkel, dan naar huis","... the store, then home"
+107,effect,effect,noun,result,"Dit medicijn heeft een positief effect","This medicine has a positive ..."
+108,eiland,island,noun,geography,"Een eiland is land omringd door water","An ... is land surrounded by water"
+109,eind,end,noun,conclusion,"Het eind van het verhaal","The ... of the story"
+110,eindeloos,endless,adjective,duration,"Een eindeloze weg lijkt nooit te stoppen","An ... road seems to never stop"
+111,eindigen,to end,verb,conclusion,"Het verhaal eindigt goed met een happy ending","The story ... well with a happy ending"
+112,elk,each,adjective,quantity,"Elk kind krijgt een cadeau","... child gets a present"
+113,emotie,emotion,noun,feeling,"Liefde en angst zijn sterke emoties","Love and fear are strong ..."
+114,emotioneel,emotional,adjective,feeling,"Het is een emotioneel moment vol tranen","It is an ... moment full of tears"
+115,en,and,conjunction,grammar,"Ik hou van koffie en thee beide","I like coffee ... tea both"
+116,energie,energy,noun,power,"Ik heb veel energie na een goede nachtrust","I have much ... after a good night's sleep"
+117,engels,English,adjective,language,"Engels is de taal van Engeland en Amerika","... is the language of England and America"
+118,enorm,enormous,adjective,size,"Dit huis is enorm groot en breed","This house is ... big and wide"
+119,er,there,adverb,location,"Er is niemand thuis","... is nobody home"
+120,er,there,particle,grammar,"Er zijn veel mensen hier","... are many people here"
+121,eten,to eat,verb,consumption,"Ik eet een appel","I eat an apple"
+122,eten,food,noun,nutrition,"Het eten is klaar","The food is ready"
+123,even,just,particle,brevity,"Wacht even, ik kom zo","Wait ..., I'm coming"
+124,experiment,experiment,noun,science,"Een wetenschappelijk experiment test een hypothese","A scientific ... tests a hypothesis"
+125,fabriek,factory,noun,industry,"Een fabriek produceert goederen en producten","A ... produces goods and products"
+126,factor,factor,noun,element,"Prijs is een belangrijke factor bij kopen","Price is an important ... when buying"
+127,familie,family,noun,relationships,"Mijn vader, moeder en broer zijn mijn familie","My father, mother and brother are my ..."
+128,fase,phase,noun,stage,"Een nieuwe fase is een stadium in een proces","A new ... is a stage in a process"
+129,feit,fact,noun,truth,"Dat is een feit","That is a ..."
+130,figuur,figure,noun,shape,"Een driehoek is een geometrische figuur","A triangle is a geometric ..."
+131,film,movie,noun,entertainment,"We kijken een film in de bioscoop","We watch a ... in the cinema"
+132,financieel,financial,adjective,money,"Een financieel probleem gaat over geld en schulden","A ... problem is about money and debts"
+133,formuleren,to formulate,verb,expression,"Ik moet een vraag duidelijk formuleren met woorden","I must ... a question clearly with words"
+134,foto,photo,noun,media,"Ik maak een foto met mijn camera","I take a ... with my camera"
+135,fruit,fruit,noun,food,"Fruit zoals appels en bananen zijn gezond","... like apples and bananas are healthy"
+136,functie,function,noun,purpose,"Wat is de functie van dit gereedschap?","What is the ... of this tool?"
+137,fundamenteel,fundamental,adjective,basis,"Een fundamenteel probleem is een basis kwestie","A ... problem is a basic issue"
+138,gaan,to go,verb,movement,"Ik ga van Amsterdam naar Utrecht met de trein","I ... from Amsterdam to Utrecht by train"
+139,gast,guest,noun,hospitality,"Een welkome gast krijgt koffie en thee","A welcome ... gets coffee and tea"
+140,geboren,born,adjective,life,"Ik ben in 1990 geboren in Amsterdam","I was ... in 1990 in Amsterdam"
+141,geluk,luck,noun,fortune,"Veel geluk!","Good ...!"
+142,gemeen,mean,adjective,personality,"Het is gemeen om anderen te pesten","It is ... to bully others"
+143,generatie,generation,noun,age,"Een nieuwe generatie is de volgende leeftijdsgroep","A new ... is the next age group"
+144,geven,to give,verb,transfer,"Kun je me dat boek geven alsjeblieft?","Can you ... me that book please?"
+145,gevoel,feeling,noun,emotion,"Ik heb een goed gevoel over deze beslissing","I have a good ... about this decision"
+146,glas,glass,noun,objects,"Ik drink water uit een glas op tafel","I drink water from a ... on the table"
+147,glas,glass,noun,material,"Een raam van glas","A window of ..."
+148,goed,good,adjective,quality,"Dat is een goed idee","That is a ... idea"
+149,goederen,goods,noun,commerce,"De winkel verkoopt goederen en producten","The store sells ... and products"
+150,gouden,golden,adjective,color,"Een gouden ring is van het edelmetaal goud","A ... ring is made of the precious metal gold"
+151,gras,grass,noun,nature,"Koeien eten gras op de weide","Cows eat ... in the meadow"
+152,groeien,to grow,verb,development,"Planten groeien snel met water en zonlicht","Plants ... fast with water and sunlight"
+153,groen,green,adjective,color,"Gras en bladeren zijn groen van kleur","Grass and leaves are ... in color"
+154,groep,group,noun,collection,"Een groep mensen staat bij de deur","A ... of people stands at the door"
+155,haar,her,pronoun,grammar,"Dat is haar tas","That is ... bag"
+156,haar,hair,noun,body,"Zij heeft lang haar","She has long ..."
+157,half,half,adjective,quantity,"Een half uur is 30 minuten lang","A ... hour is 30 minutes long"
+158,hallo,hello,interjection,greeting,"Hallo, hoe gaat het met je?","..., how are you?"
+159,hand,hand,noun,body,"Geef me je hand om te schudden","Give me your ... to shake"
+160,hard,hard,adjective,texture,"De steen is hard en niet zacht","The stone is ... and not soft"
+161,hard,loud,adjective,sound,"De muziek is te hard, zet zachter","The music is too ..., turn it down"
+162,hard,fast,adverb,speed,"Hij rijdt hard","He drives ..."
+163,hart,heart,noun,body,"Mijn hart klopt snel in mijn borst","My ... beats fast in my chest"
+164,hebben,to have,verb,possession,"Ik heb een nieuwe fiets","I ... a new bicycle"
+165,heet,hot,adjective,temperature,"Het is heet vandaag, de zon brandt","It is ... today, the sun burns"
+166,helft,half,noun,quantity,"De helft is 50 procent of de helft","The ... is 50 percent or half"
+167,helpen,to help,verb,assistance,"Kan ik je helpen met je probleem?","Can I ... you with your problem?"
+168,hem,him,pronoun,grammar,"Ik zie hem daar staan bij de deur","I see ... standing there by the door"
+169,het,it,pronoun,grammar,"Het regent niet, het is mooi weer vandaag","... doesn't rain, ... is beautiful weather today"
+170,het,the,article,grammar,"Het boek ligt op de tafel","... book lies on the table"
+171,hier,here,adverb,location,"Kom hier, naast mij zitten","Come ..., sit next to me"
+172,hij,he,pronoun,grammar,"Hij werkt in Amsterdam","... works in Amsterdam"
+173,historisch,historical,adjective,history,"De oorlog was een historisch belangrijk moment","The war was a ... important moment"
+174,hoe,how,adverb,question,"Hoe heet je?","... is your name?"
+175,hoed,hat,noun,clothing,"Ik draag een hoed op mijn hoofd tegen de zon","I wear a ... on my head against the sun"
+176,hoewel,although,conjunction,concession,"Ik ga wandelen hoewel het koud is","I go walking ... it is cold"
+177,hoi,hi,interjection,greeting,"Hoi, leuk je te zien!","..., nice to see you!"
+178,holland,Holland,noun,geography,"Ik woon in Holland","I live in ..."
+179,honger,hunger,noun,sensation,"Ik heb honger","I am ..."
+180,hoop,hope,noun,emotion,"Ik heb hoop dat alles goed komt","I have ... that everything will be fine"
+181,hoop,pile,noun,quantity,"Een hoop zand ligt op de grond","A ... of sand lies on the ground"
+182,hoor,you know,particle,reassurance,"Dat is geen probleem hoor","That's no problem ..."
+183,hopen,to hope,verb,desire,"Ik hoop dat je komt","I ... that you come"
+184,horen,to hear,verb,perception,"Ik hoor muziek","I ... music"
+185,hotel,hotel,noun,accommodation,"We slapen in een hotel","We sleep in a ..."
+186,houden,to hold,verb,action,"Ik hou van chocolade","I ... chocolate"
+187,huis,house,noun,building,"Ik woon in een huis met een tuin","I live in a ... with a garden"
+188,hulp,help,noun,assistance,"Ik kan dit niet alleen, ik heb hulp nodig","I can't do this alone, I need ..."
+189,hut,hut,noun,building,"Een hut is een klein houten huisje","A ... is a small wooden house"
+190,hé,hey,interjection,attention,"Hé, kijk hier!","..., look here!"
+191,ideaal,ideal,adjective,perfection,"Dit is de ideale oplossing voor het probleem","This is the ... solution for the problem"
+192,idee,idea,noun,thought,"Ik heb een goed idee om het probleem op te lossen","I have a good ... to solve the problem"
+193,ik,I,pronoun,grammar,"Ik hou van muziek","... love music"
+194,in,in,preposition,location,"De sleutel zit in de tas, niet erop","The key is ... the bag, not on it"
+195,individu,individual,noun,person,"Elk individu is uniek","Each ... is unique"
+196,individueel,individual,adjective,singular,"Een individueel probleem","An ... problem"
+197,informatie,information,noun,data,"Ik heb informatie","I have ..."
+198,initiatief,initiative,noun,action,"Hij neemt het initiatief om te beginnen","He takes the ... to start"
+199,instrument,instrument,noun,tool,"Een muzikaal instrument","A musical ..."
+200,interessant,interesting,adjective,quality,"Dit boek is interessant om te lezen","This book is ... to read"
+201,interesseren,to interest,verb,curiosity,"Dit onderwerp interesseert me, ik wil meer weten","This topic ... me, I want to know more"
+202,internationaal,international,adjective,global,"Een internationaal bedrijf","An ... company"
+203,invloed,influence,noun,impact,"Hij heeft veel invloed","He has much ..."
+204,ja,yes,interjection,response,"Wil je koffie? Ja, graag","Do you want coffee? ..., please"
+205,jaar,year,noun,time,"Een jaar heeft 12 maanden","A ... has 12 months"
+206,je,you,pronoun,grammar,"Hoe gaat het met je vandaag?","How are ... doing today?"
+207,jezelf,yourself,pronoun,reflexive,"Ken jezelf","Know ..."
+208,jij,you,pronoun,grammar,"Wat doe jij vandaag, werk of studie?","What do ... do today, work or study?"
+209,jong,young,adjective,age,"Hij is nog jong, pas twintig jaar oud","He is still ..., only twenty years old"
+210,jongeman,young man,noun,people,"Een aardige jongeman","A nice ..."
+211,jou,you,pronoun,grammar,"Ik zie jou daar staan bij het raam","I see ... standing there by the window"
+212,jullie,you,pronoun,plural,"Waar zijn jullie?","Where are ...?"
+213,juni,June,noun,time,"In juni ga ik weg","In ... I will leave"
+214,kaas,cheese,noun,food,"Kaas wordt gemaakt van melk","... is made from milk"
+215,kalm,calm,adjective,mood,"Blijf kalm","Stay ..."
+216,kamp,camp,noun,location,"Kinderen slapen in tenten op een zomerkamp","Children sleep in tents at a summer ..."
+217,karakter,character,noun,personality,"Iemand met een sterk karakter geeft niet snel op","Someone with a strong ... doesn't give up easily"
+218,kat,cat,noun,animals,"De kat zegt miauw en de hond blaft","The ... says meow and the dog barks"
+219,kijken,to look,verb,perception,"Kijk naar de lucht","Look at the sky"
+220,kilometer,kilometer,noun,measurement,"Een kilometer is 1000 meter afstand","A ... is 1000 meters distance"
+221,kind,child,noun,family,"Een kind is jonger dan een volwassene","A ... is younger than an adult"
+222,klant,client,noun,business,"De winkel helpt elke klant vriendelijk","The store helps every ... friendly"
+223,klas,class,noun,education,"Mijn klas heeft 25 leerlingen en een leraar","My ... has 25 students and a teacher"
+224,klassiek,classical,adjective,style,"Mozart maakte klassieke muziek","Mozart made ... music"
+225,kleur,color,noun,appearance,"Rood, blauw en groen zijn kleuren","Red, blue and green are ..."
+226,klimmen,to climb,verb,movement,"Ik klim in de boom","I ... the tree"
+227,knie,knee,noun,body,"Mijn knie doet pijn","My ... hurts"
+228,koel,cool,adjective,temperature,"Het is koel buiten","It is ... outside"
+229,koffie,coffee,noun,drinks,"'s Ochtends drink ik koffie met melk","In the morning I drink ... with milk"
+230,komen,to come,verb,movement,"Kun je morgen komen?","Can you ... tomorrow?"
+231,koning,king,noun,royalty,"De koning en koningin regeren het land","The ... and queen rule the country"
+232,kosten,to cost,verb,price,"Hoeveel kost dit?","How much does this ...?"
+233,kosten,costs,noun,expenses,"De kosten zijn hoog","The ... are high"
+234,koud,cold,adjective,temperature,"Het is koud buiten","It is ... outside"
+235,kruis,cross,noun,symbol,"Een houten kruis","A wooden ..."
+236,kunnen,can,verb,ability,"Ik kan Nederlands spreken","I ... speak Dutch"
+237,kust,coast,noun,geography,"Aan de kust","At the ..."
+238,kwaliteit,quality,noun,standard,"Goede kwaliteit","Good ..."
+239,laat,late,adjective,time,"Het is al negen uur, ik ben te laat","It's already nine, I am too ..."
+240,laatste,last,adjective,order,"Dit is de laatste pagina van het boek","This is the ... page of the book"
+241,lachen,to laugh,verb,emotion,"Ik moet lachen","I have to ..."
+242,landschap,landscape,noun,scenery,"Een mooi landschap","A beautiful ..."
+243,lang,long,adjective,dimension,"Dat is een lange weg","That is a ... road"
+244,lang,long,adverb,duration,"Hoe lang duurt het?","How long does it take?"
+245,langs,along,preposition,direction,"Loop langs de rivier","Walk ... the river"
+246,laten,to let,verb,permission,"Laat me zien","... me see"
+247,laten,to leave,verb,abandonment,"Laat me met rust","... me alone"
+248,laten,lets,verb,permission,"Hij laat me gaan","He ... me go"
+249,later,later,adverb,time,"Tot later!","See you ...!"
+250,leiden,to lead,verb,guidance,"Hij leidt het team","He ... the team"
+251,leider,leader,noun,authority,"De leider van de groep neemt beslissingen","The ... of the group makes decisions"
+252,leiding,leadership,noun,guidance,"Hij heeft de leiding en geeft instructies","He has the ... and gives instructions"
+253,leren,to learn,verb,education,"Ik leer Nederlands","I ... Dutch"
+254,leren,leather,noun,material,"Schoenen van leren","Shoes made of ..."
+255,leven,life,noun,existence,"Het leven is mooi","... is beautiful"
+256,leven,to live,verb,existence,"Ik leef in Amsterdam","I ... in Amsterdam"
+257,leveren,to deliver,verb,service,"We leveren morgen","We ... tomorrow"
+258,licht,light,noun,nature,"Doe het licht aan","Turn the ... on"
+259,licht,light,adjective,weight,"Deze tas is licht","This bag is ..."
+260,licht,light,adjective,color,"Een lichte kleur als roze of geel","A light color like pink or yellow"
+261,liefde,love,noun,emotion,"Liefde is mooi","... is beautiful"
+262,liggen,to lie,verb,position,"Ik lig op de bank","I lie on the couch"
+263,lijst,list,noun,organization,"Ik maak een boodschappenlijst voor de winkel","I make a shopping ... for the store"
+264,lip,lip,noun,body,"Mijn lip is onder mijn neus en boven mijn kin","My ... is below my nose and above my chin"
+265,literatuur,literature,noun,arts,"Literatuur is de kunst van geschreven boeken","... is the art of written books"
+266,logisch,logical,adjective,reasoning,"Een logische conclusie volgt uit de feiten","A ... conclusion follows from the facts"
+267,lopen,to walk,verb,movement,"Ik loop naar school","I walk to school"
+268,los,loose,adjective,state,"De knop is los en zit niet vast","The button is ... and not attached"
+269,luisteren,to listen,verb,perception,"Luister naar me","... to me"
+270,luitenant,lieutenant,noun,military,"De luitenant is een militaire officier","The ... is a military officer"
+271,maaltijd,meal,noun,food,"Ontbijt, lunch en diner zijn de drie maaltijden","Breakfast, lunch and dinner are the three ..."
+272,maan,moon,noun,astronomy,"De maan schijnt 's nachts aan de hemel","The ... shines at night in the sky"
+273,maand,month,noun,time,"Volgende maand ga ik op vakantie","Next ... I will go on vacation"
+274,maar,but,conjunction,contrast,"Ik wil komen maar ik kan niet","I want to come ... I cannot"
+275,maar,just,particle,emphasis,"Doe maar rustig aan","... take it easy"
+276,machine,machine,noun,equipment,"De wasmachine wast kleding automatisch","The washing ... washes clothes automatically"
+277,maken,to make,verb,creation,"Ik maak een taart in de oven","I ... a cake in the oven"
+278,mama,mom,noun,family,"Mijn mama kookt het avondeten voor ons","My ... cooks the dinner for us"
+279,man,man,noun,people,"Die man is mijn vader","That ... is my father"
+280,markt,market,noun,commerce,"Op de markt koop ik verse groenten","At the ... I buy fresh vegetables"
+281,materiaal,material,noun,substance,"Hout en staal zijn sterke materialen","Wood and steel are strong ..."
+282,me,me,pronoun,grammar,"Geef me het boek van de plank","Give ... the book from the shelf"
+283,medisch,medical,adjective,healthcare,"Medisch advies","... advice"
+284,meer,more,adverb,quantity,"Ik wil meer water","I want ... water"
+285,meer,lake,noun,nature,"Een meer is een groot gebied met zoet water","A ... is a large area with fresh water"
+286,meestal,usually,adverb,frequency,"Ik ga meestal lopend","I ... go walking"
+287,meester,master,noun,expertise,"De meester is een leraar op de basisschool","The ... is a teacher at elementary school"
+288,menen,to mean,verb,intention,"Wat meen je?","What do you ...?"
+289,met,with,preposition,accompaniment,"Ik ga met jou naar de winkel","I go ... you to the store"
+290,meter,meter,noun,measurement,"Een meter is 100 centimeter lang","A ... is 100 centimeters long"
+291,methode,method,noun,approach,"Een goede methode is een effectieve manier","A good ... is an effective way"
+292,mezelf,myself,pronoun,reflexive,"Ik zie mezelf in de spiegel","I see ... in the mirror"
+293,mij,me,pronoun,grammar,"Hij belt mij morgen","He calls ... tomorrow"
+294,mijn,my,pronoun,possession,"Dit is mijn huis, niet van jou","This is ... house, not yours"
+295,miljoen,million,numeral,numbers,"Een miljoen is duizend maal duizend","A ... is thousand times thousand"
+296,minister,minister,noun,politics,"De minister is lid van de regering","The ... is a member of the government"
+297,minuut,minute,noun,time,"Een minuut is 60 seconden lang","A ... is 60 seconds long"
+298,missen,to miss,verb,absence,"Ik mis je, wanneer kom je terug?","I ... you, when will you come back?"
+299,modern,modern,adjective,style,"Een modern huis heeft een eigentijdse stijl","A ... house has a contemporary style"
+300,moeder,mother,noun,family,"Mijn moeder en vader zijn mijn ouders","My ... and father are my parents"
+301,moeten,must,verb,obligation,"Ik moet werken vandaag","I ... work today"
+302,moment,moment,noun,time,"Wacht een moment, ik kom zo","Wait a ..., I'm coming"
+303,mond,mouth,noun,body,"Ik eet met mijn mond en praat ermee","I eat with my ... and talk with it"
+304,motief,motive,noun,reason,"Het motief voor de daad was wraak","The ... for the act was revenge"
+305,museum,museum,noun,culture,"In het museum zie je kunst en geschiedenis","In the ... you see art and history"
+306,muziek,music,noun,entertainment,"Ik luister naar muziek met mijn koptelefoon","I listen to ... with my headphones"
+307,naam,name,noun,identity,"Voor- en achternaam staan op het document","First and last ... are on the document"
+308,naar,to,preposition,direction,"Ik ga naar school om te leren","I go ... school to learn"
+309,naast,next to,preposition,position,"Ik zit naast mijn vriend in de klas","I sit ... my friend in class"
+310,nacht,night,noun,time,"Goede nacht, slaap lekker!","Good ..., sleep well!"
+311,nationaal,national,adjective,geography,"Een nationaal park behoort tot het hele land","A ... park belongs to the whole country"
+312,natuur,nature,noun,environment,"De natuur heeft bomen, dieren en rivieren","... has trees, animals and rivers"
+313,nee,no,interjection,response,"Wil je dit? Nee, dank je","Do you want this? ..., thank you"
+314,neef,nephew,noun,family,"Mijn neef is de zoon van mijn oom of tante","My ... is the son of my uncle or aunt"
+315,negatief,negative,adjective,attitude,"Een negatief gevoel is niet positief of blij","A ... feeling is not positive or happy"
+316,nek,neck,noun,body,"Mijn nek doet pijn tussen hoofd en schouders","My ... hurts between head and shoulders"
+317,neus,nose,noun,body,"Mijn neus loopt, ik ben verkouden","My ... is running, I have a cold"
+318,nicht,niece,noun,family,"Mijn nicht is de dochter van mijn oom of tante","My ... is the daughter of my uncle or aunt"
+319,niet,not,adverb,negation,"Ik kan niet komen, ik ben ziek","I can ... come, I am sick"
+320,nieuw,new,adjective,quality,"Ik heb een nieuwe fiets","I have a ... bicycle"
+321,noorden,north,noun,direction,"In het noorden is het koud en ligt Nederland","In the ... it is cold and lies the Netherlands"
+322,normaal,normal,adjective,standard,"Dat gedrag is niet normaal maar vreemd","That behavior is not ... but strange"
+323,nu,now,adverb,time,"Ik ga nu meteen naar huis, niet later","I am going home ... immediately, not later"
+324,nummer,number,noun,identifier,"Mijn telefoonnummer heeft 10 cijfers","My phone ... has 10 digits"
+325,object,object,noun,thing,"Een object is een ding of voorwerp","An ... is a thing or item"
+326,of,or,conjunction,grammar,"Wil je koffie of thee drinken vandaag?","Do you want coffee ... tea to drink today?"
+327,officieel,official,adjective,formal,"Dit is het officieel document van de overheid","This is the ... document from the government"
+328,officier,officer,noun,military,"Een officier is een militaire leider","An ... is a military leader"
+329,oh,oh,interjection,realization,"Oh, ik begrijp het nu","..., I understand now"
+330,oktober,October,noun,time,"Oktober is de tiende maand van het jaar","... is the tenth month of the year"
+331,oké,okay,interjection,agreement,"Oké, dat is goed","..., that is fine"
+332,olie,oil,noun,substance,"Olie is een vloeibare stof om mee te koken","... is a liquid substance to cook with"
+333,oma,grandmother,noun,family,"Mijn oma is de moeder van mijn vader of moeder","My ... is the mother of my father or mother"
+334,omdat,because,conjunction,reason,"Ik leer Nederlands omdat het nuttig is","I learn Dutch ... it is useful"
+335,onder,under,preposition,position,"De kat ligt onder de tafel","The cat lies ... the table"
+336,ontbreken,to lack,verb,absence,"Er ontbreekt iets","Something is ..."
+337,oom,uncle,noun,family,"Mijn oom is de broer van mijn vader of moeder","My ... is the brother of my father or mother"
+338,oor,ear,noun,body,"We horen met onze oren geluid","We hear sound with our ..."
+339,op,on,preposition,location,"Het boek ligt op de tafel","The book is ... the table"
+340,op,up,adverb,direction,"Ik sta vroeg op","I get ... early"
+341,opa,grandfather,noun,family,"Mijn opa is de vader van mijn vader of moeder","My ... is the father of my father or mother"
+342,open,open,adjective,state,"De deur is open","The door is ..."
+343,open,to open,verb,action,"Winkels open om negen uur","Shops open at nine"
+344,openen,to open,verb,action,"Open de deur","... the door"
+345,operatie,operation,noun,medical,"Een operatie is een chirurgische medische ingreep","An ... is a surgical medical procedure"
+346,orgaan,organ,noun,body,"Het hart en de lever zijn belangrijke organen","The heart and liver are important ..."
+347,organisatie,organization,noun,institution,"Een organisatie is een gestructureerde groep mensen","An ... is a structured group of people"
+348,organiseren,to organize,verb,planning,"Een feest organiseren","To ... a party"
+349,oud,old,adjective,age,"Mijn huis is oud","My house is ..."
+350,ouders,parents,noun,family,"Mijn ouders zijn mijn vader en moeder","My ... are my father and mother"
+351,over,about,preposition,topic,"We praten over het weer","We talk ... the weather"
+352,pad,path,noun,route,"Een smal pad loopt door het bos","A narrow ... runs through the forest"
+353,papier,paper,noun,material,"Papier is gemaakt van hout om op te schrijven","... is made from wood to write on"
+354,partner,partner,noun,relationships,"Mijn partner is de persoon met wie ik samenleef","My ... is the person I live with"
+355,pas,just,adverb,time,"Ik kom pas om acht uur","I come ... at eight"
+356,pas,pass,noun,document,"Ik heb mijn pas vergeten","I forgot my pass"
+357,passeren,to pass,verb,movement,"Ik passeer het huis op weg naar school","I ... the house on my way to school"
+358,patiënt,patient,noun,healthcare,"De patiënt wordt behandeld door een dokter","The ... is treated by a doctor"
+359,patroon,pattern,noun,design,"Een patroon is een herhalend ontwerp","A ... is a repeating design"
+360,periode,period,noun,time,"Een periode is een bepaalde tijdspanne","A ... is a certain time span"
+361,pers,press,noun,media,"De pers zijn journalisten en kranten","The ... are journalists and newspapers"
+362,persoon,person,noun,people,"Een persoon is een individueel mens","A ... is an individual human"
+363,persoonlijk,personally,adverb,manner,"Ik kom persoonlijk","I come ..."
+364,persoonlijkheid,personality,noun,character,"Zijn persoonlijkheid is vriendelijk en extravert","His ... is friendly and extroverted"
+365,pijn,pain,noun,sensation,"Ik heb pijn in mijn been, het doet zeer","I have ... in my leg, it hurts"
+366,pijnlijk,painful,adjective,sensation,"Een pijnlijke ervaring doet emotioneel zeer","A ... experience hurts emotionally"
+367,plaat,plate,noun,objects,"Een plaat is een vlak stuk materiaal","A ... is a flat piece of material"
+368,plaats,place,noun,location,"Dit is een mooie plaats om te wonen","This is a beautiful ... to live"
+369,plaatsen,to place,verb,positioning,"Ik plaats het boek op de plank","I ... the book on the shelf"
+370,plan,plan,noun,strategy,"Wat is je plan voor het weekend?","What is your ... for the weekend?"
+371,plant,plant,noun,nature,"Een groene plant groeit in de tuin","A green ... grows in the garden"
+372,planten,to plant,verb,gardening,"Ik plant bloemen en groenten in de tuin","I ... flowers and vegetables in the garden"
+373,plezier,pleasure,noun,emotion,"Veel plezier met het feest vanavond!","Have fun at the party tonight!"
+374,politie,police,noun,authority,"Bel de politie bij nood of gevaar","Call the ... in an emergency or danger"
+375,positie,position,noun,placement,"Een goede positie is een gunstige plek","A good ... is a favorable spot"
+376,positief,positive,adjective,attitude,"Een positief resultaat is goed nieuws","A ... result is good news"
+377,pot,pot,noun,container,"Ik kook soep in een grote pot","I cook soup in a large ..."
+378,praktijk,practice,noun,application,"In de praktijk werkt het anders dan in theorie","In ... it works differently than in theory"
+379,praktisch,practical,adjective,utility,"Een praktische oplossing is handig en werkt goed","A ... solution is handy and works well"
+380,president,president,noun,politics,"De president is de leider van een land","The ... is the leader of a country"
+381,prijs,price,noun,money,"De prijs van dit boek is 20 euro","The ... of this book is 20 euros"
+382,probleem,problem,noun,difficulty,"Ik heb een probleem met mijn computer","I have a ... with my computer"
+383,procent,percent,noun,measurement,"Vijftig procent is de helft, 50 van 100","Fifty ... is half, 50 of 100"
+384,proces,process,noun,procedure,"Een proces is een reeks stappen om iets te bereiken","A ... is a series of steps to achieve something"
+385,produceren,to produce,verb,creation,"Fabrieken produceren goederen en artikelen","Factories ... goods and articles"
+386,product,product,noun,goods,"De winkel verkoopt veel producten en goederen","The store sells many ... and goods"
+387,productie,production,noun,manufacturing,"De productie van auto's stopt vandaag","The ... of cars stops today"
+388,programma,program,noun,schedule,"Het televisieprogramma start om acht uur","The television ... starts at eight o'clock"
+389,project,project,noun,work,"Een nieuw project begint met een plan","A new ... starts with a plan"
+390,provincie,province,noun,geography,"In deze provincie","In this ..."
+391,psychologie,psychology,noun,science,"Ik studeer psychologie","I study ..."
+392,psychologisch,psychological,adjective,mental,"Een psychologisch effect","A ... effect"
+393,psycholoog,psychologist,noun,profession,"De psycholoog helpt","The ... helps"
+394,publiceren,to publish,verb,media,"Een boek publiceren","To ... a book"
+395,radio,radio,noun,media,"Ik luister naar de radio","I listen to the ..."
+396,reactie,reaction,noun,response,"Wat is je reactie op dit nieuws?","What is your ... to this news?"
+397,realiseren,to realize,verb,understanding,"Ik realiseer het nu","I ... it now"
+398,reden,reason,noun,logic,"Wat is de reden?","What is the ...?"
+399,relatie,relationship,noun,connections,"Een goede relatie","A good ..."
+400,relatief,relatively,adverb,comparison,"Relatief eenvoudig","... simple"
+401,rennen,to run,verb,movement,"Ik ren naar huis","I ... home"
+402,restaurant,restaurant,noun,food,"We eten in een restaurant","We eat in a ..."
+403,resultaat,result,noun,outcome,"Het resultaat van de test is positief","The ... of the test is positive"
+404,rijk,rich,adjective,wealth,"Hij is rijk en heeft veel geld","He is ... and has a lot of money"
+405,rijk,kingdom,noun,geography,"Het Koninkrijk der Nederlanden","The ... of the Netherlands"
+406,risico,risk,noun,danger,"Een groot risico kan gevaarlijk zijn","A big ... can be dangerous"
+407,rivier,river,noun,nature,"Een rivier is stromend water tussen land","A ... is flowing water between land"
+408,rol,role,noun,function,"Hij speelt een rol","He plays a ..."
+409,rol,roll,noun,food,"Een broodje is een klein rol","A ... is a small bread"
+410,rond,round,adjective,shape,"Een ronde tafel","A ... table"
+411,rond,around,preposition,location,"Loop rond het huis","Walk ... the house"
+412,rood,red,adjective,color,"Bloed is rood en rozen ook","Blood is ... and roses too"
+413,rust,rest,noun,relaxation,"Ik heb rust nodig na hard werken","I need ... after working hard"
+414,rusten,to rest,verb,relaxation,"Ik moet rusten","I must ..."
+415,schaduw,shadow,noun,light,"De zon maakt een schaduw achter het huis","The sun makes a ... behind the house"
+416,schoen,shoe,noun,clothing,"Ik draag schoenen aan mijn voeten","I wear ... on my feet"
+417,school,school,noun,education,"Ik ga naar school","I go to ..."
+418,schouder,shoulder,noun,body,"De schouder verbindt de arm met het lichaam","The ... connects the arm to the body"
+419,seconde,second,noun,time,"Een minuut heeft 60 seconden","A minute has 60 ..."
+420,sector,sector,noun,industry,"De publieke sector omvat overheid en onderwijs","The public ... includes government and education"
+421,serieus,serious,adjective,attitude,"Dit is een serieus probleem, geen grapje","This is a ... problem, not a joke"
+422,sigaret,cigarette,noun,smoking,"Een sigaret roken is ongezond voor de longen","Smoking a ... is unhealthy for the lungs"
+423,sinds,since,preposition,time,"Sinds vorige week ben ik ziek","... last week I am sick"
+424,slaap,sleep,noun,rest,"Ik ben moe en heb slaap nodig","I am tired and need ..."
+425,slapen,to sleep,verb,rest,"Ik ga slapen","I go to ..."
+426,sneeuw,snow,noun,weather,"Witte sneeuw valt 's winters van de hemel","White ... falls from the sky in winter"
+427,sociaal,social,adjective,society,"Een sociaal probleem betreft de maatschappij","A ... problem concerns society"
+428,sommige,some,adjective,quantity,"Sommige mensen houden van koffie, anderen niet","... people like coffee, others don't"
+429,soms,sometimes,adverb,frequency,"Ik ga soms zwemmen","I go swimming ..."
+430,soort,kind,noun,type,"Wat voor soort muziek luister je, rock of jazz?","What ... of music do you listen to, rock or jazz?"
+431,speciaal,special,adjective,quality,"Een speciaal cadeau is uniek en bijzonder","A ... gift is unique and extraordinary"
+432,specifiek,specific,adjective,precision,"Ik heb een specifiek en duidelijk antwoord","I have a ... and clear answer"
+433,spreken,to speak,verb,communication,"Ik spreek Nederlands","I ... Dutch"
+434,staan,to stand,verb,position,"Ik sta bij de deur","I ... by the door"
+435,staan,stand,noun,position,"Een fruitstal op de markt","A fruit stand at the market"
+436,staat,state,noun,condition,"Mijn auto is in goede staat en werkt perfect","My car is in good ... and works perfectly"
+437,stap,step,noun,movement,"Nog één stap en je bent bij de deur","One more ... and you're at the door"
+438,stappen,to step,verb,movement,"Ik stap in de trein","I ... into the train"
+439,station,station,noun,transportation,"Ik wacht op het station","I wait at the ..."
+440,steen,stone,noun,material,"Een steen is een hard stuk rots","A ... is a hard piece of rock"
+441,ster,star,noun,astronomy,"'s Nachts zie je sterren aan de hemel","At night you see ... in the sky"
+442,stijf,stiff,adjective,texture,"Mijn nek is stijf en beweegt moeilijk","My neck is ... and moves with difficulty"
+443,stijl,style,noun,manner,"Elke kunstenaar heeft zijn eigen stijl","Every artist has his own ..."
+444,stoppen,to stop,verb,action,"Stop hier","... here"
+445,straat,street,noun,location,"Auto's rijden op de straat tussen huizen","Cars drive on the ... between houses"
+446,structuur,structure,noun,organization,"Een gebouw heeft een sterke structuur","A building has a strong ..."
+447,student,student,noun,education,"Ik ben student en studeer aan de universiteit","I am a ... and study at the university"
+448,studeren,to study,verb,education,"Ik studeer hard","I ... hard"
+449,studie,study,noun,education,"Mijn studie aan de universiteit duurt vier jaar","My ... at the university lasts four years"
+450,succes,success,noun,achievement,"Veel succes met je examen morgen!","Good luck with your exam tomorrow!"
+451,suiker,sugar,noun,food,"Suiker is zoet en zit in de koffie","... is sweet and goes in the coffee"
+452,symbool,symbol,noun,representation,"Een belangrijk symbool","An important ..."
+453,systeem,system,noun,structure,"Het computersysteem werkt niet meer goed","The computer... doesn't work well anymore"
+454,tafel,table,noun,furniture,"We eten samen aan de tafel","We eat together at the ..."
+455,tante,aunt,noun,family,"Mijn tante komt","My ... is coming"
+456,te,to,particle,grammar,"Ik ga te laat komen","I am going ... arrive late"
+457,te,too,adverb,grammar,"Dit is te moeilijk voor mij","This is ... difficult for me"
+458,techniek,technique,noun,method,"Een goede techniek","A good ..."
+459,technisch,technical,adjective,skill,"Een technisch probleem","A ... problem"
+460,tegen,against,preposition,opposition,"De ladder staat tegen de muur","The ladder stands ... the wall"
+461,tekst,text,noun,writing,"Ik lees de tekst in het boek","I read the ... in the book"
+462,telefoon,phone,noun,communication,"Ik bel mijn moeder met de telefoon","I call my mother with the ..."
+463,televisie,television,noun,media,"Ik kijk televisie","I watch ..."
+464,term,term,noun,expression,"Een technische term","A technical ..."
+465,terras,terrace,noun,building,"Zitten op het terras","Sitting on the ..."
+466,terrein,terrain,noun,land,"Een groot terrein","A large ..."
+467,terwijl,while,conjunction,simultaneity,"Ik luister muziek terwijl ik werk","I listen to music ... I work"
+468,thee,tea,noun,drinks,"Ik drink thee","I drink ..."
+469,theoretisch,theoretical,adjective,concept,"Theoretisch mogelijk","... possible"
+470,theorie,theory,noun,concept,"Een interessante theorie","An interesting ..."
+471,tien,ten,numeral,numbers,"Tien is het getal tussen negen en elf","... is the number between nine and eleven"
+472,titel,title,noun,naming,"Elk boek heeft een titel bovenaan","Every book has a ... at the top"
+473,toch,still,particle,emphasis,"Het is toch waar wat ik zeg","It is ... true what I say"
+474,toen,then,adverb,time,"Toen was ik jong","... I was young"
+475,tong,tongue,noun,body,"Mijn tong zit in mijn mond om te proeven","My ... is in my mouth to taste"
+476,top,top,noun,position,"De top van de berg is het hoogste punt","The ... of the mountain is the highest point"
+477,tot,until,preposition,time,"Ik werk tot vijf uur 's avonds","I work ... five o'clock in the evening"
+478,totaal,total,adjective,sum,"Het totaal bedrag van 20 plus 30 is 50 euro","The ... amount of 20 plus 30 is 50 euros"
+479,traditie,tradition,noun,custom,"Een traditie is een gebruik dat generaties lang bestaat","A ... is a custom that exists for generations"
+480,traditioneel,traditional,adjective,custom,"Traditioneel eten wordt al eeuwen gemaakt","... food has been made for centuries"
+481,trein,train,noun,transportation,"Ik reis met de trein","I travel by ..."
+482,tussen,between,preposition,position,"Ik zit tussen jou en hem","I sit ... you and him"
+483,twee,two,numeral,numbers,"Ik heb twee kinderen","I have ... children"
+484,typisch,typical,adjective,characteristic,"Kaas en klompen zijn typisch Nederlands","Cheese and clogs are ... Dutch"
+485,u,you,pronoun,formal,"Hoe gaat het met u?","How are ... doing?"
+486,uit,from,preposition,origin,"Ik kom uit Nederland","I come ... the Netherlands"
+487,universiteit,university,noun,education,"Ik studeer aan de universiteit","I study at the ..."
+488,uur,hour,noun,time,"Een uur is 60 minuten en duurt best lang","An ... is 60 minutes and takes quite long"
+489,vader,father,noun,family,"Mijn vader en moeder zijn mijn ouders","My ... and mother are my parents"
+490,vallen,to fall,verb,movement,"Pas op, je gaat vallen","Watch out, you will ..."
+491,van,of,preposition,possession,"Het huis van mijn vriend is groot","The house ... my friend is big"
+492,vechten,to fight,verb,combat,"Ik wil niet vechten","I don't want to ..."
+493,veld,field,noun,nature,"Een groen veld is een open stuk grasland","A green ... is an open piece of grassland"
+494,ver,far,adjective,distance,"Is het nog ver?","Is it still ...?"
+495,verbieden,to forbid,verb,prohibition,"De wet verbiedt roken in restaurants","The law ... smoking in restaurants"
+496,verder,further,adverb,distance,"Ik kan niet verder","I cannot go ..."
+497,verspreiden,to spread,verb,distribution,"Het nieuws verspreidt zich snel via internet","The news ... quickly via internet"
+498,vertellen,to tell,verb,communication,"Vertel me een verhaal","... me a story"
+499,vervullen,to fulfill,verb,completion,"Ik wil mijn droom vervullen om de wereld te zien","I want to ... my dream to see the world"
+500,vier,four,numeral,numbers,"Ik heb vier appels","I have ... apples"
+501,vijf,five,numeral,numbers,"Vijf is het getal tussen vier en zes","... is the number between four and six"
+502,vinden,to find,verb,discovery,"Ik kan mijn sleutel niet vinden","I cannot ... my key"
+503,vinger,finger,noun,body,"Mijn vinger is gebroken","My ... is broken"
+504,vis,fish,noun,food,"Ik eet vis","I eat ..."
+505,visie,vision,noun,perspective,"Een visie is een duidelijk toekomstbeeld","A ... is a clear future image"
+506,vissen,to fish,verb,activity,"Ik ga vissen in de rivier","I go ... in the river"
+507,vliegen,to fly,verb,movement,"Vogels vliegen","Birds ..."
+508,vloer,floor,noun,building,"De vloer is onder je voeten in het huis","The ... is under your feet in the house"
+509,vluchten,to flee,verb,escape,"Ik moet vluchten voor het gevaar","I must ... from the danger"
+510,voelen,to feel,verb,perception,"Ik voel me ziek","I ... sick"
+511,voet,foot,noun,body,"Mijn voet doet pijn","My ... hurts"
+512,vol,full,adjective,quantity,"Mijn glas is vol","My glass is ..."
+513,voor,before,preposition,time,"Kom voor acht uur","Come ... eight o'clock"
+514,voor,for,preposition,purpose,"Dit cadeau is voor jou","This gift is ... you"
+515,vorming,formation,noun,development,"De vorming van een mening duurt tijd","The ... of an opinion takes time"
+516,vriend,friend,noun,relationships,"Hij is mijn beste vriend","He is my best ..."
+517,vriendelijk,friendly,adjective,personality,"Een vriendelijke man helpt anderen graag","A ... man likes to help others"
+518,vrij,free,adjective,availability,"Ben je morgen vrij?","Are you ... tomorrow?"
+519,vullen,to fill,verb,action,"Vul het glas met water tot de rand","... the glass with water to the rim"
+520,vuur,fire,noun,element,"Het vuur brandt","The ... burns"
+521,wachten,to wait,verb,action,"Wacht op mij, ik kom eraan","... for me, I'm coming"
+522,wakker,awake,adjective,state,"Ben je wakker?","Are you ...?"
+523,wanneer,when,adverb,question,"Wanneer kom je naar mijn huis?","... are you coming to my house?"
+524,want,because,conjunction,reason,"Ik blijf thuis want ik ben ziek","I stay home ... I am sick"
+525,wapen,weapon,noun,combat,"Een wapen zoals een mes of pistool is gevaarlijk","A ... like a knife or gun is dangerous"
+526,warm,warm,adjective,temperature,"Het is warm weer","It is ... weather"
+527,warmte,warmth,noun,temperature,"De warmte van de zon verwarms de aarde","The ... of the sun warms the earth"
+528,wassen,to wash,verb,cleaning,"Ik was mijn handen","I ... my hands"
+529,wat,what,pronoun,question,"Wat wil je eten?","... do you want to eat?"
+530,water,water,noun,drinks,"Water is belangrijk voor ons leven","... is important for our life"
+531,we,we,pronoun,grammar,"We gaan naar de bioscoop","... are going to the cinema"
+532,week,week,noun,time,"Een week heeft zeven dagen","A ... has seven days"
+533,wel,indeed,particle,affirmation,"Ik heb het wel gedaan","I ... did it"
+534,welk,which,pronoun,question,"Welk boek wil je?","... book do you want?"
+535,wens,wish,noun,desire,"Mijn grootste wens is de wereld rondreizen","My biggest ... is to travel the world"
+536,wensen,to wish,verb,desire,"Ik wens je succes","I ... you success"
+537,wereld,world,noun,geography,"De wereld heeft zeven continenten en oceanen","The ... has seven continents and oceans"
+538,werk,work,noun,occupation,"Ik ga naar mijn werk","I go to my ..."
+539,werken,to work,verb,occupation,"Ik werk in een kantoor","I ... in an office"
+540,westen,west,noun,direction,"In het westen gaat de zon onder","In the ... the sun sets"
+541,westers,western,adjective,direction,"Westers denken komt uit Europa en Amerika","... thinking comes from Europe and America"
+542,wij,we,pronoun,grammar,"Wij gaan op vakantie","... are going on vacation"
+543,wijd,wide,adjective,dimension,"Een wijde straat is breed en ruim","A ... street is broad and spacious"
+544,wijn,wine,noun,drinks,"Wijn is een alcoholische drank van druiven","... is an alcoholic drink from grapes"
+545,wild,wild,adjective,nature,"Een wild dier leeft vrij in de natuur","A ... animal lives free in nature"
+546,wind,wind,noun,weather,"De wind blaast de bladeren van de boom","The ... blows the leaves from the tree"
+547,winnen,to win,verb,victory,"Ik wil winnen en de eerste zijn","I want to ... and be first"
+548,winter,winter,noun,season,"In de winter is het koud","In ... it is cold"
+549,wit,white,adjective,color,"Sneeuw en melk zijn wit van kleur","Snow and milk are ... in color"
+550,woord,word,noun,language,"Wat betekent dit woord?","What does this ... mean?"
+551,worden,to become,verb,change,"Ik word arts","I become a doctor"
+552,wow,wow,interjection,surprise,"Wow, wat mooi!","..., how beautiful!"
+553,zand,sand,noun,nature,"Op het strand ligt geel zand","On the beach lies yellow ..."
+554,zee,sea,noun,nature,"De zee is groot en zout water","The ... is large and salt water"
+555,zelf,self,pronoun,grammar,"Ik doe het zelf","I do it my..."
+556,zenden,to send,verb,transmission,"Ik zend een brief per post naar jou","I ... a letter by mail to you"
+557,zes,six,numeral,numbers,"Zes is het getal tussen vijf en zeven","... is the number between five and seven"
+558,ziek,sick,adjective,health,"Ik ben ziek","I am ..."
+559,zien,to see,verb,perception,"Ik zie een vogel","I see a bird"
+560,zij,she,pronoun,grammar,"Zij is mijn zus","... is my sister"
+561,zingen,to sing,verb,music,"Ik zing een lied met mijn stem","I ... a song with my voice"
+562,zitten,to sit,verb,position,"Ik zit op een stoel","I ... on a chair"
+563,zo,so,adverb,manner,"Deze taart is zo lekker en zoet","This cake is ... delicious and sweet"
+564,zodat,so that,conjunction,purpose,"Ik ren snel zodat ik op tijd kom","I run fast ... I arrive on time"
+565,zomer,summer,noun,season,"In de zomer is het warm en schijnt de zon","In the ... it is warm and the sun shines"
+566,zondag,Sunday,noun,time,"Zondag is de laatste dag van het weekend","... is the last day of the weekend"
+567,zonder,without,preposition,absence,"Ik ga zonder jas naar buiten","I go ... a coat outside"
+568,zoon,son,noun,family,"Mijn zoon en dochter zijn mijn kinderen","My ... and daughter are my children"
+569,zullen,shall,verb,future,"We zullen morgen vertrekken met de trein","We ... leave tomorrow by train"
+570,zus,sister,noun,family,"Mijn zus is jonger dan mijn broer","My ... is younger than my brother"
+571,zuster,sister,noun,family,"Mijn broer en zuster zijn mijn broers en zussen","My brother and ... are my siblings"
