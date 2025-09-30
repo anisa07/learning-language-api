@@ -284,7 +284,7 @@ def serialize(w: Word, rank: int, category: str):
     elif pos == "numeral" and w.numeral_form:
         num = w.numeral_form
         out["numeral_form"] = {
-            "numeral": num.numeral,
+            "numeral": w.word,  # Use word from words table instead of redundant numeral column
             "numeric_value": num.numeric_value,
             "ordinal_form": num.ordinal_form,
         }

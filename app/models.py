@@ -99,7 +99,6 @@ class Noun(Base):
 class Numeral(Base):
     __tablename__ = "numerals"
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    numeral: Mapped[str] = mapped_column(String(150), nullable=True) # the number word (e.g. "drie", "twintig")
     numeric_value: Mapped[int] = mapped_column(Integer, nullable=True) # the actual number (e.g. 3, 20)
     ordinal_form: Mapped[str] = mapped_column(String(100), nullable=True) # ordinal form (e.g. "derde", "twintigste")
     

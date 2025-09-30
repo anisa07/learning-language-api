@@ -91,7 +91,6 @@ CREATE TABLE IF NOT EXISTS nouns (
 CREATE TABLE IF NOT EXISTS numerals (
     id SERIAL PRIMARY KEY,
     word_id INTEGER UNIQUE REFERENCES words(id) ON DELETE CASCADE,
-    numeral VARCHAR(150), -- the number word (e.g. "drie", "twintig")
     numeric_value INTEGER, -- the actual number (e.g. 3, 20)
     ordinal_form VARCHAR(100), -- ordinal form (e.g. "derde", "twintigste")
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
