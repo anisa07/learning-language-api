@@ -54,23 +54,22 @@ class Verb(Base):
     infinitive: Mapped[str] = mapped_column(String(100))
     
     # Present Simple (Onvoltooid Tegenwoordige Tijd)
-    present_simple_1st_singular: Mapped[str] = mapped_column(String(100), nullable=True)  # ik
-    present_simple_2nd_singular: Mapped[str] = mapped_column(String(100), nullable=True)  # jij/je
-    present_simple_2nd_respectful: Mapped[str] = mapped_column(String(100), nullable=True)  # u
-    present_simple_3rd_singular: Mapped[str] = mapped_column(String(100), nullable=True)  # hij/zij/het
-    present_simple_plural: Mapped[str] = mapped_column(String(100), nullable=True)  # wij/jullie/zij
+    ik: Mapped[str] = mapped_column(String(100), nullable=True)  # ik (1st person singular)
+    jij: Mapped[str] = mapped_column(String(100), nullable=True)  # jij/je (2nd person singular informal)
+    u: Mapped[str] = mapped_column(String(100), nullable=True)  # u (2nd person singular/plural formal)
+    hij: Mapped[str] = mapped_column(String(100), nullable=True)  # hij/zij/het (3rd person singular)
+    wij: Mapped[str] = mapped_column(String(100), nullable=True)  # wij/jullie/zij (plural)
     
-    # Past Simple (Onvoltooid Verleden Tijd) - simplified
-    past_simple_singular: Mapped[str] = mapped_column(String(100), nullable=True)  # ik/jij/hij
-    past_simple_plural: Mapped[str] = mapped_column(String(100), nullable=True)  # wij/jullie/zij
+    # Past Simple (Onvoltooid Verleden Tijd)
+    past_sg: Mapped[str] = mapped_column(String(100), nullable=True)  # ik/jij/hij (singular)
+    past_pl: Mapped[str] = mapped_column(String(100), nullable=True)  # wij/jullie/zij (plural)
     
     # Present Perfect (Voltooid Tegenwoordige Tijd)
     past_participle: Mapped[str] = mapped_column(String(100), nullable=True)  # gebruikt in perfectum
-    perfect_auxiliary: Mapped[str] = mapped_column(String(10), nullable=True)  # "hebben", "zijn", or "both"
+    perfect: Mapped[str] = mapped_column(String(10), nullable=True)  # "hebben", "zijn", or "both"
     
     # Separable verb parts (for separable verbs like "opstaan")
     separable_prefix: Mapped[str] = mapped_column(String(50), nullable=True)
-    is_separable: Mapped[bool] = mapped_column(default=False)
     
     # Irregular verb indicators
     is_irregular: Mapped[bool] = mapped_column(default=False)
@@ -111,11 +110,10 @@ class Numeral(Base):
 class Adjective(Base):
     __tablename__ = "adjectives"
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    adjective: Mapped[str] = mapped_column(String(150), nullable=True)
-    de_form: Mapped[str] = mapped_column(String(150), nullable=True) # if applicable
-    comparison: Mapped[str] = mapped_column(String(100), nullable=True)
+    inflected: Mapped[str] = mapped_column(String(150), nullable=True) # if applicable
+    comparative: Mapped[str] = mapped_column(String(100), nullable=True)
     superlative: Mapped[str] = mapped_column(String(100), nullable=True)
-     # 1-to-1 relationship with Word
+    # 1-to-1 relationship with Word
     word_id: Mapped[int] = mapped_column(ForeignKey("words.id"), unique=True)
     word: Mapped["Word"] = relationship("Word", back_populates="adjective_form")
     

@@ -251,16 +251,16 @@ def serialize(w: Word, rank: int, category: str):
         out["verb_form"] = {
             "infinitive": v.infinitive,
             "present": {
-                "ik": v.present_simple_1st_singular,
-                "jij": v.present_simple_2nd_singular,
-                "u": v.present_simple_2nd_respectful,
-                "hij": v.present_simple_3rd_singular,
-                "wij": v.present_simple_plural,
+                "ik": v.ik,
+                "jij": v.jij,
+                "u": v.u,
+                "hij": v.hij,
+                "wij": v.wij,
             },
-            "past": {"sg": v.past_simple_singular, "pl": v.past_simple_plural},
-            "perfect": {"aux": v.perfect_auxiliary, "participle": v.past_participle},
+            "past": {"sg": v.past_sg, "pl": v.past_pl},
+            "perfect": {"aux": v.perfect, "participle": v.past_participle},
             "separable_prefix": v.separable_prefix,
-            "is_separable": v.is_separable,
+            "is_separable": v.separable_prefix is not None,
             "is_irregular": v.is_irregular,
             "is_strong_verb": v.is_strong_verb,
             "is_modal": v.is_modal,
@@ -276,9 +276,9 @@ def serialize(w: Word, rank: int, category: str):
     elif pos == "adjective" and w.adjective_form:
         a = w.adjective_form
         out["adjective_form"] = {
-            "adjective": a.adjective,
-            "de_form": a.de_form,
-            "comparison": a.comparison,
+            "base": w.word,  # Get base form from words table
+            "inflected": a.inflected,
+            "comparative": a.comparative,
             "superlative": a.superlative,
         }
     elif pos == "numeral" and w.numeral_form:

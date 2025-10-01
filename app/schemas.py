@@ -35,17 +35,16 @@ class WordRead(WordBase):
 class VerbFormBase(BaseModel):
     infinitive: str
     modal: bool = False
-    present_simple_1st_singular: Optional[str] = None
-    present_simple_2nd_singular: Optional[str] = None
-    present_simple_2nd_respectful: Optional[str] = None
-    present_simple_3rd_singular: Optional[str] = None
-    present_simple_plural: Optional[str] = None
-    past_simple_singular: Optional[str] = None
-    past_simple_plural: Optional[str] = None
+    ik: Optional[str] = None
+    jij: Optional[str] = None
+    u: Optional[str] = None
+    hij: Optional[str] = None
+    wij: Optional[str] = None
+    past_sg: Optional[str] = None
+    past_pl: Optional[str] = None
     past_participle: Optional[str] = None
-    perfect_auxiliary: Optional[str] = None
+    perfect: Optional[str] = None
     separable_prefix: Optional[str] = None
-    is_separable: bool = False
     is_irregular: bool = False
     is_strong_verb: bool = False
 
@@ -79,7 +78,8 @@ class NounFormRead(NounFormBase):
 
 # AdjectiveForm schemas
 class AdjectiveFormBase(BaseModel):
-    comparison: str
+    inflected: str
+    comparative: str
     superlative: str
 
 class AdjectiveFormCreate(AdjectiveFormBase):

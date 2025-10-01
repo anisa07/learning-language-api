@@ -51,23 +51,22 @@ CREATE TABLE IF NOT EXISTS verbs (
     infinitive VARCHAR(100),
     
     -- Present Simple (Onvoltooid Tegenwoordige Tijd)
-    present_simple_1st_singular VARCHAR(100), -- ik
-    present_simple_2nd_singular VARCHAR(100), -- jij/je
-    present_simple_2nd_respectful VARCHAR(100), -- u
-    present_simple_3rd_singular VARCHAR(100), -- hij/zij/het
-    present_simple_plural VARCHAR(100), -- wij/jullie/zij
+    ik VARCHAR(100), -- ik (1st person singular)
+    jij VARCHAR(100), -- jij/je (2nd person singular informal)
+    u VARCHAR(100), -- u (2nd person singular/plural formal)
+    hij VARCHAR(100), -- hij/zij/het (3rd person singular)
+    wij VARCHAR(100), -- wij/jullie/zij (plural)
     
     -- Past Simple (Onvoltooid Verleden Tijd)
-    past_simple_singular VARCHAR(100), -- ik/jij/hij
-    past_simple_plural VARCHAR(100), -- wij/jullie/zij
+    past_sg VARCHAR(100), -- ik/jij/hij (singular)
+    past_pl VARCHAR(100), -- wij/jullie/zij (plural)
     
     -- Present Perfect (Voltooid Tegenwoordige Tijd)
     past_participle VARCHAR(100), -- gebruikt in perfectum
-    perfect_auxiliary VARCHAR(10), -- "hebben", "zijn", or "both"
+    perfect VARCHAR(10), -- "hebben", "zijn", or "both"
     
     -- Separable verb parts
     separable_prefix VARCHAR(50),
-    is_separable BOOLEAN DEFAULT FALSE,
     
     -- Irregular verb indicators
     is_irregular BOOLEAN DEFAULT FALSE,
@@ -100,9 +99,8 @@ CREATE TABLE IF NOT EXISTS numerals (
 CREATE TABLE IF NOT EXISTS adjectives (
     id SERIAL PRIMARY KEY,
     word_id INTEGER UNIQUE REFERENCES words(id) ON DELETE CASCADE,
-    adjective VARCHAR(150),
-    de_form VARCHAR(150), -- if applicable
-    comparison VARCHAR(100), -- comparative form (-er)
+    inflected VARCHAR(150), -- if applicable
+    comparative VARCHAR(100), -- comparative form (-er)
     superlative VARCHAR(100), -- superlative form (-st)
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );

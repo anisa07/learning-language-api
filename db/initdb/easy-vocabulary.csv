@@ -18,7 +18,7 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 17,agent,agent,noun,work,De agent in uniform regelt het verkeer,The ... in uniform directs traffic
 18,al,already,adverb,time,Het is pas acht uur maar ik ben al moe,It's only eight but I'm ... tired
 19,al,all,adjective,quantity,"Al het eten is op, niets meer over","... the food is gone, nothing left"
-20,algemene,general,adjective,category,Algemene informatie over het onderwerp,... information about the topic
+20,algemeen,general,adjective,category,Algemene informatie over het onderwerp,... information about the topic
 21,alle,all,adjective,quantity,Alle kinderen moeten naar school,... children must go to school
 22,alleen,only,adverb,quantity,"Ik heb geen thee, alleen water","I have no tea, ... water"
 23,alleen,alone,adjective,quality,"Mijn ouders zijn weg, ik ben alleen thuis","My parents are away, I am ... at home"
@@ -405,7 +405,7 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 404,op,up,adverb,location,Ik sta vroeg op,I get ... early
 405,opa,grandfather,noun,relationships,Mijn opa is de vader van mijn vader of moeder,My ... is the father of my father or mother
 406,open,open,adjective,quality,De deur is open,The door is ...
-407,open,to open,verb,movement,Winkels open om negen uur,Shops open at nine
+407,openen,to open,verb,movement,Winkels open om negen uur,Shops open at nine
 408,operatie,operation,noun,medical,Een operatie is een chirurgische medische ingreep,An ... is a surgical medical procedure
 409,ophalen,to pick up,verb,movement,Ik haal je op om acht uur,I pick you up at eight o clock
 410,opruimen,to clean up,verb,housework,Ik ruim mijn kamer op,I clean up my room
