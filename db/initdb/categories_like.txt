@@ -1,0 +1,42 @@
+I like categories
+body,19
+building,11
+color,7
+conversation,8
+education,19
+emotion,23
+family,18
+food,22
+health,14
+nature,26
+numbers,28
+quantity,24
+
+Need to be reworked
+description,20
+evaluation,8
+expressions,10
+intention,8
+language,5
+manner,14
+mental,10
+media,9
+money,15
+messages,7
+object,25
+organization,11
+outcome,17
+personality,7
+properties,11
+relation,10
+reason,8
+sense,18
+service,8
+social,42
+
+Need to be split
+location,39
+movement,45
+time,46
+work,33
+grammar,44

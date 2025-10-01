@@ -27,7 +27,7 @@ class Word(Base):
     noun_form: Mapped["Noun"] = relationship("Noun", back_populates="word", uselist=False)
     # 1-to-1 relationship with Numeral (optional - only for numerals)
     numeral_form: Mapped["Numeral"] = relationship("Numeral", back_populates="word", uselist=False)
-     # 1-to-1 relationship with AdjectiveForm (optional - only for adjectives)
+    # 1-to-1 relationship with AdjectiveForm (optional - only for adjectives)
     adjective_form: Mapped["Adjective"] = relationship("Adjective", back_populates="word", uselist=False)
     # Many-to-many relationship with Category
     category_words: Mapped[List["CategoryWord"]] = relationship("CategoryWord", back_populates="word")
@@ -85,8 +85,7 @@ class Verb(Base):
 class Noun(Base):
     __tablename__ = "nouns"
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    noun: Mapped[str] = mapped_column(String(150), nullable=True) # with - de/het article
-    indefinite_article: Mapped[str] = mapped_column(String(5), nullable=True) # if possible
+    indefinite_article: Mapped[str] = mapped_column(String(5), nullable=True) # de/het
     diminutive: Mapped[str] = mapped_column(String(100), nullable=True)
     plural: Mapped[str] = mapped_column(String(100), nullable=True)
     # 1-to-1 relationship with Word
@@ -116,6 +115,8 @@ class Adjective(Base):
     # 1-to-1 relationship with Word
     word_id: Mapped[int] = mapped_column(ForeignKey("words.id"), unique=True)
     word: Mapped["Word"] = relationship("Word", back_populates="adjective_form")
+
+    created_at: Mapped[DateTime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     
 class Category(Base):
     __tablename__ = "categories"
@@ -140,6 +141,8 @@ class CategoryWord(Base):
 class AppUser(Base):
     __tablename__ = "app_users"
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    username: Mapped[str] = mapped_column(String(50), unique=True, nullable=True)
+    email: Mapped[str] = mapped_column(String(100), unique=True, nullable=True)
     
     # Foreign key to Level (many users can have the same level)
     level_id: Mapped[int] = mapped_column(ForeignKey("levels.id"))
@@ -148,10 +151,13 @@ class AppUser(Base):
     # Many-to-many relationship with Word through AppUserWord
     app_user_words: Mapped[List["AppUserWord"]] = relationship("AppUserWord", back_populates="app_user")
 
+    created_at: Mapped[DateTime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
 class AppUserWord(Base):
     __tablename__ = "app_user_words"
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    rank: Mapped[int] = mapped_column(Integer, default=0) 
+    rank: Mapped[int] = mapped_column(Integer, default=0)
+    learned_at: Mapped[DateTime] = mapped_column(DateTime(timezone=True), nullable=True)
     
     # Many-to-many association table
     app_user_id: Mapped[int] = mapped_column(ForeignKey("app_users.id"))
@@ -171,5 +177,4 @@ class Level(Base):
     
     # One-to-many relationship with Word
     words: Mapped[List["Word"]] = relationship("Word", back_populates="level")
-
 

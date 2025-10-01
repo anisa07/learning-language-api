@@ -34,7 +34,6 @@ class WordRead(WordBase):
 # VerbForm schemas
 class VerbFormBase(BaseModel):
     infinitive: str
-    modal: bool = False
     ik: Optional[str] = None
     jij: Optional[str] = None
     u: Optional[str] = None
@@ -47,6 +46,7 @@ class VerbFormBase(BaseModel):
     separable_prefix: Optional[str] = None
     is_irregular: bool = False
     is_strong_verb: bool = False
+    is_modal: bool = False
 
 class VerbFormCreate(VerbFormBase):
     word_id: int
@@ -62,9 +62,8 @@ class VerbFormRead(VerbFormBase):
 # NounForm schemas
 class NounFormBase(BaseModel):
     indefinite_article: Optional[str] = None
-    definite_article: Optional[str] = None
-    diminutive: str
-    plural: str
+    diminutive: Optional[str] = None
+    plural: Optional[str] = None
 
 class NounFormCreate(NounFormBase):
     word_id: int
@@ -78,9 +77,9 @@ class NounFormRead(NounFormBase):
 
 # AdjectiveForm schemas
 class AdjectiveFormBase(BaseModel):
-    inflected: str
-    comparative: str
-    superlative: str
+    inflected: Optional[str] = None
+    comparative: Optional[str] = None
+    superlative: Optional[str] = None
 
 class AdjectiveFormCreate(AdjectiveFormBase):
     word_id: int
@@ -120,7 +119,8 @@ class LevelRead(LevelBase):
 
 # AppUser schemas
 class AppUserBase(BaseModel):
-    pass
+    username: Optional[str] = None
+    email: Optional[str] = None
 
 class AppUserCreate(AppUserBase):
     level_id: int
@@ -128,6 +128,7 @@ class AppUserCreate(AppUserBase):
 class AppUserRead(AppUserBase):
     id: int
     level_id: int
+    created_at: datetime
 
     class Config:
         from_attributes = True
@@ -135,6 +136,7 @@ class AppUserRead(AppUserBase):
 # AppUserWord schemas
 class AppUserWordBase(BaseModel):
     rank: int = 0
+    learned_at: Optional[datetime] = None
 
 class AppUserWordCreate(AppUserWordBase):
     app_user_id: int

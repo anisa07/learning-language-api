@@ -1,6 +1,8 @@
 from fastapi import APIRouter, Query, Path
-from app.schemas import AppUserWords, BatchSetRanks
+from app.schemas import AppUserWords, BatchSetRanks, CategoryRead
+from typing import List
 from ...controllers.word import get_app_user_words as get_user_words, get_app_words, remove_app_user_words, sentences_with_app_user_words, update_app_words, update_user_words_ranks
+from ...controllers.category import get_categories
 from ...services.ai import AIService
 
 router = APIRouter(prefix="/words", tags=["words"])
@@ -55,3 +57,10 @@ async def get_app_user_sentences(user_id: int = Path(..., gt=0), limit: int = Qu
     - return list of sentences with user words
     """
     return await sentences_with_app_user_words(user_id, limit)
+
+@router.get("/words/categories", response_model=List[CategoryRead])
+async def get_all_categories():
+    """
+    - return all categories from the database
+    """
+    return await get_categories()

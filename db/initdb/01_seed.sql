@@ -1,4 +1,4 @@
--- 01_seed.sql
+﻿-- 01_seed.sql
 -- Complete seed data for Dutch Language Learning API
 -- Auto-generated from dutch_words.json and dutch-learning-backup.json
 -- This file is automatically executed after schema creation
@@ -8,33 +8,12 @@ INSERT INTO levels (level, count) VALUES
 ('A1', 500), ('A2', 1000), ('B1', 1500), ('B2', 2000), ('C1', 3000), ('C2', 5000)
 ON CONFLICT (level) DO UPDATE SET count = EXCLUDED.count;
 
--- Insert consolidated categories (reduced from 276 to 123)
-INSERT INTO categories (category) VALUES 
-('abandonment'),('ability'),('accommodation'),('accompaniment'),('activity'),
-('age'),('application'),('approximation'),('astronomy'),('authority'),
-('beginning'),('body'),('brevity'),('building'),('category'),
-('change'),('classification'),('cleanliness'),('clothing'),('color'),
-('commerce'),('communication'),('concession'),('conflict'),('consensus'),
-('consumption'),('creation'),('culture'),('design'),('development'),
-('direction'),('discovery'),('disposal'),('education'),('element'),
-('emotion'),('exclusion'),('existence'),('expertise'),('feature'),
-('food'),('foundation'),('function'),('future'),('global'),
-('goods'),('grammar'),('health'),('housework'),('impact'),
-('industry'),('information'),('intention'),('language'),('leisure'),
-('life'),('location'),('luck'),('manner'),('manufacturing'),
-('material'),('media'),('medical'),('mental'),('mixture'),
-('money'),('movement'),('nature'),('numbers'),('object'),
-('occurrence'),('ordinary'),('organization'),('origin'),('outcome'),
-('people'),('person'),('personality'),('perspective'),('plan'),
-('plural'),('possession'),('power'),('preference'),('presence'),
-('quality'),('quantity'),('reality'),('reason'),('reflexive'),
-('relation'),('relationships'),('representation'),('reputation'),('response'),
-('rest'),('risk'),('royalty'),('rule'),('scenery'),
-('season'),('sense'),('service'),('shape'),('singular'),
-('skill'),('social'),('speed'),('stage'),('substance'),
-('suggestion'),('sum'),('support'),('temperature'),('thing'),
-('thought'),('time'),('topic'),('transportation'),('truth'),
-('type'),('weight'),('work')
+-- Insert categories (automatically extracted from easy-vocabulary.csv)
+-- To regenerate categories.csv, run: python db/initdb/extract_categories.py
+COPY categories (category)
+FROM '/docker-entrypoint-initdb.d/categories.csv'
+DELIMITER ','
+CSV HEADER
 ON CONFLICT (category) DO NOTHING;
 
 -- Insert all vocabulary words from CSV
@@ -165,8 +144,8 @@ VALUES
 ((SELECT id FROM t_nouns WHERE word='broer' LIMIT 1), 'de', 'broertje', 'broers'),
 ((SELECT id FROM t_nouns WHERE word='brood' LIMIT 1), 'het', 'broodje', 'broden'),
 ((SELECT id FROM t_nouns WHERE word='bus' LIMIT 1), 'de', 'busje', 'bussen'),
-((SELECT id FROM t_nouns WHERE word='café' LIMIT 1), 'het', 'cafeetje', 'cafés'),
-((SELECT id FROM t_nouns WHERE word='categorie' LIMIT 1), 'de', 'categorietje', 'categorieën'),
+((SELECT id FROM t_nouns WHERE word='cafÃ©' LIMIT 1), 'het', 'cafeetje', 'cafÃ©s'),
+((SELECT id FROM t_nouns WHERE word='categorie' LIMIT 1), 'de', 'categorietje', 'categorieÃ«n'),
 ((SELECT id FROM t_nouns WHERE word='centrum' LIMIT 1), 'het', 'centrumpje', 'centrums'),
 ((SELECT id FROM t_nouns WHERE word='collega' LIMIT 1), 'de', 'collegatje', 'collega''s'),
 ((SELECT id FROM t_nouns WHERE word='combinatie' LIMIT 1), 'de', 'combinatietje', 'combinaties'),
@@ -189,13 +168,13 @@ VALUES
 ((SELECT id FROM t_nouns WHERE word='dorst' LIMIT 1), 'de', 'dorstje', 'dorst'),
 ((SELECT id FROM t_nouns WHERE word='drinken' LIMIT 1), 'het', 'drinkje', 'drankjes'),
 ((SELECT id FROM t_nouns WHERE word='droom' LIMIT 1), 'de', 'droompje', 'dromen'),
-((SELECT id FROM t_nouns WHERE word='economie' LIMIT 1), 'de', 'economietje', 'economieën'),
+((SELECT id FROM t_nouns WHERE word='economie' LIMIT 1), 'de', 'economietje', 'economieÃ«n'),
 ((SELECT id FROM t_nouns WHERE word='effect' LIMIT 1), 'het', 'effectje', 'effecten'),
 ((SELECT id FROM t_nouns WHERE word='ei' LIMIT 1), 'het', 'eitje', 'eieren'),
 ((SELECT id FROM t_nouns WHERE word='eiland' LIMIT 1), 'het', 'eilandje', 'eilanden'),
 ((SELECT id FROM t_nouns WHERE word='eind' LIMIT 1), 'het', 'eindje', 'einden'),
 ((SELECT id FROM t_nouns WHERE word='emotie' LIMIT 1), 'de', 'emotietje', 'emoties'),
-((SELECT id FROM t_nouns WHERE word='energie' LIMIT 1), 'de', 'energietje', 'energieën'),
+((SELECT id FROM t_nouns WHERE word='energie' LIMIT 1), 'de', 'energietje', 'energieÃ«n'),
 ((SELECT id FROM t_nouns WHERE word='eten' LIMIT 1), 'het', 'etentje', 'etens'),
 ((SELECT id FROM t_nouns WHERE word='examen' LIMIT 1), 'het', 'examentje', 'examens'),
 ((SELECT id FROM t_nouns WHERE word='experiment' LIMIT 1), 'het', 'experimentje', 'experimenten'),
@@ -232,7 +211,7 @@ VALUES
 ((SELECT id FROM t_nouns WHERE word='huis' LIMIT 1), 'het', 'huisje', 'huizen'),
 ((SELECT id FROM t_nouns WHERE word='hulp' LIMIT 1), 'de', 'hulpje', 'hulp'),
 ((SELECT id FROM t_nouns WHERE word='hut' LIMIT 1), 'de', 'hutje', 'hutten'),
-((SELECT id FROM t_nouns WHERE word='idee' LIMIT 1), 'het', 'ideetje', 'ideeën'),
+((SELECT id FROM t_nouns WHERE word='idee' LIMIT 1), 'het', 'ideetje', 'ideeÃ«n'),
 ((SELECT id FROM t_nouns WHERE word='individu' LIMIT 1), 'het', 'individutje', 'individuen'),
 ((SELECT id FROM t_nouns WHERE word='informatie' LIMIT 1), 'de', 'informatietje', 'informatie'),
 ((SELECT id FROM t_nouns WHERE word='initiatief' LIMIT 1), 'het', 'initiatiefje', 'initiatieven'),
@@ -252,7 +231,7 @@ VALUES
 ((SELECT id FROM t_nouns WHERE word='klant' LIMIT 1), 'de', 'klantje', 'klanten'),
 ((SELECT id FROM t_nouns WHERE word='klas' LIMIT 1), 'de', 'klasje', 'klassen'),
 ((SELECT id FROM t_nouns WHERE word='kleur' LIMIT 1), 'de', 'kleurtje', 'kleuren'),
-((SELECT id FROM t_nouns WHERE word='knie' LIMIT 1), 'de', 'knietje', 'knieën'),
+((SELECT id FROM t_nouns WHERE word='knie' LIMIT 1), 'de', 'knietje', 'knieÃ«n'),
 ((SELECT id FROM t_nouns WHERE word='koffie' LIMIT 1), 'de', 'koffietje', 'koffie'),
 ((SELECT id FROM t_nouns WHERE word='koning' LIMIT 1), 'de', 'koninkje', 'koningen'),
 ((SELECT id FROM t_nouns WHERE word='kosten' LIMIT 1), 'de', 'kostentje', 'kosten'),
@@ -303,7 +282,7 @@ VALUES
 ((SELECT id FROM t_nouns WHERE word='object' LIMIT 1), 'het', 'objectje', 'objecten'),
 ((SELECT id FROM t_nouns WHERE word='officier' LIMIT 1), 'de', 'officiertje', 'officieren'),
 ((SELECT id FROM t_nouns WHERE word='oktober' LIMIT 1), 'de', 'oktobertje', 'oktobers'),
-((SELECT id FROM t_nouns WHERE word='olie' LIMIT 1), 'de', 'olietje', 'oliën'),
+((SELECT id FROM t_nouns WHERE word='olie' LIMIT 1), 'de', 'olietje', 'oliÃ«n'),
 ((SELECT id FROM t_nouns WHERE word='oma' LIMIT 1), 'de', 'omaatje', 'oma''s'),
 ((SELECT id FROM t_nouns WHERE word='oom' LIMIT 1), 'de', 'oompje', 'ooms'),
 ((SELECT id FROM t_nouns WHERE word='oor' LIMIT 1), 'het', 'oortje', 'oren'),
@@ -316,7 +295,7 @@ VALUES
 ((SELECT id FROM t_nouns WHERE word='papier' LIMIT 1), 'het', 'papiertje', 'papieren'),
 ((SELECT id FROM t_nouns WHERE word='partner' LIMIT 1), 'de', 'partnertje', 'partners'),
 ((SELECT id FROM t_nouns WHERE word='pas' LIMIT 1), 'de', 'pasje', 'passen'),
-((SELECT id FROM t_nouns WHERE word='patiënt' LIMIT 1), 'de', 'patiëntje', 'patiënten'),
+((SELECT id FROM t_nouns WHERE word='patiÃ«nt' LIMIT 1), 'de', 'patiÃ«ntje', 'patiÃ«nten'),
 ((SELECT id FROM t_nouns WHERE word='patroon' LIMIT 1), 'het', 'patroontje', 'patronen'),
 ((SELECT id FROM t_nouns WHERE word='periode' LIMIT 1), 'de', 'periodetje', 'periodes'),
 ((SELECT id FROM t_nouns WHERE word='pers' LIMIT 1), 'de', 'persje', 'pers'),
@@ -394,7 +373,7 @@ VALUES
 ((SELECT id FROM t_nouns WHERE word='terras' LIMIT 1), 'het', 'terrasje', 'terrassen'),
 ((SELECT id FROM t_nouns WHERE word='terrein' LIMIT 1), 'het', 'terreintje', 'terreinen'),
 ((SELECT id FROM t_nouns WHERE word='thee' LIMIT 1), 'de', 'theetje', 'thee'),
-((SELECT id FROM t_nouns WHERE word='theorie' LIMIT 1), 'de', 'theorietje', 'theorieën'),
+((SELECT id FROM t_nouns WHERE word='theorie' LIMIT 1), 'de', 'theorietje', 'theorieÃ«n'),
 ((SELECT id FROM t_nouns WHERE word='titel' LIMIT 1), 'de', 'titeltje', 'titels'),
 ((SELECT id FROM t_nouns WHERE word='toetje' LIMIT 1), 'het', 'toetje', 'toetjes'),
 ((SELECT id FROM t_nouns WHERE word='toets' LIMIT 1), 'de', 'toetsje', 'toetsen'),
@@ -435,7 +414,7 @@ VALUES
 ((SELECT id FROM t_nouns WHERE word='woord' LIMIT 1), 'het', 'woordje', 'woorden'),
 ((SELECT id FROM t_nouns WHERE word='zaken' LIMIT 1), 'de', 'zaakje', 'zaken'),
 ((SELECT id FROM t_nouns WHERE word='zand' LIMIT 1), 'het', 'zandje', 'zand'),
-((SELECT id FROM t_nouns WHERE word='zee' LIMIT 1), 'de', 'zeetje', 'zeeën'),
+((SELECT id FROM t_nouns WHERE word='zee' LIMIT 1), 'de', 'zeetje', 'zeeÃ«n'),
 ((SELECT id FROM t_nouns WHERE word='zomer' LIMIT 1), 'de', 'zomertje', 'zomers'),
 ((SELECT id FROM t_nouns WHERE word='zondag' LIMIT 1), 'de', 'zondagje', 'zondagen'),
 ((SELECT id FROM t_nouns WHERE word='zoon' LIMIT 1), 'de', 'zoontje', 'zonen'),
@@ -524,7 +503,7 @@ INSERT INTO adjectives (word_id, inflected, comparative, superlative) VALUES
 ((SELECT id FROM t_adjs WHERE word='emotioneel' LIMIT 1), 'emotionele', 'emotioneler', 'emotioneelste'),
 ((SELECT id FROM t_adjs WHERE word='engels' LIMIT 1), 'engelse', NULL, NULL),
 ((SELECT id FROM t_adjs WHERE word='enorm' LIMIT 1), 'enorme', 'enormer', 'enormste'),
-((SELECT id FROM t_adjs WHERE word='financieel' LIMIT 1), 'financiële', 'financieler', 'financieelste'),
+((SELECT id FROM t_adjs WHERE word='financieel' LIMIT 1), 'financiÃ«le', 'financieler', 'financieelste'),
 ((SELECT id FROM t_adjs WHERE word='fundamenteel' LIMIT 1), 'fundamentele', 'fundamenteler', 'fundamenteelste'),
 ((SELECT id FROM t_adjs WHERE word='geboren' LIMIT 1), 'geboren', NULL, NULL),
 ((SELECT id FROM t_adjs WHERE word='gemeen' LIMIT 1), 'gemene', 'gemener', 'gemeenste'),
@@ -557,14 +536,14 @@ INSERT INTO adjectives (word_id, inflected, comparative, superlative) VALUES
 ((SELECT id FROM t_adjs WHERE word='los' LIMIT 1), 'losse', 'losser', 'losste'),
 ((SELECT id FROM t_adjs WHERE word='medisch' LIMIT 1), 'medische', NULL, NULL),
 ((SELECT id FROM t_adjs WHERE word='modern' LIMIT 1), 'moderne', 'moderner', 'modernste'),
-((SELECT id FROM t_adjs WHERE word='moe' LIMIT 1), 'moe', 'moeër', 'moeste'),
+((SELECT id FROM t_adjs WHERE word='moe' LIMIT 1), 'moe', 'moeÃ«r', 'moeste'),
 ((SELECT id FROM t_adjs WHERE word='moeilijk' LIMIT 1), 'moeilijke', 'moeilijker', 'moeilijkste'),
 ((SELECT id FROM t_adjs WHERE word='mooi' LIMIT 1), 'mooie', 'mooier', 'mooiste'),
 ((SELECT id FROM t_adjs WHERE word='nationaal' LIMIT 1), 'nationale', 'nationaler', 'nationaalste'),
 ((SELECT id FROM t_adjs WHERE word='negatief' LIMIT 1), 'negatieve', 'negatiever', 'negatiefste'),
 ((SELECT id FROM t_adjs WHERE word='nieuw' LIMIT 1), 'nieuwe', 'nieuwer', 'nieuwste'),
 ((SELECT id FROM t_adjs WHERE word='normaal' LIMIT 1), 'normale', 'normaler', 'normaalste'),
-((SELECT id FROM t_adjs WHERE word='officieel' LIMIT 1), 'officiële', 'officiëler', 'officiëelst'),
+((SELECT id FROM t_adjs WHERE word='officieel' LIMIT 1), 'officiÃ«le', 'officiÃ«ler', 'officiÃ«elst'),
 ((SELECT id FROM t_adjs WHERE word='open' LIMIT 1), 'open', 'opener', 'openste'),
 ((SELECT id FROM t_adjs WHERE word='oud' LIMIT 1), 'oude', 'ouder', 'oudste'),
 ((SELECT id FROM t_adjs WHERE word='pijnlijk' LIMIT 1), 'pijnlijke', 'pijnlijker', 'pijnlijkste'),
@@ -650,8 +629,8 @@ VALUES
 ((SELECT id FROM t_verbs WHERE word='bestellen' LIMIT 1), 'bestellen', 'bestel', 'bestelt', 'bestelt', 'bestelt', 'bestellen', 'bestelde', 'bestelden', 'besteld', 'hebben', NULL, false, false, false),
 -- bezoeken (to visit) - regular
 ((SELECT id FROM t_verbs WHERE word='bezoeken' LIMIT 1), 'bezoeken', 'bezoek', 'bezoekt', 'bezoekt', 'bezoekt', 'bezoeken', 'bezocht', 'bezochten', 'bezocht', 'hebben', NULL, false, false, false),
--- beïnvloeden (to influence) - regular
-((SELECT id FROM t_verbs WHERE word='beïnvloeden' LIMIT 1), 'beïnvloeden', 'beïnvloed', 'beïnvloedt', 'beïnvloedt', 'beïnvloedt', 'beïnvloeden', 'beïnvloedde', 'beïnvloedden', 'beïnvloed', 'hebben', NULL, false, false, false),
+-- beÃ¯nvloeden (to influence) - regular
+((SELECT id FROM t_verbs WHERE word='beÃ¯nvloeden' LIMIT 1), 'beÃ¯nvloeden', 'beÃ¯nvloed', 'beÃ¯nvloedt', 'beÃ¯nvloedt', 'beÃ¯nvloedt', 'beÃ¯nvloeden', 'beÃ¯nvloedde', 'beÃ¯nvloedden', 'beÃ¯nvloed', 'hebben', NULL, false, false, false),
 -- bijten (to bite) - strong verb
 ((SELECT id FROM t_verbs WHERE word='bijten' LIMIT 1), 'bijten', 'bijt', 'bijt', 'bijt', 'bijt', 'bijten', 'beet', 'beten', 'gebeten', 'hebben', NULL, true, true, false),
 -- borrelen (to have drinks) - regular
@@ -675,7 +654,7 @@ VALUES
 -- dromen (to dream) - regular
 ((SELECT id FROM t_verbs WHERE word='dromen' LIMIT 1), 'dromen', 'droom', 'droomt', 'droomt', 'droomt', 'dromen', 'droomde', 'droomden', 'gedroomd', 'hebben', NULL, false, false, false),
 -- eindigen (to end) - regular
-((SELECT id FROM t_verbs WHERE word='eindigen' LIMIT 1), 'eindigen', 'eindig', 'eindigt', 'eindigt', 'eindigt', 'eindigen', 'eindigde', 'eindigden', 'geëindigd', 'hebben', NULL, false, false, false),
+((SELECT id FROM t_verbs WHERE word='eindigen' LIMIT 1), 'eindigen', 'eindig', 'eindigt', 'eindigt', 'eindigt', 'eindigen', 'eindigde', 'eindigden', 'geÃ«indigd', 'hebben', NULL, false, false, false),
 -- eten (to eat) - strong verb
 ((SELECT id FROM t_verbs WHERE word='eten' LIMIT 1), 'eten', 'eet', 'eet', 'eet', 'eet', 'eten', 'at', 'aten', 'gegeten', 'hebben', NULL, true, true, false),
 -- formuleren (to formulate) - regular
@@ -697,7 +676,7 @@ VALUES
 -- houden (to hold) - irregular
 ((SELECT id FROM t_verbs WHERE word='houden' LIMIT 1), 'houden', 'hou', 'houdt', 'houdt', 'houdt', 'houden', 'hield', 'hielden', 'gehouden', 'hebben', NULL, true, false, false),
 -- interesseren (to interest) - regular
-((SELECT id FROM t_verbs WHERE word='interesseren' LIMIT 1), 'interesseren', 'interesseer', 'interesseert', 'interesseert', 'interesseert', 'interesseren', 'interesseerde', 'interesseerden', 'geïnteresseerd', 'hebben', NULL, false, false, false),
+((SELECT id FROM t_verbs WHERE word='interesseren' LIMIT 1), 'interesseren', 'interesseer', 'interesseert', 'interesseert', 'interesseert', 'interesseren', 'interesseerde', 'interesseerden', 'geÃ¯nteresseerd', 'hebben', NULL, false, false, false),
 -- kijken (to look) - regular
 ((SELECT id FROM t_verbs WHERE word='kijken' LIMIT 1), 'kijken', 'kijk', 'kijkt', 'kijkt', 'kijkt', 'kijken', 'keek', 'keken', 'gekeken', 'hebben', NULL, false, false, false),
 -- klagen (to complain) - regular
@@ -861,3 +840,4 @@ ON CONFLICT (username) DO NOTHING;
 
 -- Note: Level target counts can be added later if needed
 -- Currently using actual word counts from the database
+

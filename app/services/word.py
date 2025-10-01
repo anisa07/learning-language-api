@@ -152,7 +152,7 @@ async def pick_from_bucket(cond, n: int, user_id: int, selected_ids: set, sessio
     """Pick users words"""
     if n <= 0:
         return []
-     
+
     stmt = (
         select(Word, AppUserWord.rank, Category.category)
         .join(AppUserWord, AppUserWord.word_id == Word.id, isouter=True)
@@ -177,7 +177,7 @@ async def pick_from_bucket(cond, n: int, user_id: int, selected_ids: set, sessio
   
 async def select_new_words(app_user: AppUser, limit: int, selected_ids: set, session: AsyncSession = Depends(get_session)):
     """Select new word from database for the user"""
-     # exclude words already assigned to this user
+    # exclude words already assigned to this user
     assigned_exists = (
         select(AppUserWord.id)
         .where(
