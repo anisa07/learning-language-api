@@ -10,10 +10,18 @@ ON CONFLICT (level) DO UPDATE SET count = EXCLUDED.count;
 
 -- Insert categories (automatically extracted from easy-vocabulary.csv)
 -- To regenerate categories.csv, run: python db/initdb/extract_categories.py
-COPY categories (category)
+CREATE TEMP TABLE t_categories (
+    category TEXT,
+    count INTEGER
+);
+
+COPY t_categories (category, count)
 FROM '/docker-entrypoint-initdb.d/categories.csv'
 DELIMITER ','
-CSV HEADER
+CSV HEADER;
+
+INSERT INTO categories (category)
+SELECT DISTINCT category FROM t_categories
 ON CONFLICT (category) DO NOTHING;
 
 -- Insert all vocabulary words from CSV
@@ -840,4 +848,20 @@ ON CONFLICT (username) DO NOTHING;
 
 -- Note: Level target counts can be added later if needed
 -- Currently using actual word counts from the database
+
+-- Log seeding results
+DO $$
+BEGIN
+    RAISE NOTICE '=== SEEDING RESULTS ===';
+    RAISE NOTICE 'Levels: % entries', (SELECT COUNT(*) FROM levels);
+    RAISE NOTICE 'Categories: % entries', (SELECT COUNT(*) FROM categories);
+    RAISE NOTICE 'Words: % entries', (SELECT COUNT(*) FROM words);
+    RAISE NOTICE 'Category-Word associations: % entries', (SELECT COUNT(*) FROM category_words);
+    RAISE NOTICE 'Nouns: % entries', (SELECT COUNT(*) FROM nouns);
+    RAISE NOTICE 'Numerals: % entries', (SELECT COUNT(*) FROM numerals);
+    RAISE NOTICE 'Adjectives: % entries', (SELECT COUNT(*) FROM adjectives);
+    RAISE NOTICE 'Verbs: % entries', (SELECT COUNT(*) FROM verbs);
+    RAISE NOTICE 'App Users: % entries', (SELECT COUNT(*) FROM app_users);
+    RAISE NOTICE '========================';
+END $$;
 

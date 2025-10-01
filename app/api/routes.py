@@ -179,7 +179,7 @@ async def get_app_user_words(user_id: int = Path(..., gt=0), limit: int = Query(
     # check user has 10 words with rank <= limit
     # return 10 randow words of hiw level
     try: 
-         # 1) load the user (and level)
+        # 1) load the user (and level)
         app_user = await session.get(AppUser, user_id, options=[selectinload(AppUser.app_user_words).joinedload(AppUserWord.word)])
         if not app_user:
             raise HTTPException(404, "User not found")
@@ -197,7 +197,7 @@ async def get_app_user_words(user_id: int = Path(..., gt=0), limit: int = Query(
             await save_user_words(rows, session)
 
             return [
-                {"id": item['word'].id, "word": item['word'].word, "part_of_speech": item['word'].part_of_speech, "meaning": item['word'].meanin, "rank": item['rank']}
+                {"id": item['word'].id, "word": item['word'].word, "part_of_speech": item['word'].part_of_speech, "meaning": item['word'].meaning, "rank": item['rank']}
                 for item in words
             ]
             
