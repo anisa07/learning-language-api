@@ -121,13 +121,13 @@ CREATE TABLE IF NOT EXISTS category_meanings (
     UNIQUE(category_id, meaning_id)
 );
 
-CREATE TABLE IF NOT EXISTS app_user_words (
+CREATE TABLE IF NOT EXISTS app_user_meanings (
     id SERIAL PRIMARY KEY,
     app_user_id INTEGER REFERENCES app_users(id) ON DELETE CASCADE,
-    word_id INTEGER REFERENCES words(id) ON DELETE CASCADE,
+    meaning_id INTEGER REFERENCES meanings(id) ON DELETE CASCADE,
     rank INTEGER DEFAULT 0,
-    learned_at TIMESTAMP WITH TIME ZONE,
-    UNIQUE(app_user_id, word_id)
+    is_selected BOOLEAN DEFAULT FALSE,
+    UNIQUE(app_user_id, meaning_id)
 );
 
 -- Create indexes for better performance
@@ -142,5 +142,6 @@ CREATE INDEX IF NOT EXISTS idx_numerals_numeric_value ON numerals(numeric_value)
 CREATE INDEX IF NOT EXISTS idx_adjectives_meaning_id ON adjectives(meaning_id);
 CREATE INDEX IF NOT EXISTS idx_category_meanings_category_id ON category_meanings(category_id);
 CREATE INDEX IF NOT EXISTS idx_category_meanings_meaning_id ON category_meanings(meaning_id);
-CREATE INDEX IF NOT EXISTS idx_app_user_words_user_id ON app_user_words(app_user_id);
-CREATE INDEX IF NOT EXISTS idx_app_user_words_word_id ON app_user_words(word_id);
+CREATE INDEX IF NOT EXISTS idx_app_user_meanings_user_id ON app_user_meanings(app_user_id);
+CREATE INDEX IF NOT EXISTS idx_app_user_meanings_meaning_id ON app_user_meanings(meaning_id);
+CREATE INDEX IF NOT EXISTS idx_app_user_meanings_is_selected ON app_user_meanings(is_selected);

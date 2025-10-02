@@ -150,19 +150,19 @@ class AppUserRead(AppUserBase):
     class Config:
         from_attributes = True
 
-# AppUserWord schemas
-class AppUserWordBase(BaseModel):
+# AppUserMeaning schemas
+class AppUserMeaningBase(BaseModel):
     rank: int = 0
-    learned_at: Optional[datetime] = None
+    is_selected: bool = False
 
-class AppUserWordCreate(AppUserWordBase):
+class AppUserMeaningCreate(AppUserMeaningBase):
     app_user_id: int
-    word_id: int
+    meaning_id: int
 
-class AppUserWordRead(AppUserWordBase):
+class AppUserMeaningRead(AppUserMeaningBase):
     id: int
     app_user_id: int
-    word_id: int
+    meaning_id: int
 
     class Config:
         from_attributes = True
@@ -194,12 +194,16 @@ class ChatResponse(BaseModel):
     provider: str
     model: str
     
-class WordRank(BaseModel):
-    word_id: int
+class MeaningRank(BaseModel):
+    meaning_id: int
     rank: int
 
 class BatchSetRanks(BaseModel):
-    items: List[WordRank]
+    items: List[MeaningRank]
 
-class AppUserWords(BaseModel):
-    words: List[int]
+class AppUserMeanings(BaseModel):
+    meanings: List[int]
+
+class SelectedMeaningsUpdate(BaseModel):
+    meaning_ids: List[int]
+    is_selected: bool

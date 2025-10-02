@@ -19,8 +19,8 @@ class Word(Base):
     level_id: Mapped[int] = mapped_column(ForeignKey("levels.id"))
     # Relationship to Level
     level: Mapped["Level"] = relationship("Level", back_populates="words")
-    # Many-to-many relationship with AppUser
-    app_user_words: Mapped[List["AppUserWord"]] = relationship("AppUserWord", back_populates="word")
+    # Relationship through meanings
+    app_user_meanings: Mapped[List["AppUserMeaning"]] = relationship("AppUserMeaning", secondary="meanings", viewonly=True)
     # One-to-many relationship with Meaning
     meanings:  Mapped[List["Meaning"]] = relationship("Meaning", back_populates="word", cascade="all, delete-orphan")
 
@@ -45,6 +45,9 @@ class Meaning(Base):
     numeral_form: Mapped["Numeral"] = relationship("Numeral", back_populates="meaning", uselist=False)
     # 1-to-1 relationship with AdjectiveForm (optional - only for adjectives)
     adjective_form: Mapped["Adjective"] = relationship("Adjective", back_populates="meaning", uselist=False)
+    
+    # Many-to-many relationship with AppUser
+    app_user_meanings: Mapped[List["AppUserMeaning"]] = relationship("AppUserMeaning", back_populates="meaning")
     
     # Many-to-many relationship with Category
     category_meanings: Mapped[List["CategoryMeaning"]] = relationship("CategoryMeaning", back_populates="meaning")
@@ -149,24 +152,24 @@ class AppUser(Base):
     level_id: Mapped[int] = mapped_column(ForeignKey("levels.id"))
     # Relationship to Level
     level: Mapped["Level"] = relationship("Level", back_populates="users")
-    # Many-to-many relationship with Word through AppUserWord
-    app_user_words: Mapped[List["AppUserWord"]] = relationship("AppUserWord", back_populates="app_user")
+    # Many-to-many relationship with Meaning through AppUserMeaning
+    app_user_meanings: Mapped[List["AppUserMeaning"]] = relationship("AppUserMeaning", back_populates="app_user")
 
     created_at: Mapped[DateTime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
-class AppUserWord(Base):
-    __tablename__ = "app_user_words"
+class AppUserMeaning(Base):
+    __tablename__ = "app_user_meanings"
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     rank: Mapped[int] = mapped_column(Integer, default=0)
-    learned_at: Mapped[DateTime] = mapped_column(DateTime(timezone=True), nullable=True)
+    is_selected: Mapped[bool] = mapped_column(default=False)
     
     # Many-to-many association table
     app_user_id: Mapped[int] = mapped_column(ForeignKey("app_users.id"))
-    word_id: Mapped[int] = mapped_column(ForeignKey("words.id"))
+    meaning_id: Mapped[int] = mapped_column(ForeignKey("meanings.id"))
     
     # Relationships to access the linked objects
-    app_user: Mapped["AppUser"] = relationship("AppUser", back_populates="app_user_words")
-    word: Mapped["Word"] = relationship("Word", back_populates="app_user_words")
+    app_user: Mapped["AppUser"] = relationship("AppUser", back_populates="app_user_meanings")
+    meaning: Mapped["Meaning"] = relationship("Meaning", back_populates="app_user_meanings")
 
 class Level(Base):
     __tablename__ = "levels"
