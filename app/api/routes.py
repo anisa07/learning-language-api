@@ -8,7 +8,7 @@ from sqlalchemy.dialects.postgresql import insert as pg_insert
 from ..services.word import get_random_words, save_user_words
 from ..controllers.word import get_user_ranked_words
 from ..db import get_session
-from ..models import AppUserWord, PromptExample, Word, Level, Category, AppUser
+from ..models import AppUserWord, PromptExample, Word, Level, Category, AppUser, Meaning
 from ..schemas import PromptExampleCreate, PromptExampleRead, ChatRequest, ChatResponse
 from ..services.ai import AIService
 
@@ -62,21 +62,22 @@ async def get_all_words(limit: int = 50, session: AsyncSession = Depends(get_ses
         count_result = await session.execute(select(func.count(Word.id)))
         total_count = count_result.scalar()
         
-        # Get words with their levels
+        # Get words with their levels and meanings
         result = await session.execute(
-            select(Word, Level.level.label('level_name'))
+            select(Word, Level.level.label('level_name'), Meaning.pos, Meaning.meaning)
             .join(Level, Word.level_id == Level.id)
+            .join(Meaning, Meaning.word_id == Word.id)
             .order_by(Word.word)
             .limit(limit)
         )
         
         words = []
-        for word, level_name in result:
+        for word, level_name, pos, meaning in result:
             words.append({
                 "id": word.id,
                 "dutch": word.word,
-                "english": word.meaning,
-                "pos": word.pos,
+                "english": meaning,
+                "pos": pos,
                 "level": level_name
             })
         
@@ -103,9 +104,9 @@ async def get_vocabulary_stats(session: AsyncSession = Depends(get_session)):
         
         # Count words by part of speech
         pos_stats = await session.execute(
-            select(Word.pos, func.count(Word.id).label('word_count'))
-            .group_by(Word.pos)
-            .order_by(func.count(Word.id).desc())
+            select(Meaning.pos, func.count(Meaning.id).label('word_count'))
+            .group_by(Meaning.pos)
+            .order_by(func.count(Meaning.id).desc())
         )
         
         # Total counts
@@ -128,19 +129,20 @@ async def get_sample_words_by_level(level_name: str, limit: int = 10, session: A
     """Get sample words for a specific level."""
     try:
         result = await session.execute(
-            select(Word)
+            select(Word, Meaning.pos, Meaning.meaning)
             .join(Level, Word.level_id == Level.id)
+            .join(Meaning, Meaning.word_id == Word.id)
             .where(Level.level == level_name)
             .order_by(Word.word)
             .limit(limit)
         )
         
         words = []
-        for word in result.scalars():
+        for word, pos, meaning in result:
             words.append({
                 "dutch": word.word,
-                "english": word.meaning,
-                "pos": word.pos
+                "english": meaning,
+                "pos": pos
             })
         
         return {
@@ -191,13 +193,13 @@ async def get_app_user_words(user_id: int = Path(..., gt=0), limit: int = Query(
             # 2) fetch random words for that level when user has no words
             words = await get_random_words([Word.level_id == app_user.level_id], limit, session)
             rows = [
-                {"app_user_id": user_id, "word_id": item['word'].id, "rank": 0}
+                {"app_user_id": user_id, "word_id": item[0].id, "rank": 0}
                 for item in words
             ]
             await save_user_words(rows, session)
 
             return [
-                {"id": item['word'].id, "word": item['word'].word, "pos": item['word'].pos, "meaning": item['word'].meaning, "rank": item['rank']}
+                {"id": item[0].id, "word": item[0].word, "meanings": [{"id": m.id, "pos": m.pos, "meaning": m.meaning, "categories": [cm.category.category for cm in m.category_meanings]} for m in item[0].meanings], "rank": item[1] or 0}
                 for item in words
             ]
             

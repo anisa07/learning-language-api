@@ -19,14 +19,31 @@ class PromptExampleRead(PromptExampleBase):
 # Word schemas
 class WordBase(BaseModel):
     word: str
-    pos: str
-    meaning: str
 
 class WordCreate(WordBase):
-    pass
+    level_id: int
 
 class WordRead(WordBase):
     id: int
+    level_id: int
+
+    class Config:
+        from_attributes = True
+
+# Meaning schemas
+class MeaningBase(BaseModel):
+    pos: str
+    meaning: str
+    usage: Optional[str] = None
+    example_dutch: Optional[str] = None
+    example_english: Optional[str] = None
+
+class MeaningCreate(MeaningBase):
+    word_id: int
+
+class MeaningRead(MeaningBase):
+    id: int
+    word_id: int
 
     class Config:
         from_attributes = True
@@ -49,11 +66,11 @@ class VerbFormBase(BaseModel):
     is_modal: bool = False
 
 class VerbFormCreate(VerbFormBase):
-    word_id: int
+    meaning_id: int
 
 class VerbFormRead(VerbFormBase):
     id: int
-    word_id: int
+    meaning_id: int
     created_at: datetime
 
     class Config:
@@ -66,11 +83,11 @@ class NounFormBase(BaseModel):
     plural: Optional[str] = None
 
 class NounFormCreate(NounFormBase):
-    word_id: int
+    meaning_id: int
 
 class NounFormRead(NounFormBase):
     id: int
-    word_id: int
+    meaning_id: int
 
     class Config:
         from_attributes = True
@@ -82,11 +99,11 @@ class AdjectiveFormBase(BaseModel):
     superlative: Optional[str] = None
 
 class AdjectiveFormCreate(AdjectiveFormBase):
-    word_id: int
+    meaning_id: int
 
 class AdjectiveFormRead(AdjectiveFormBase):
     id: int
-    word_id: int
+    meaning_id: int
 
     class Config:
         from_attributes = True
@@ -150,18 +167,18 @@ class AppUserWordRead(AppUserWordBase):
     class Config:
         from_attributes = True
 
-# CategoryWord schemas  
-class CategoryWordBase(BaseModel):
+# CategoryMeaning schemas  
+class CategoryMeaningBase(BaseModel):
     pass
 
-class CategoryWordCreate(CategoryWordBase):
+class CategoryMeaningCreate(CategoryMeaningBase):
     category_id: int
-    word_id: int
+    meaning_id: int
 
-class CategoryWordRead(CategoryWordBase):
+class CategoryMeaningRead(CategoryMeaningBase):
     id: int
     category_id: int
-    word_id: int
+    meaning_id: int
 
     class Config:
         from_attributes = True

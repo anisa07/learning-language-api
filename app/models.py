@@ -12,25 +12,13 @@ class PromptExample(Base):
 
 class Word(Base):
     __tablename__ = "words"
-    __table_args__ = (UniqueConstraint("word", "pos", name="uq_words_token_pos"), CheckConstraint("pos IN ('verb','noun','adjective','numeral')", name="ck_pos"),)
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    word: Mapped[str] = mapped_column(String(150), nullable=False) # if ite's verb - infinitive, noun - singular form with definite article, adjective - het form w/o e at the end
-    pos: Mapped[str] = mapped_column(String(25), nullable=False) # e.g adjective, noun, verb
+    word: Mapped[str] = mapped_column(String(150), nullable=False, unique=True) # Dutch word (unique)
     
     # Foreign key to Level (many words can have the same level)
     level_id: Mapped[int] = mapped_column(ForeignKey("levels.id"))
     # Relationship to Level
     level: Mapped["Level"] = relationship("Level", back_populates="words")
-    # 1-to-1 relationship with Verb (optional - only for verbs)
-    verb_form: Mapped["Verb"] = relationship("Verb", back_populates="word", uselist=False)
-    # 1-to-1 relationship with Noun (optional - only for nouns)
-    noun_form: Mapped["Noun"] = relationship("Noun", back_populates="word", uselist=False)
-    # 1-to-1 relationship with Numeral (optional - only for numerals)
-    numeral_form: Mapped["Numeral"] = relationship("Numeral", back_populates="word", uselist=False)
-    # 1-to-1 relationship with AdjectiveForm (optional - only for adjectives)
-    adjective_form: Mapped["Adjective"] = relationship("Adjective", back_populates="word", uselist=False)
-    # Many-to-many relationship with Category
-    category_words: Mapped[List["CategoryWord"]] = relationship("CategoryWord", back_populates="word")
     # Many-to-many relationship with AppUser
     app_user_words: Mapped[List["AppUserWord"]] = relationship("AppUserWord", back_populates="word")
     # One-to-many relationship with Meaning
@@ -38,8 +26,9 @@ class Word(Base):
 
 class Meaning(Base):
     __tablename__ = "meanings"
-    __table_args__ = (UniqueConstraint("word_id", "meaning", name="uq_meaning_per_word"),)
+    __table_args__ = (UniqueConstraint("word_id", "meaning", "pos", name="uq_meaning_per_word_pos"),)
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    pos: Mapped[str] = mapped_column(String(25), nullable=False) # part of speech
     meaning = mapped_column(String(200), nullable=False)
     usage = mapped_column(Text, nullable=True) # context
     example_dutch = mapped_column(Text, nullable=True)
@@ -47,6 +36,18 @@ class Meaning(Base):
     # One-to-many relationship with Word
     word_id: Mapped[int] = mapped_column(ForeignKey("words.id"), nullable=False, index=True)
     word: Mapped["Word"] = relationship("Word", back_populates="meanings")
+    
+    # 1-to-1 relationship with Verb (optional - only for verbs)
+    verb_form: Mapped["Verb"] = relationship("Verb", back_populates="meaning", uselist=False)
+    # 1-to-1 relationship with Noun (optional - only for nouns)
+    noun_form: Mapped["Noun"] = relationship("Noun", back_populates="meaning", uselist=False)
+    # 1-to-1 relationship with Numeral (optional - only for numerals)
+    numeral_form: Mapped["Numeral"] = relationship("Numeral", back_populates="meaning", uselist=False)
+    # 1-to-1 relationship with AdjectiveForm (optional - only for adjectives)
+    adjective_form: Mapped["Adjective"] = relationship("Adjective", back_populates="meaning", uselist=False)
+    
+    # Many-to-many relationship with Category
+    category_meanings: Mapped[List["CategoryMeaning"]] = relationship("CategoryMeaning", back_populates="meaning")
 
 class Verb(Base):
     __tablename__ = "verbs"
@@ -76,9 +77,9 @@ class Verb(Base):
     is_strong_verb: Mapped[bool] = mapped_column(default=False)  # strong vs weak verbs
     is_modal: Mapped[bool] = mapped_column(default=False)
 
-    # 1-to-1 relationship with Word
-    word_id: Mapped[int] = mapped_column(ForeignKey("words.id"), unique=True)
-    word: Mapped["Word"] = relationship("Word", back_populates="verb_form")
+    # 1-to-1 relationship with Meaning
+    meaning_id: Mapped[int] = mapped_column(ForeignKey("meanings.id"), unique=True)
+    meaning: Mapped["Meaning"] = relationship("Meaning", back_populates="verb_form")
 
     created_at: Mapped[DateTime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     
@@ -88,9 +89,9 @@ class Noun(Base):
     indefinite_article: Mapped[str] = mapped_column(String(5), nullable=True) # de/het
     diminutive: Mapped[str] = mapped_column(String(100), nullable=True)
     plural: Mapped[str] = mapped_column(String(100), nullable=True)
-    # 1-to-1 relationship with Word
-    word_id: Mapped[int] = mapped_column(ForeignKey("words.id"), unique=True)
-    word: Mapped["Word"] = relationship("Word", back_populates="noun_form")
+    # 1-to-1 relationship with Meaning
+    meaning_id: Mapped[int] = mapped_column(ForeignKey("meanings.id"), unique=True)
+    meaning: Mapped["Meaning"] = relationship("Meaning", back_populates="noun_form")
 
     created_at: Mapped[DateTime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
@@ -100,9 +101,9 @@ class Numeral(Base):
     numeric_value: Mapped[int] = mapped_column(Integer, nullable=True) # the actual number (e.g. 3, 20)
     ordinal_form: Mapped[str] = mapped_column(String(100), nullable=True) # ordinal form (e.g. "derde", "twintigste")
     
-    # 1-to-1 relationship with Word
-    word_id: Mapped[int] = mapped_column(ForeignKey("words.id"), unique=True)
-    word: Mapped["Word"] = relationship("Word", back_populates="numeral_form")
+    # 1-to-1 relationship with Meaning
+    meaning_id: Mapped[int] = mapped_column(ForeignKey("meanings.id"), unique=True)
+    meaning: Mapped["Meaning"] = relationship("Meaning", back_populates="numeral_form")
 
     created_at: Mapped[DateTime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
@@ -112,9 +113,9 @@ class Adjective(Base):
     inflected: Mapped[str] = mapped_column(String(150), nullable=True) # if applicable
     comparative: Mapped[str] = mapped_column(String(100), nullable=True)
     superlative: Mapped[str] = mapped_column(String(100), nullable=True)
-    # 1-to-1 relationship with Word
-    word_id: Mapped[int] = mapped_column(ForeignKey("words.id"), unique=True)
-    word: Mapped["Word"] = relationship("Word", back_populates="adjective_form")
+    # 1-to-1 relationship with Meaning
+    meaning_id: Mapped[int] = mapped_column(ForeignKey("meanings.id"), unique=True)
+    meaning: Mapped["Meaning"] = relationship("Meaning", back_populates="adjective_form")
 
     created_at: Mapped[DateTime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     
@@ -123,20 +124,20 @@ class Category(Base):
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     category: Mapped[str] = mapped_column(String(100))
     
-    # Many-to-many relationship with Word
-    category_words: Mapped[List["CategoryWord"]] = relationship("CategoryWord", back_populates="category")
+    # Many-to-many relationship with Meaning
+    category_meanings: Mapped[List["CategoryMeaning"]] = relationship("CategoryMeaning", back_populates="category")
 
-class CategoryWord(Base):
-    __tablename__ = "category_words"
+class CategoryMeaning(Base):
+    __tablename__ = "category_meanings"
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     
     # Many-to-many association table
     category_id: Mapped[int] = mapped_column(ForeignKey("categories.id"))
-    word_id: Mapped[int] = mapped_column(ForeignKey("words.id"))
+    meaning_id: Mapped[int] = mapped_column(ForeignKey("meanings.id"))
     
     # Optional: relationships to access the linked objects
-    category: Mapped["Category"] = relationship("Category", back_populates="category_words")
-    word: Mapped["Word"] = relationship("Word", back_populates="category_words")
+    category: Mapped["Category"] = relationship("Category", back_populates="category_meanings")
+    meaning: Mapped["Meaning"] = relationship("Meaning", back_populates="category_meanings")
 
 class AppUser(Base):
     __tablename__ = "app_users"

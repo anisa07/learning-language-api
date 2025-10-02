@@ -10,7 +10,7 @@ from typing import List
 
 from app.schemas import WordRank
 from ..db import get_session
-from ..models import AppUser, AppUserWord, CategoryWord, PromptExample, Word, Level, Category
+from ..models import AppUser, AppUserWord, CategoryMeaning, PromptExample, Word, Level, Category, Meaning
 
 async def update_words_ranks(user_id: int, items: List[WordRank], session: AsyncSession = Depends(get_session)):
     # de-dup by word_id (keep last) do we really need it?
@@ -57,14 +57,16 @@ async def get_app_user(user_id: int, session: AsyncSession):
 async def get_word_list(limit: int, session: AsyncSession = Depends(get_session)):
     stmt = (
         select(Word, Category.category)
-        .join(CategoryWord, CategoryWord.word_id == Word.id, isouter=True)
-        .join(Category, CategoryWord.category_id == Category.id, isouter=True)
+        .join(Meaning, Meaning.word_id == Word.id, isouter=True)
+        .join(CategoryMeaning, CategoryMeaning.meaning_id == Meaning.id, isouter=True)
+        .join(Category, CategoryMeaning.category_id == Category.id, isouter=True)
+        .distinct()
         .options(
-            selectinload(Word.meanings),
-            selectinload(Word.verb_form),
-            selectinload(Word.noun_form),
-            selectinload(Word.adjective_form),
-            selectinload(Word.numeral_form),
+            selectinload(Word.meanings).selectinload(Meaning.verb_form),
+            selectinload(Word.meanings).selectinload(Meaning.noun_form),
+            selectinload(Word.meanings).selectinload(Meaning.adjective_form),
+            selectinload(Word.meanings).selectinload(Meaning.numeral_form),
+            selectinload(Word.meanings).selectinload(Meaning.category_meanings).selectinload(CategoryMeaning.category),
         )
     )
     if limit and limit > 0:
@@ -122,15 +124,17 @@ async def get_random_words(conditions: list[ColumnElement[bool]], limit: int, se
     stmt = (
         select(Word, AppUserWord.rank, Category.category)
         .join(AppUserWord, AppUserWord.word_id == Word.id, isouter=True)
-        .join(CategoryWord, CategoryWord.word_id == Word.id, isouter=True)
-        .join(Category, CategoryWord.category_id == Category.id, isouter=True)
+        .join(Meaning, Meaning.word_id == Word.id, isouter=True)
+        .join(CategoryMeaning, CategoryMeaning.meaning_id == Meaning.id, isouter=True)
+        .join(Category, CategoryMeaning.category_id == Category.id, isouter=True)
+        .distinct()
         .where(*conditions)
         .options(
-            selectinload(Word.meanings),
-            selectinload(Word.verb_form),
-            selectinload(Word.noun_form),
-            selectinload(Word.adjective_form),
-            selectinload(Word.numeral_form),
+            selectinload(Word.meanings).selectinload(Meaning.verb_form),
+            selectinload(Word.meanings).selectinload(Meaning.noun_form),
+            selectinload(Word.meanings).selectinload(Meaning.adjective_form),
+            selectinload(Word.meanings).selectinload(Meaning.numeral_form),
+            selectinload(Word.meanings).selectinload(Meaning.category_meanings).selectinload(CategoryMeaning.category),
         )
         .order_by(func.random())           # PostgreSQL random order
     )
@@ -162,15 +166,16 @@ async def pick_from_bucket(cond, n: int, user_id: int, selected_ids: set, sessio
     stmt = (
         select(Word, AppUserWord.rank, Category.category)
         .join(AppUserWord, AppUserWord.word_id == Word.id, isouter=True)
-        .join(CategoryWord, CategoryWord.word_id == Word.id, isouter=True)
-        .join(Category, CategoryWord.category_id == Category.id, isouter=True)
+        .join(Meaning, Meaning.word_id == Word.id, isouter=True)
+        .join(CategoryMeaning, CategoryMeaning.meaning_id == Meaning.id, isouter=True)
+        .join(Category, CategoryMeaning.category_id == Category.id, isouter=True)
+        .distinct()
         .where(AppUserWord.app_user_id == user_id, cond, ~Word.id.in_(selected_ids))
         .options(
-            selectinload(Word.meanings), 
-            selectinload(Word.verb_form),
-            selectinload(Word.noun_form),
-            selectinload(Word.adjective_form),
-            selectinload(Word.numeral_form),
+            selectinload(Word.meanings).selectinload(Meaning.verb_form), 
+            selectinload(Word.meanings).selectinload(Meaning.noun_form),
+            selectinload(Word.meanings).selectinload(Meaning.adjective_form),
+            selectinload(Word.meanings).selectinload(Meaning.numeral_form),
         )
         .order_by(func.random())  # PostgreSQL
     )
@@ -208,15 +213,17 @@ async def select_user_words_from_list(user_id: int, limit: int, session: AsyncSe
     stmt = (
         select(Word, AppUserWord.rank, Category.category)
         .join(AppUserWord, AppUserWord.word_id == Word.id)
-        .join(CategoryWord, CategoryWord.word_id == Word.id, isouter=True)
-        .join(Category, CategoryWord.category_id == Category.id, isouter=True)
+        .join(Meaning, Meaning.word_id == Word.id, isouter=True)
+        .join(CategoryMeaning, CategoryMeaning.meaning_id == Meaning.id, isouter=True)
+        .join(Category, CategoryMeaning.category_id == Category.id, isouter=True)
+        .distinct()
         .where(AppUserWord.app_user_id == user_id)
         .options(
-            selectinload(Word.meanings),
-            selectinload(Word.verb_form),
-            selectinload(Word.noun_form),
-            selectinload(Word.adjective_form),
-            selectinload(Word.numeral_form),
+            selectinload(Word.meanings).selectinload(Meaning.verb_form),
+            selectinload(Word.meanings).selectinload(Meaning.noun_form),
+            selectinload(Word.meanings).selectinload(Meaning.adjective_form),
+            selectinload(Word.meanings).selectinload(Meaning.numeral_form),
+            selectinload(Word.meanings).selectinload(Meaning.category_meanings).selectinload(CategoryMeaning.category),
         )
     )
         
@@ -239,59 +246,73 @@ async def select_user_words_from_list(user_id: int, limit: int, session: AsyncSe
 #     POS.numeral: Word.numeral_form,
 # }
 
-def serialize(w: Word, rank: int, category: str):
+def serialize(w: Word, rank: int, category: str = None):
+    # Get categories for each meaning
+    meaning_categories = {}
+    for meaning in w.meanings:
+        meaning_categories[meaning.id] = []
+        for category_meaning in meaning.category_meanings:
+            meaning_categories[meaning.id].append(category_meaning.category.category)
+    
     out = {
         "id": w.id,
         "word": w.word,
-        "pos": w.pos,
-        # "meaning": w.meaning,
-        "meanings": [m for m in w.meanings],
+        "meanings": [
+            {
+                "id": m.id, 
+                "pos": m.pos, 
+                "meaning": m.meaning, 
+                "usage": m.usage, 
+                "example_dutch": m.example_dutch, 
+                "example_english": m.example_english,
+                "categories": meaning_categories.get(m.id, [])
+            } for m in w.meanings
+        ],
         "rank": rank,  # 0 if user doesn't have it yet
-        "category": category
     }
-    pos = w.pos
-    # print(pos)
-    #print(w)
-    if pos == "verb" and w.verb_form:
-        v = w.verb_form
-        out["verb_form"] = {
-            "infinitive": v.infinitive,
-            "present": {
-                "ik": v.ik,
-                "jij": v.jij,
-                "u": v.u,
-                "hij": v.hij,
-                "wij": v.wij,
-            },
-            "past": {"sg": v.past_sg, "pl": v.past_pl},
-            "perfect": {"aux": v.perfect, "participle": v.past_participle},
-            "separable_prefix": v.separable_prefix,
-            "is_separable": v.separable_prefix is not None,
-            "is_irregular": v.is_irregular,
-            "is_strong_verb": v.is_strong_verb,
-            "is_modal": v.is_modal,
-        }
-    elif pos == "noun" and w.noun_form:
-        n = w.noun_form
-        out["noun_form"] = {
-            "noun": w.word,
-            "indefinite_article": n.indefinite_article,
-            "diminutive": n.diminutive,
-            "plural": n.plural,
-        }
-    elif pos == "adjective" and w.adjective_form:
-        a = w.adjective_form
-        out["adjective_form"] = {
-            "base": w.word,  # Get base form from words table
-            "inflected": a.inflected,
-            "comparative": a.comparative,
-            "superlative": a.superlative,
-        }
-    elif pos == "numeral" and w.numeral_form:
-        num = w.numeral_form
-        out["numeral_form"] = {
-            "numeral": w.word,  # Use word from words table instead of redundant numeral column
-            "numeric_value": num.numeric_value,
-            "ordinal_form": num.ordinal_form,
-        }
+    
+    # Handle grammatical forms for all meanings (support words with multiple POS)
+    for meaning in w.meanings:
+        if meaning.pos == "verb" and meaning.verb_form:
+            v = meaning.verb_form
+            out["verb_form"] = {
+                "infinitive": v.infinitive,
+                "present": {
+                    "ik": v.ik,
+                    "jij": v.jij,
+                    "u": v.u,
+                    "hij": v.hij,
+                    "wij": v.wij,
+                },
+                "past": {"sg": v.past_sg, "pl": v.past_pl},
+                "perfect": {"aux": v.perfect, "participle": v.past_participle},
+                "separable_prefix": v.separable_prefix,
+                "is_separable": v.separable_prefix is not None,
+                "is_irregular": v.is_irregular,
+                "is_strong_verb": v.is_strong_verb,
+                "is_modal": v.is_modal,
+            }
+        elif meaning.pos == "noun" and meaning.noun_form:
+            n = meaning.noun_form
+            out["noun_form"] = {
+                "noun": w.word,
+                "indefinite_article": n.indefinite_article,
+                "diminutive": n.diminutive,
+                "plural": n.plural,
+            }
+        elif meaning.pos == "adjective" and meaning.adjective_form:
+            a = meaning.adjective_form
+            out["adjective_form"] = {
+                "base": w.word,  # Get base form from words table
+                "inflected": a.inflected,
+                "comparative": a.comparative,
+                "superlative": a.superlative,
+            }
+        elif meaning.pos == "numeral" and meaning.numeral_form:
+            num = meaning.numeral_form
+            out["numeral_form"] = {
+                "numeral": w.word,  # Use word from words table instead of redundant numeral column
+                "numeric_value": num.numeric_value,
+                "ordinal_form": num.ordinal_form,
+            }
     return out

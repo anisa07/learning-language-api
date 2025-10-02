@@ -30,7 +30,7 @@ async def get_app_user_words(user_id: int, limit: int):
                 for item in words_only
             ]
             await save_user_words(rows, session)
-            return [serialize(item[0], item[1] or 0, item[2]) for item in result]
+            return [serialize(item[0], item[1] or 0) for item in result]
                 
         if len(app_user.app_user_words):
             print("user has words")
@@ -111,9 +111,9 @@ async def get_user_ranked_words(limit: int, app_user: AppUser, session: AsyncSes
     word_pool = WordPool()
     if limit > 0:
         selected = await word_pool.get_user_words(app_user.id, limit, session)
-        return [serialize(item['word'], item['rank'] or 0, item['category']) for item in selected[:limit]]
+        return [serialize(item['word'], item['rank'] or 0) for item in selected[:limit]]
     selected = await select_user_words_from_list(app_user.id, 0, session)
-    return [serialize(item[0], item[1] or 0, item[2]) for item in selected]
+    return [serialize(item[0], item[1] or 0) for item in selected]
     
 
 async def update_user_words_ranks(user_id: int, body: BatchSetRanks = []):
@@ -139,7 +139,7 @@ async def get_app_words(limit: int):
         session = await get_session()
         list = await get_word_list(limit, session)
         
-        return [serialize(item[0], 0, item[1]) for item in list]
+        return [serialize(item[0], 0) for item in list]
     
     except SQLAlchemyError:
         await session.rollback()
@@ -160,7 +160,7 @@ async def update_app_words(user_id: int, body: AppUserWords, limit: int):
         await update_app_user_word_list(user_id, body.words, session)
         words = await select_user_words_from_list(user_id, limit, session)
         
-        return [serialize(item[0], item[1] or 0, item[2]) for item in words]
+        return [serialize(item[0], item[1] or 0) for item in words]
     
     except SQLAlchemyError as e:
         await session.rollback()
@@ -183,7 +183,7 @@ async def remove_app_user_words(user_id: int, body: AppUserWords, limit: int):
         
         words = await select_user_words_from_list(user_id, limit, session)
         
-        return [serialize(item[0], item[1] or 0, item[2]) for item in words]
+        return [serialize(item[0], item[1] or 0) for item in words]
     
     except SQLAlchemyError as e:
         await session.rollback()
