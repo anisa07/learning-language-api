@@ -60,7 +60,6 @@ async def get_word_list(limit: int, session: AsyncSession = Depends(get_session)
         .join(Meaning, Meaning.word_id == Word.id, isouter=True)
         .join(CategoryMeaning, CategoryMeaning.meaning_id == Meaning.id, isouter=True)
         .join(Category, CategoryMeaning.category_id == Category.id, isouter=True)
-        .distinct()
         .options(
             selectinload(Word.meanings).selectinload(Meaning.verb_form),
             selectinload(Word.meanings).selectinload(Meaning.noun_form),
@@ -68,6 +67,7 @@ async def get_word_list(limit: int, session: AsyncSession = Depends(get_session)
             selectinload(Word.meanings).selectinload(Meaning.numeral_form),
             selectinload(Word.meanings).selectinload(Meaning.category_meanings).selectinload(CategoryMeaning.category),
         )
+        .order_by(Word.word)
     )
     if limit and limit > 0:
         stmt = stmt.limit(limit)
@@ -127,7 +127,6 @@ async def get_random_words(conditions: list[ColumnElement[bool]], limit: int, se
         .join(Meaning, Meaning.word_id == Word.id, isouter=True)
         .join(CategoryMeaning, CategoryMeaning.meaning_id == Meaning.id, isouter=True)
         .join(Category, CategoryMeaning.category_id == Category.id, isouter=True)
-        .distinct()
         .where(*conditions)
         .options(
             selectinload(Word.meanings).selectinload(Meaning.verb_form),
@@ -169,7 +168,6 @@ async def pick_from_bucket(cond, n: int, user_id: int, selected_ids: set, sessio
         .join(Meaning, Meaning.word_id == Word.id, isouter=True)
         .join(CategoryMeaning, CategoryMeaning.meaning_id == Meaning.id, isouter=True)
         .join(Category, CategoryMeaning.category_id == Category.id, isouter=True)
-        .distinct()
         .where(AppUserWord.app_user_id == user_id, cond, ~Word.id.in_(selected_ids))
         .options(
             selectinload(Word.meanings).selectinload(Meaning.verb_form), 
@@ -216,7 +214,6 @@ async def select_user_words_from_list(user_id: int, limit: int, session: AsyncSe
         .join(Meaning, Meaning.word_id == Word.id, isouter=True)
         .join(CategoryMeaning, CategoryMeaning.meaning_id == Meaning.id, isouter=True)
         .join(Category, CategoryMeaning.category_id == Category.id, isouter=True)
-        .distinct()
         .where(AppUserWord.app_user_id == user_id)
         .options(
             selectinload(Word.meanings).selectinload(Meaning.verb_form),
@@ -225,6 +222,7 @@ async def select_user_words_from_list(user_id: int, limit: int, session: AsyncSe
             selectinload(Word.meanings).selectinload(Meaning.numeral_form),
             selectinload(Word.meanings).selectinload(Meaning.category_meanings).selectinload(CategoryMeaning.category),
         )
+        .order_by(Word.word)
     )
         
     if limit and limit > 0:
@@ -254,6 +252,9 @@ def serialize(w: Word, rank: int, category: str = None):
         for category_meaning in meaning.category_meanings:
             meaning_categories[meaning.id].append(category_meaning.category.category)
     
+    # Sort meanings by POS first, then by meaning text
+    sorted_meanings = sorted(w.meanings, key=lambda m: (m.pos, m.meaning))
+    
     out = {
         "id": w.id,
         "word": w.word,
@@ -266,13 +267,13 @@ def serialize(w: Word, rank: int, category: str = None):
                 "example_dutch": m.example_dutch, 
                 "example_english": m.example_english,
                 "categories": meaning_categories.get(m.id, [])
-            } for m in w.meanings
+            } for m in sorted_meanings
         ],
         "rank": rank,  # 0 if user doesn't have it yet
     }
     
     # Handle grammatical forms for all meanings (support words with multiple POS)
-    for meaning in w.meanings:
+    for meaning in sorted_meanings:
         if meaning.pos == "verb" and meaning.verb_form:
             v = meaning.verb_form
             out["verb_form"] = {
