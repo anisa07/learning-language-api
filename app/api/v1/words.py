@@ -31,7 +31,7 @@ async def update_app_user_words_rank(user_id: int = Path(..., gt=0), body: Batch
 @router.get("/list")
 async def get_app_word_list(limit: int = 0):
     """
-    - retrun words form the system
+    - return words form the system
     """
     return await get_app_words(limit)
 

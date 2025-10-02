@@ -22,7 +22,7 @@ class WordPool:
             "r0":   dict(cond=and_(AppUserWord.rank >= 0,  AppUserWord.rank <= 4),  share=None, want=0, have=0),  # gets the remainder
         }
     
-    async def _get_user_word_pool_slection_plan(self, user_id: int, limit: int, session: AsyncSession):
+    async def _get_user_word_pool_selection_plan(self, user_id: int, limit: int, session: AsyncSession):
         buckets = self.bucket_rank()
         
         for b in buckets.values():
@@ -53,7 +53,7 @@ class WordPool:
         return buckets
     
     async def get_user_words(self, user_id: int, limit: int, session: AsyncSession):
-        buckets = await self._get_user_word_pool_slection_plan(user_id, limit, session)
+        buckets = await self._get_user_word_pool_selection_plan(user_id, limit, session)
         
         selected_ids = set()
         selected = []
@@ -70,7 +70,7 @@ class WordPool:
         return selected
     
     async def _count_bucket(self, cond, user_id: int, session: AsyncSession):
-        """Count how many user words exist in each bucket satisfying condtion"""
+        """Count how many user words exist in each bucket satisfying condition"""
         q = select(func.count()).select_from(AppUserWord).where(
             AppUserWord.app_user_id == user_id, cond
         )

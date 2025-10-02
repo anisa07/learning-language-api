@@ -27,10 +27,10 @@ CREATE TABLE IF NOT EXISTS categories (
 CREATE TABLE IF NOT EXISTS words (
     id SERIAL PRIMARY KEY,
     word VARCHAR(150),
-    part_of_speech VARCHAR(25) NOT NULL,
+    pos VARCHAR(25) NOT NULL,
     level_id INTEGER REFERENCES levels(id),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-    UNIQUE(word, part_of_speech) -- Allow same word with different meanings
+    UNIQUE(word, pos) -- Allow same word with different meanings
 );
 
 -- Create meanings table 1-to-many connection with word
@@ -39,12 +39,12 @@ CREATE TABLE IF NOT EXISTS meanings (
   word_id INTEGER NOT NULL REFERENCES words(id) ON DELETE CASCADE,
   meaning VARCHAR(200) NOT NULL,
   usage TEXT,
-  example TEXT,
-  example_translation TEXT,
+  example_dutch TEXT,
+  example_english TEXT,
   CONSTRAINT uq_meaning_per_word UNIQUE (word_id, meaning)
 );
 
--- Create verbs table (1-to-1 with words where part_of_speech = 'verb')
+-- Create verbs table (1-to-1 with words where pos = 'verb')
 CREATE TABLE IF NOT EXISTS verbs (
     id SERIAL PRIMARY KEY,
     word_id INTEGER UNIQUE REFERENCES words(id) ON DELETE CASCADE,
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS verbs (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- Create nouns table (1-to-1 with words where part_of_speech = 'noun')
+-- Create nouns table (1-to-1 with words where pos = 'noun')
 CREATE TABLE IF NOT EXISTS nouns (
     id SERIAL PRIMARY KEY,
     word_id INTEGER UNIQUE REFERENCES words(id) ON DELETE CASCADE,
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS nouns (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- Create numerals table (1-to-1 with words where part_of_speech = 'numeral')
+-- Create numerals table (1-to-1 with words where pos = 'numeral')
 CREATE TABLE IF NOT EXISTS numerals (
     id SERIAL PRIMARY KEY,
     word_id INTEGER UNIQUE REFERENCES words(id) ON DELETE CASCADE,
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS numerals (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- Create adjectives table (1-to-1 with words where part_of_speech = 'adjective')
+-- Create adjectives table (1-to-1 with words where pos = 'adjective')
 CREATE TABLE IF NOT EXISTS adjectives (
     id SERIAL PRIMARY KEY,
     word_id INTEGER UNIQUE REFERENCES words(id) ON DELETE CASCADE,
@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS app_user_words (
 );
 
 -- Create indexes for better performance
-CREATE INDEX IF NOT EXISTS idx_words_part_of_speech ON words(part_of_speech);
+CREATE INDEX IF NOT EXISTS idx_words_pos ON words(pos);
 CREATE INDEX IF NOT EXISTS idx_words_level_id ON words(level_id);
 CREATE INDEX IF NOT EXISTS idx_words_word ON words(word);
 CREATE INDEX IF NOT EXISTS idx_verbs_word_id ON verbs(word_id);

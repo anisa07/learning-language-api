@@ -76,7 +76,7 @@ async def get_all_words(limit: int = 50, session: AsyncSession = Depends(get_ses
                 "id": word.id,
                 "dutch": word.word,
                 "english": word.meaning,
-                "part_of_speech": word.part_of_speech,
+                "pos": word.pos,
                 "level": level_name
             })
         
@@ -103,8 +103,8 @@ async def get_vocabulary_stats(session: AsyncSession = Depends(get_session)):
         
         # Count words by part of speech
         pos_stats = await session.execute(
-            select(Word.part_of_speech, func.count(Word.id).label('word_count'))
-            .group_by(Word.part_of_speech)
+            select(Word.pos, func.count(Word.id).label('word_count'))
+            .group_by(Word.pos)
             .order_by(func.count(Word.id).desc())
         )
         
@@ -118,7 +118,7 @@ async def get_vocabulary_stats(session: AsyncSession = Depends(get_session)):
             "total_levels": total_levels.scalar(),
             "total_categories": total_categories.scalar(),
             "words_by_level": {level: count for level, count in level_stats},
-            "words_by_part_of_speech": {pos: count for pos, count in pos_stats}
+            "words_by_pos": {pos: count for pos, count in pos_stats}
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
@@ -140,7 +140,7 @@ async def get_sample_words_by_level(level_name: str, limit: int = 10, session: A
             words.append({
                 "dutch": word.word,
                 "english": word.meaning,
-                "part_of_speech": word.part_of_speech
+                "pos": word.pos
             })
         
         return {
@@ -177,7 +177,7 @@ async def get_app_user_words(user_id: int = Path(..., gt=0), limit: int = Query(
     # check user exist 
     # get user level
     # check user has 10 words with rank <= limit
-    # return 10 randow words of hiw level
+    # return 10 random words of hiw level
     try: 
         # 1) load the user (and level)
         app_user = await session.get(AppUser, user_id, options=[selectinload(AppUser.app_user_words).joinedload(AppUserWord.word)])
@@ -187,7 +187,7 @@ async def get_app_user_words(user_id: int = Path(..., gt=0), limit: int = Query(
         words = []
         rows = []
         if len(app_user.app_user_words) == 0:
-            print("user doesn't have words")
+            print("routes: user doesn't have words")
             # 2) fetch random words for that level when user has no words
             words = await get_random_words([Word.level_id == app_user.level_id], limit, session)
             rows = [
@@ -197,7 +197,7 @@ async def get_app_user_words(user_id: int = Path(..., gt=0), limit: int = Query(
             await save_user_words(rows, session)
 
             return [
-                {"id": item['word'].id, "word": item['word'].word, "part_of_speech": item['word'].part_of_speech, "meaning": item['word'].meaning, "rank": item['rank']}
+                {"id": item['word'].id, "word": item['word'].word, "pos": item['word'].pos, "meaning": item['word'].meaning, "rank": item['rank']}
                 for item in words
             ]
             

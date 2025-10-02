@@ -24,93 +24,108 @@ INSERT INTO categories (category)
 SELECT DISTINCT category FROM t_categories
 ON CONFLICT (category) DO NOTHING;
 
+INSERT INTO categories (category) VALUES ('numbers'), ('verbs'), ('nouns'), ('adjectives'), ('prepositions'), ('articles'), ('pronouns')
+ON CONFLICT (category) DO NOTHING;
+
 -- Insert all vocabulary words from CSV
 -- Create a temporary table to load CSV data
 CREATE TEMP TABLE t_vocab_words (
     number INTEGER,
     dutch TEXT,
     english TEXT,
-    part_of_speech TEXT,
+    pos TEXT,
     category TEXT,
     example_dutch TEXT,
     example_english TEXT
 );
-
--- Load CSV data into temporary table
-COPY t_vocab_words(number, dutch, english, part_of_speech, category, example_dutch, example_english)
-FROM '/docker-entrypoint-initdb.d/easy-vocabulary.csv'
-DELIMITER ','
-CSV HEADER
-QUOTE '"';
 
 -- Insert words from CSV (all at A2 level since it's "easy vocabulary")
 DO $$
 DECLARE
     a2_level_id INTEGER;
 BEGIN
-    -- Get A2 level ID
-    SELECT id INTO a2_level_id FROM levels WHERE level = 'A2';
+  -- Get A2 level ID
+  SELECT id INTO a2_level_id FROM levels WHERE level = 'A2';
 
-    -- Insert words from temp table (all at A2 level)
-    INSERT INTO words (word, part_of_speech, level_id)
-    SELECT DISTINCT dutch, part_of_speech, a2_level_id
-    FROM t_vocab_words
-    ON CONFLICT (word, part_of_speech) DO NOTHING;
+  -- Load CSV data into temporary table
+  COPY t_vocab_words(number, dutch, english, pos, category, example_dutch, example_english)
+  FROM '/docker-entrypoint-initdb.d/easy-vocabulary.csv'
+  DELIMITER ','
+  CSV HEADER
+  QUOTE '"';
 
-    -- Also insert category associations
-    INSERT INTO category_words (category_id, word_id)
-    SELECT DISTINCT c.id, w.id
-    FROM t_vocab_words tv
-    JOIN words w ON w.word = tv.dutch AND w.part_of_speech = tv.part_of_speech
-    JOIN categories c ON c.category = tv.category
-    ON CONFLICT (category_id, word_id) DO NOTHING;
+  -- Insert words from temp table (all at A2 level)
+  INSERT INTO words (word, pos, level_id)
+  SELECT DISTINCT dutch, pos, a2_level_id
+  FROM t_vocab_words
+  ON CONFLICT (word, pos) DO NOTHING;
 
-    -- Auto-categorize words by part of speech (for backward compatibility)
-    INSERT INTO category_words (category_id, word_id)
-    SELECT c.id, w.id 
-    FROM categories c, words w 
-    WHERE c.category = 'verbs' AND w.part_of_speech = 'verb'
-    ON CONFLICT (category_id, word_id) DO NOTHING;
+  -- Also insert category associations
+  INSERT INTO category_words (category_id, word_id)
+  SELECT DISTINCT c.id, w.id
+  FROM t_vocab_words tv
+  JOIN words w ON w.word = tv.dutch AND w.pos = tv.pos
+  JOIN categories c ON c.category = tv.category
+  ON CONFLICT (category_id, word_id) DO NOTHING;
 
-    INSERT INTO category_words (category_id, word_id)
-    SELECT c.id, w.id 
-    FROM categories c, words w 
-    WHERE c.category = 'adjectives' AND w.part_of_speech = 'adjective'
-    ON CONFLICT (category_id, word_id) DO NOTHING;
+  -- Auto-categorize words by part of speech (for backward compatibility)
+  INSERT INTO category_words (category_id, word_id)
+  SELECT c.id, w.id 
+  FROM categories c, words w
+  WHERE c.category = 'verbs' AND w.pos = 'verb'
+  ON CONFLICT (category_id, word_id) DO NOTHING;
 
-    INSERT INTO category_words (category_id, word_id)
-    SELECT c.id, w.id 
-    FROM categories c, words w 
-    WHERE c.category = 'numbers' AND w.part_of_speech = 'numeral'
-    ON CONFLICT (category_id, word_id) DO NOTHING;
+  INSERT INTO category_words (category_id, word_id)
+  SELECT c.id, w.id 
+  FROM categories c, words w
+  WHERE c.category = 'adjectives' AND w.pos = 'adjective'
+  ON CONFLICT (category_id, word_id) DO NOTHING;
 
-    INSERT INTO category_words (category_id, word_id)
-    SELECT c.id, w.id 
-    FROM categories c, words w 
-    WHERE c.category = 'prepositions' AND w.part_of_speech = 'preposition'
-    ON CONFLICT (category_id, word_id) DO NOTHING;
+  INSERT INTO category_words (category_id, word_id)
+  SELECT c.id, w.id 
+  FROM categories c, words w
+  WHERE c.category = 'numbers' AND w.pos = 'numeral'
+  ON CONFLICT (category_id, word_id) DO NOTHING;
 
-    INSERT INTO category_words (category_id, word_id)
-    SELECT c.id, w.id 
-    FROM categories c, words w 
-    WHERE c.category = 'articles' AND w.part_of_speech = 'article'
-    ON CONFLICT (category_id, word_id) DO NOTHING;
+  INSERT INTO category_words (category_id, word_id)
+  SELECT c.id, w.id 
+  FROM categories c, words w
+  WHERE c.category = 'prepositions' AND w.pos = 'preposition'
+  ON CONFLICT (category_id, word_id) DO NOTHING;
 
-    INSERT INTO category_words (category_id, word_id)
-    SELECT c.id, w.id 
-    FROM categories c, words w 
-    WHERE c.category = 'pronouns' AND w.part_of_speech = 'pronoun'
-    ON CONFLICT (category_id, word_id) DO NOTHING;
+  INSERT INTO category_words (category_id, word_id)
+  SELECT c.id, w.id 
+  FROM categories c, words w
+  WHERE c.category = 'articles' AND w.pos = 'article'
+  ON CONFLICT (category_id, word_id) DO NOTHING;
+
+  INSERT INTO category_words (category_id, word_id)
+  SELECT c.id, w.id 
+  FROM categories c, words w
+  WHERE c.category = 'pronouns' AND w.pos = 'pronoun'
+  ON CONFLICT (category_id, word_id) DO NOTHING;
+
+  -- Clean up temporary table
+  DROP TABLE t_vocab_words;
 
 END $$;
 
--- Clean up temporary table
-DROP TABLE t_vocab_words;
+-- Create meanings for words
+WITH data(word, pos, meaning, "usage", example_dutch, example_english) AS (
+  VALUES
+    ('de stad','noun','city','A human settlement of a substantial size','Amsterdam is een grote stad','Amsterdam is a big city'),
+)
+INSERT INTO meanings (word_id, meaning, "usage", example_dutch, example_english)
+SELECT w.id, d.meaning, d."usage", d.example_dutch, d.example_english
+FROM data d
+JOIN words w
+  ON w.word = d.word AND w.pos = d.pos
+ON CONFLICT (word_id, meaning) DO NOTHING;
 
 CREATE TEMP TABLE t_nouns AS
 SELECT id, word
 FROM words
-WHERE part_of_speech = 'noun';
+WHERE pos = 'noun';
 
 -- Insert noun forms for Dutch nouns from easy-vocabulary.csv
 -- Note: Grammatical forms (articles, diminutives, plurals) need to be filled in manually
@@ -437,7 +452,7 @@ DROP TABLE t_nouns;
 CREATE TEMP TABLE t_numerals AS
 SELECT id, word
 FROM words
-WHERE part_of_speech = 'numeral';
+WHERE pos = 'numeral';
 
 -- Create numeral forms for Dutch numerals (explicit rows mirroring nouns style)
 INSERT INTO numerals (word_id, numeric_value, ordinal_form) VALUES
@@ -474,7 +489,7 @@ DROP TABLE t_numerals;
 CREATE TEMP TABLE t_adjs AS
 SELECT id, word
 FROM words
-WHERE part_of_speech = 'adjective';
+WHERE pos = 'adjective';
 
 -- Create adjective forms for Dutch adjectives (explicit rows)
 INSERT INTO adjectives (word_id, inflected, comparative, superlative) VALUES
@@ -605,7 +620,7 @@ DROP TABLE t_adjs;
 CREATE TEMP TABLE t_verbs AS
 SELECT id, word
 FROM words
-WHERE part_of_speech = 'verb';
+WHERE pos = 'verb';
 
 -- Create verb forms for common Dutch verbs (explicit rows)
 INSERT INTO verbs (
@@ -848,20 +863,3 @@ ON CONFLICT (username) DO NOTHING;
 
 -- Note: Level target counts can be added later if needed
 -- Currently using actual word counts from the database
-
--- Log seeding results
-DO $$
-BEGIN
-    RAISE NOTICE '=== SEEDING RESULTS ===';
-    RAISE NOTICE 'Levels: % entries', (SELECT COUNT(*) FROM levels);
-    RAISE NOTICE 'Categories: % entries', (SELECT COUNT(*) FROM categories);
-    RAISE NOTICE 'Words: % entries', (SELECT COUNT(*) FROM words);
-    RAISE NOTICE 'Category-Word associations: % entries', (SELECT COUNT(*) FROM category_words);
-    RAISE NOTICE 'Nouns: % entries', (SELECT COUNT(*) FROM nouns);
-    RAISE NOTICE 'Numerals: % entries', (SELECT COUNT(*) FROM numerals);
-    RAISE NOTICE 'Adjectives: % entries', (SELECT COUNT(*) FROM adjectives);
-    RAISE NOTICE 'Verbs: % entries', (SELECT COUNT(*) FROM verbs);
-    RAISE NOTICE 'App Users: % entries', (SELECT COUNT(*) FROM app_users);
-    RAISE NOTICE '========================';
-END $$;
-

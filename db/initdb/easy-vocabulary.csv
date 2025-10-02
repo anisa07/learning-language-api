@@ -1,8 +1,8 @@
-number,dutch,english,part_of_speech,category,example_dutch,example_english
+number,dutch,english,pos,category,example_dutch,example_english
 1,aanstaande,upcoming,adjective,time_order,Aanstaande maandag heb ik een afspraak,Next Monday I have an ...
 2,aanwezig,present,adjective,states,Iedereen is aanwezig,Everyone is ...
 3,aardappel,potato,noun,food,Ik eet een aardappel,I eat a ...
-4,absoluut,absolutely,adverb,adverbs,Dit verhaal is absoluut waar gebeurd,This story ... happened for real
+4,absoluut,absolutely,adverb,grammar,Dit verhaal is absoluut waar gebeurd,This story ... happened for real
 5,accepteren,to accept,verb,people,Ik kan deze situatie niet accepteren,I cannot ... this situation
 6,acht,eight,numeral,numbers,Acht is het getal tussen zeven en negen,... is the number between seven and nine
 7,achter,behind,preposition,directions,De tuin is achter het huis,The garden is ... the house
@@ -32,22 +32,22 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 31,aspect,aspect,noun,properties,Een belangrijk aspect van dit probleem is de prijs,An important ... of this problem is the price
 32,au,ouch,interjection,body_parts,"Au, dat doet pijn!","..., that hurts!"
 33,auteur,author,noun,media,De auteur schreef tien boeken,The ... wrote ten books
-34,automatisch,automatically,adverb,adverbs,De deur sluit automatisch na 5 seconden,The door closes ... after 5 seconds
+34,automatisch,automatically,adverb,grammar,De deur sluit automatisch na 5 seconden,The door closes ... after 5 seconds
 35,avondeten,dinner,noun,food,Het avondeten is om zes uur,... is at six o clock
-36,baan,job,noun,workplace,Ik zoek een nieuwe baan,I am looking for a new ...
+36,baan,job,noun,work,Ik zoek een nieuwe baan,I am looking for a new ...
 37,baas,boss,noun,profession,Mijn baas is aardig,My ... is nice
 38,baby,baby,noun,family,De baby huilt en heeft honger,The ... cries and is hungry
-39,bank,bank,noun,money,Ik ga naar de bank om geld te storten,I go to the ... to deposit money
-40,bank,couch,noun,home,Ik zit op de bank,I sit on the ...
+39,bank,bank,noun,money;building,Ik ga naar de bank om geld te storten,I go to the ... to deposit money
+40,bank,couch,noun,money;home,Ik zit op de bank,I sit on the ...
 41,basis,base,noun,building,De basis van alles,The ... of everything
 42,bed,bed,noun,home,'s Avonds ga ik slapen in mijn bed,In the evening I sleep in my ...
-43,bedrijf,company,noun,workplace,Hij werkt bij een groot bedrijf,He works at a large ...
+43,bedrijf,company,noun,work,Hij werkt bij een groot bedrijf,He works at a large ...
 44,begin,beginning,noun,results,Het begin van het jaar,The ... of the year
 45,beginnen,to begin,verb,actions,We beginnen om negen uur,We ... at nine o'clock
 46,behalve,except,preposition,society,Iedereen is er behalve Jan,Everyone is there ... Jan
 47,beide,both,adjective,quantity,Beide kinderen zijn ziek,... children are sick
 48,beroemd,famous,adjective,relationships,Gary Oldman is een beroemde acteur,Gary Oldman is a ... actor
-49,beroep,profession,noun,workplace,Wat is je beroep?,What is your ...?
+49,beroep,profession,noun,work,Wat is je beroep?,What is your ...?
 50,bespreken,to discuss,verb,conversation,We bespreken het probleem,We ... the problem
 51,bestellen,to order,verb,actions,Ik bestel een pizza,I ... a pizza
 52,beter,better,adjective,qualities,Deze oplossing is beter dan de vorige,This solution is ... than the previous one
@@ -56,7 +56,7 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 55,beïnvloeden,to influence,verb,items,Hij kan me beïnvloeden,He can ... me
 56,bier,beer,noun,food,Hij drinkt een koud bier in de kroeg,He drinks a cold ... in the pub
 57,bij,at,preposition,directions,Ik ben bij mijn ouders thuis,I am ... my parents' house
-58,bijbaantje,side job,noun,workplace,Hij werkt bij een bank en heeft een bijbaantje in de winkel,He work in bank and has a ... at the store
+58,bijbaantje,side job,noun,work,Hij werkt bij een bank en heeft een bijbaantje in de winkel,He work in bank and has a ... at the store
 59,bijna,almost,adverb,quantity,Het is bijna klaar,It is ... ready
 60,bijten,to bite,verb,actions,De hond kan bijten,The dog can ...
 61,bitter,bitter,adjective,senses,Deze medicijn heeft een bittere smaak,This medicine has a ... taste
@@ -65,7 +65,7 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 64,bodem,bottom,noun,directions,De bodem van de zee,The ... of the sea
 65,boek,book,noun,education,Ik lees een boek,I read a ...
 66,boodschap,message,noun,conversation,Ik krijg een boodschap,I receive a ...
-67,boos,angry,adjective,feelings,Ik ben boos op hem,I am angry at him
+67,boos,angry,adjective,mood,Ik ben boos op hem,I am angry at him
 68,boot,boat,noun,transport,We varen met de boot over het water,We sail with the ... on the water
 69,borrelen,to have drinks,verb,relationships,We gaan borrelen na het werk,We are ... after work
 70,bouwen,to build,verb,building,Ze bouwen een nieuw huis,They ... a new house
@@ -91,13 +91,13 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 90,dag,day,noun,schedule,Een week heeft zeven dagen,A week has seven ...
 91,dag,bye,interjection,conversation,"Dag, tot morgen!","..., see you tomorrow!"
 92,dan,then,adverb,time_order,"Eerst eten, dan werken","First eat, ... work"
-93,danken,to thank,verb,feelings,Ik dank je voor je hulp en steun,I ... you for your help and support
-94,dankzij,thanks to,preposition,feelings,Dankzij jouw hulp lukte het,... to your help it worked
+93,danken,to thank,verb,mood,Ik dank je voor je hulp en steun,I ... you for your help and support
+94,dankzij,thanks to,preposition,mood,Dankzij jouw hulp lukte het,... to your help it worked
 95,dansen,to dance,verb,motion,Ik dans graag op muziek in de disco,I like to ... to music in the disco
 96,dat,that,pronoun,grammar,Dat is mijn fiets,... is my bicycle
 97,dat,that,conjunction,grammar,Ik denk dat hij komt,I think ... he is coming
 98,de,the,article,grammar,De kat zit op de tafel,... cat sits on the table
-99,denken,to think,verb,mental_states,Ik denk aan jou,I ... about you
+99,denken,to think,verb,mood,Ik denk aan jou,I ... about you
 100,dertien,thirteen,numeral,numbers,Dertien is het getal na twaalf,... is the number after twelve
 101,dertig,thirty,numeral,numbers,Dertig is het getal na twintig,... is the number after twenty
 102,detail,detail,noun,properties,Een klein detail is een specifiek onderdeel,A small ... is a specific part
@@ -106,8 +106,8 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 105,dichtbij,nearby,adverb,position,De winkel is dichtbij,The store is nearby
 106,diep,deep,adjective,quantity,Het water is diep,The water is ...
 107,ding,thing,noun,items,Wat is dat vreemde ding op de tafel?,What is that strange ... on the table?
-108,direct,directly,adverb,adverbs,Kom direct hier zonder te wachten,Come ... here without waiting
-109,direct,direct,adjective,adverbs,Een directe vraag is open en eerlijk,A ... question is open and honest
+108,direct,directly,adverb,grammar,Kom direct hier zonder te wachten,Come ... here without waiting
+109,direct,direct,adjective,grammar,Een directe vraag is open en eerlijk,A ... question is open and honest
 110,directeur,director,noun,leadership,De directeur leidt het bedrijf en neemt beslissingen,The ... leads the company and makes decisions
 111,discussie,discussion,noun,conversation,Een goede discussie gaat over verschillende meningen,A good ... is about different opinions
 112,dit,this,pronoun,grammar,Dit boek hier is belangrijk om te lezen,... book here is important to read
@@ -115,7 +115,7 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 114,doen,to do,verb,actions,Wat moet ik doen?,What should I ...?
 115,doen,matter,verb,grammar,Dat doet er niet toe,That does not matter
 116,dokter,doctor,noun,profession,Ik ga naar de dokter als ik ziek ben,I go to the ... when I am sick
-117,dom,dumb,adjective,mental_states,Het is dom om zonder jas in de regen te lopen,It is ... to walk in the rain without a coat
+117,dom,dumb,adjective,mood,Het is dom om zonder jas in de regen te lopen,It is ... to walk in the rain without a coat
 118,dood,death,noun,life_experience,De dood van een vriend,The ... of a friend
 119,dood,dead,adjective,states,De plant is dood,The plant is ...
 120,door,through,preposition,actions,We lopen door het park naar huis,We walk ... the park home
@@ -123,13 +123,13 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 122,dorst,thirst,noun,life_experience,Ik heb dorst,I am thirsty
 123,draaien,to turn,verb,motion,Draai naar links,Turn left
 124,drie,three,numeral,numbers,Drie is het getal tussen twee en vier,... is the number between two and four
-125,drinken,to drink,verb,money,Ik drink water en koffie uit een glas,I ... water and coffee from a glass
+125,drinken,to drink,verb,food,Ik drink water en koffie uit een glas,I ... water and coffee from a glass
 126,drinken,drink,noun,food,Een koud drinken op een warme dag,A cold drink on a hot day
 127,dromen,to dream,verb,health,Ik droom 's nachts over vliegen in de lucht,I ... at night about flying in the air
 128,droom,dream,noun,health,Een droom is wat je ziet tijdens je slaap,A ... is what you see during your sleep
-129,druk,busy,adjective,transport,Ik heb het erg druk,I am very busy
+129,druk,busy,adjective,states,Ik heb het erg druk,I am very busy
 130,dubbel,double,adjective,quantity,Een dubbele portie is twee keer zoveel,A ... portion is twice as much
-131,duidelijk,clear,adjective,adverbs,Een duidelijke uitleg,A clear explanation
+131,duidelijk,clear,adjective,grammar,Een duidelijke uitleg,A clear explanation
 132,duizend,thousand,numeral,numbers,Duizend is tien keer honderd,... is ten times one hundred
 133,dun,thin,adjective,quantity,Een dunne lijn is smal en niet dik,A ... line is narrow and not thick
 134,duur,expensive,adjective,money,Deze auto is duur,This car is expensive
@@ -137,11 +137,11 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 136,een,a,article,grammar,"Ik heb een boek, niet twee of drie","I have ... book, not two or three"
 137,een,one,numeral,numbers,Een is het getal na nul,... is the number after zero
 138,eens,just,particle,grammar,Kom eens hier kijken,Come ... look here
-139,eenzaam,lonely,adjective,feelings,Ik voel me eenzaam,I feel lonely
+139,eenzaam,lonely,adjective,mood,Ik voel me eenzaam,I feel lonely
 140,eerst,first,adverb,time_order,"Eerst de winkel, dan naar huis","... the store, then home"
 141,effect,effect,noun,results,Dit medicijn heeft een positief effect,This medicine has a positive ...
 142,ei,egg,noun,food,Ik eet een ei bij het ontbijt,I eat an egg at breakfast
-143,eigenlijk,actually,adverb,adverbs,Eigenlijk wil ik niet gaan,Actually I do not want to go
+143,eigenlijk,actually,adverb,grammar,Eigenlijk wil ik niet gaan,Actually I do not want to go
 144,eiland,island,noun,nature,Een eiland is land omringd door water,An ... is land surrounded by water
 145,eind,end,noun,results,Het eind van het verhaal,The ... of the story
 146,eindeloos,endless,adjective,duration,Een eindeloze weg lijkt nooit te stoppen,An ... road seems to never stop
@@ -156,12 +156,12 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 155,enorm,enormous,adjective,quantity,Dit huis is enorm groot en breed,This house is ... big and wide
 156,er,there,adverb,position,Er is niemand thuis,... is nobody home
 157,er,there,particle,grammar,Er zijn veel mensen hier,... are many people here
-158,eten,to eat,verb,money,Ik eet een appel,I eat an apple
+158,eten,to eat,verb,food,Ik eet een appel,I eat an apple
 159,eten,food,noun,food,Het eten is klaar,The food is ready
 160,even,just,particle,time_order,"Wacht even, ik kom zo","Wait ..., I'm coming"
 161,examen,exam,noun,education,Ik heb morgen een examen,I have an exam tomorrow
 162,experiment,experiment,noun,education,Een wetenschappelijk experiment test een hypothese,A scientific ... tests a hypothesis
-163,fabriek,factory,noun,workplace,Een fabriek produceert goederen en producten,A ... produces goods and products
+163,fabriek,factory,noun,work,Een fabriek produceert goederen en producten,A ... produces goods and products
 164,factor,factor,noun,tools,Prijs is een belangrijke factor bij kopen,Price is an important ... when buying
 165,familie,family,noun,family,"Mijn vader, moeder en broer zijn mijn familie","My father, mother and brother are my ..."
 166,fase,phase,noun,duration,Een nieuwe fase is een stadium in een proces,A new ... is a stage in a process
@@ -177,14 +177,14 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 176,gaan,to go,verb,actions,Ik ga van Amsterdam naar Utrecht met de trein,I ... from Amsterdam to Utrecht by train
 177,gast,guest,noun,people,Een welkome gast krijgt koffie en thee,A welcome ... gets coffee and tea
 178,geboren,born,adjective,family,Ik ben in 1990 geboren in Amsterdam,I was ... in 1990 in Amsterdam
-179,geluk,luck,noun,feelings,Veel geluk!,Good ...!
-180,gemeen,mean,adjective,feelings,Het is gemeen om anderen te pesten,It is ... to bully others
+179,geluk,luck,noun,mood,Veel geluk!,Good ...!
+180,gemeen,mean,adjective,mood,Het is gemeen om anderen te pesten,It is ... to bully others
 181,generatie,generation,noun,results,Een nieuwe generatie is de volgende leeftijdsgroep,A new ... is the next age group
 182,gerecht,dish,noun,food,Een lekker gerecht met vis,A tasty dish with fish
 183,getal,number,noun,education,Een getal tussen één en tien,A ... between one and ten
 184,geven,to give,verb,actions,Kun je me dat boek geven alsjeblieft?,Can you ... me that book please?
-185,gevoel,feeling,noun,feelings,Ik heb een goed gevoel over deze beslissing,I have a good ... about this decision
-186,gewoon,normal,adjective,adverbs,Een gewone dag,A normal day
+185,gevoel,feeling,noun,mood,Ik heb een goed gevoel over deze beslissing,I have a good ... about this decision
+186,gewoon,normal,adjective,mood,Een gewone dag,A normal day
 187,gezond,healthy,adjective,health,Fruit is gezond,Fruit is healthy
 188,glas,glass,noun,home,Ik drink water uit een glas op tafel,I drink water from a ... on the table
 189,glas,glass,noun,home,Een raam van glas,A window of ...
@@ -201,11 +201,11 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 200,half,half,adjective,quantity,Een half uur is 30 minuten lang,A ... hour is 30 minutes long
 201,hallo,hello,interjection,conversation,"Hallo, hoe gaat het met je?","..., how are you?"
 202,hand,hand,noun,body_parts,Geef me je hand om te schudden,Give me your ... to shake
-203,hard,hard,adjective,senses,De steen is hard en niet zacht,The stone is ... and not soft
-204,hard,loud,adjective,senses,"De muziek is te hard, zet zachter","The music is too ..., turn it down"
-205,hard,fast,adverb,actions,Hij rijdt hard,He drives ...
+203,hard,hard,adjective,antonyms;difficulty,De steen is hard en niet zacht,The stone is ... and not soft
+204,hard,loud,adjective,antonyms;music,"De muziek is te hard, zet zachter","The music is too ..., turn it down"
+205,hard,fast,adverb,antonyms;speed,Hij rijdt hard,He drives ...
 206,hart,heart,noun,body_parts,Mijn hart klopt snel in mijn borst,My ... beats fast in my chest
-207,hebben,to have,verb,money,Ik heb een nieuwe fiets,I ... a new bicycle
+207,hebben,to have,verb,grammar,Ik heb een nieuwe fiets,I ... a new bicycle
 208,heet,hot,adjective,senses,"Het is heet vandaag, de zon brandt","It is ... today, the sun burns"
 209,helft,half,noun,quantity,De helft is 50 procent of de helft,The ... is 50 percent or half
 210,helpen,to help,verb,society,Kan ik je helpen met je probleem?,Can I ... you with your problem?
@@ -222,20 +222,20 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 221,hoi,hi,interjection,conversation,"Hoi, leuk je te zien!","..., nice to see you!"
 222,holland,Holland,noun,country,Ik woon in Holland,I live in ...
 223,honderd,hundred,numeral,numbers,Honderd is tien keer tien,... is ten times ten
-224,honger,hunger,noun,feelings,Ik heb honger,I am ...
-225,hoop,hope,noun,feelings,Ik heb hoop dat alles goed komt,I have ... that everything will be fine
+224,honger,hunger,noun,mood,Ik heb honger,I am ...
+225,hoop,hope,noun,mood,Ik heb hoop dat alles goed komt,I have ... that everything will be fine
 226,hoop,pile,noun,quantity,Een hoop zand ligt op de grond,A ... of sand lies on the ground
 227,hoor,you know,particle,grammar,Dat is geen probleem hoor,That's no problem ...
 228,hopen,to hope,verb,life_experience,Ik hoop dat je komt,I ... that you come
 229,horen,to hear,verb,senses,Ik hoor muziek,I ... music
-230,hotel,hotel,noun,building,We slapen in een hotel,We sleep in a ...
+230,hotel,hotel,noun,building;places,We slapen in een hotel,We sleep in a ...
 231,houden,to hold,verb,actions,Ik hou van chocolade,I ... chocolate
-232,huis,house,noun,building,Ik woon in een huis met een tuin,I live in a ... with a garden
+232,huis,house,noun,building;home,Ik woon in een huis met een tuin,I live in a ... with a garden
 233,hulp,help,noun,society,"Ik kan dit niet alleen, ik heb hulp nodig","I can't do this alone, I need ..."
 234,hut,hut,noun,building,Een hut is een klein houten huisje,A ... is a small wooden house
 235,hé,hey,interjection,life_experience,"Hé, kijk hier!","..., look here!"
 236,ideaal,ideal,adjective,qualities,Dit is de ideale oplossing voor het probleem,This is the ... solution for the problem
-237,idee,idea,noun,mental_states,Ik heb een goed idee om het probleem op te lossen,I have a good ... to solve the problem
+237,idee,idea,noun,mood,Ik heb een goed idee om het probleem op te lossen,I have a good ... to solve the problem
 238,ieder,every,adjective,quantity,Ieder kind krijgt een cadeau,Every child gets a present
 239,iedere,each,adjective,quantity,Iedere dag ga ik wandelen,Each day I go walking
 240,ik,I,pronoun,grammar,Ik hou van muziek,... love music
@@ -244,9 +244,9 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 243,individueel,individual,adjective,grammar,Een individueel probleem,An ... problem
 244,informatie,information,noun,conversation,Ik heb informatie,I have ...
 245,initiatief,initiative,noun,actions,Hij neemt het initiatief om te beginnen,He takes the ... to start
-246,instrument,instrument,noun,tools,Een muzikaal instrument,A musical ...
+246,instrument,instrument,noun,tools;music,Een muzikaal instrument,A musical ...
 247,interessant,interesting,adjective,qualities,Dit boek is interessant om te lezen,This book is ... to read
-248,interesseren,to interest,verb,mental_states,"Dit onderwerp interesseert me, ik wil meer weten","This topic ... me, I want to know more"
+248,interesseren,to interest,verb,mood,"Dit onderwerp interesseert me, ik wil meer weten","This topic ... me, I want to know more"
 249,internationaal,international,adjective,society,Een internationaal bedrijf,An ... company
 250,invloed,influence,noun,society,Hij heeft veel invloed,He has much ...
 251,ja,yes,interjection,conversation,"Wil je koffie? Ja, graag","Do you want coffee? ..., please"
@@ -260,9 +260,9 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 259,jullie,you,pronoun,grammar,Waar zijn jullie?,Where are ...?
 260,juni,June,noun,schedule,In juni ga ik weg,In ... I will leave
 261,kaas,cheese,noun,food,Kaas wordt gemaakt van melk,... is made from milk
-262,kalm,calm,adjective,feelings,Blijf kalm,Stay ...
+262,kalm,calm,adjective,mood,Blijf kalm,Stay ...
 263,kamp,camp,noun,places,Kinderen slapen in tenten op een zomerkamp,Children sleep in tents at a summer ...
-264,karakter,character,noun,mental_states,Iemand met een sterk karakter geeft niet snel op,Someone with a strong ... doesn't give up easily
+264,karakter,character,noun,mood,Iemand met een sterk karakter geeft niet snel op,Someone with a strong ... doesn't give up easily
 265,kat,cat,noun,nature,De kat zegt miauw en de hond blaft,The ... says meow and the dog barks
 266,keer,time,noun,time_order,Dit is de eerste keer,This is the first time
 267,kennis,knowledge,noun,education,Hij heeft veel kennis,He has much knowledge
@@ -289,7 +289,7 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 288,kwaliteit,quality,noun,properties,Goede kwaliteit,Good ...
 289,laat,late,adjective,time_order,"Het is al negen uur, ik ben te laat","It's already nine, I am too ..."
 290,laatste,last,adjective,time_order,Dit is de laatste pagina van het boek,This is the ... page of the book
-291,lachen,to laugh,verb,feelings,Ik moet lachen,I have to ...
+291,lachen,to laugh,verb,mood,Ik moet lachen,I have to ...
 292,landschap,landscape,noun,position,Een mooi landschap,A beautiful ...
 293,lang,long,adjective,quantity,Dat is een lange weg,That is a ... road
 294,lang,long,adverb,duration,Hoe lang duurt het?,How long does it take?
@@ -306,11 +306,11 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 305,leven,life,noun,life_experience,Het leven is mooi,... is beautiful
 306,leven,to live,verb,life_experience,Ik leef in Amsterdam,I ... in Amsterdam
 307,leveren,to deliver,verb,society,We leveren morgen,We ... tomorrow
-308,licht,light,noun,nature,Doe het licht aan,Turn the ... on
-309,licht,light,adjective,quantity,Deze tas is licht,This bag is ...
-310,licht,light,adjective,color,Een lichte kleur als roze of geel,A light color like pink or yellow
-311,liefde,love,noun,feelings,Liefde is mooi,... is beautiful
-312,liever,rather,adverb,adverbs,Ik drink liever thee,I rather drink tea
+308,licht,light,noun,physics,Doe het licht aan,Turn the ... on
+309,licht,light,adjective,antonyms;weight,Deze tas is licht,This bag is ...
+310,licht,light,adjective,color;antonyms,Een lichte kleur als roze of geel,A light color like pink or yellow
+311,liefde,love,noun,mood,Liefde is mooi,... is beautiful
+312,liever,rather,adverb,antonyms,Ik drink liever thee,I rather drink tea
 313,liggen,to lie,verb,directions,Ik lig op de bank,I lie on the couch
 314,lijst,list,noun,tools,Ik maak een boodschappenlijst voor de winkel,I make a shopping ... for the store
 315,lip,lip,noun,body_parts,Mijn lip is onder mijn neus en boven mijn kin,My ... is below my nose and above my chin
@@ -330,46 +330,46 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 329,maken,to make,verb,actions,Ik maak een taart in de oven,I ... a cake in the oven
 330,mama,mom,noun,family,Mijn mama kookt het avondeten voor ons,My ... cooks the dinner for us
 331,man,man,noun,people,Die man is mijn vader,That ... is my father
-332,markt,market,noun,workplace,Op de markt koop ik verse groenten,At the ... I buy fresh vegetables
-333,materiaal,material,noun,home,Hout en staal zijn sterke materialen,Wood and steel are strong ...
+332,markt,market,noun,work;places,Op de markt koop ik verse groenten,At the ... I buy fresh vegetables
+333,materiaal,material,noun,material,Hout en staal zijn sterke materialen,Wood and steel are strong ...
 334,me,me,pronoun,grammar,Geef me het boek van de plank,Give ... the book from the shelf
 335,medisch,medical,adjective,health,Medisch advies,... advice
-336,meer,more,adverb,quantity,Ik wil meer water,I want ... water
+336,meer,more,adverb,antonyms,Ik wil meer water,I want ... water
 337,meer,lake,noun,nature,Een meer is een groot gebied met zoet water,A ... is a large area with fresh water
 338,meestal,usually,adverb,time_order,Ik ga meestal lopend,I ... go walking
-339,meester,master,noun,tasks,De meester is een leraar op de basisschool,The ... is a teacher at elementary school
+339,meester,master,noun,education,De meester is een leraar op de basisschool,The ... is a teacher at elementary school
 340,menen,to mean,verb,grammar,Wat meen je?,What do you ...?
 341,met,with,preposition,grammar,Ik ga met jou naar de winkel,I go ... you to the store
 342,meter,meter,noun,quantity,Een meter is 100 centimeter lang,A ... is 100 centimeters long
-343,methode,method,noun,properties,Een goede methode is een effectieve manier,A good ... is an effective way
+343,methode,method,noun,tools,Een goede methode is een effectieve manier,A good ... is an effective way
 344,mezelf,myself,pronoun,grammar,Ik zie mezelf in de spiegel,I see ... in the mirror
 345,mij,me,pronoun,grammar,Hij belt mij morgen,He calls ... tomorrow
 346,mijn,my,pronoun,money,"Dit is mijn huis, niet van jou","This is ... house, not yours"
 347,miljoen,million,numeral,numbers,Een miljoen is duizend maal duizend,A ... is thousand times thousand
-348,minister,minister,noun,leadership,De minister is lid van de regering,The ... is a member of the government
+348,minister,minister,noun,society,De minister is lid van de regering,The ... is a member of the government
 349,minuut,minute,noun,schedule,Een minuut is 60 seconden lang,A ... is 60 seconds long
-350,missen,to miss,verb,feelings,"Ik mis je, wanneer kom je terug?","I ... you, when will you come back?"
-351,modern,modern,adjective,states,Een modern huis heeft een eigentijdse stijl,A ... house has a contemporary style
-352,moe,tired,adjective,states,Ik ben moe,I am tired
+350,missen,to miss,verb,mood,"Ik mis je, wanneer kom je terug?","I ... you, when will you come back?"
+351,modern,modern,adjective,culture;antonyms,Een modern huis heeft een eigentijdse stijl,A ... house has a contemporary style
+352,moe,tired,adjective,mood;health,Ik ben moe,I am tired
 353,moeder,mother,noun,family,Mijn moeder en vader zijn mijn ouders,My ... and father are my parents
 354,moeilijk,difficult,adjective,qualities,Deze som is moeilijk,This math problem is difficult
 355,moeten,must,verb,grammar,Ik moet werken vandaag,I ... work today
-356,moment,moment,noun,duration,"Wacht een moment, ik kom zo","Wait a ..., I'm coming"
+356,moment,moment,noun,time,"Wacht een moment, ik kom zo","Wait a ..., I'm coming"
 357,mond,mouth,noun,body_parts,Ik eet met mijn mond en praat ermee,I eat with my ... and talk with it
 358,mooi,beautiful,adjective,qualities,Een mooi schilderij,A beautiful painting
 359,motief,motive,noun,conversation,Het motief voor de daad was wraak,The ... for the act was revenge
-360,museum,museum,noun,culture,In het museum zie je kunst en geschiedenis,In the ... you see art and history
-361,muziek,music,noun,culture,Ik luister naar muziek met mijn koptelefoon,I listen to ... with my headphones
+360,museum,museum,noun,culture;places,In het museum zie je kunst en geschiedenis,In the ... you see art and history
+361,muziek,music,noun,culture;music,Ik luister naar muziek met mijn koptelefoon,I listen to ... with my headphones
 362,naam,name,noun,people,Voor- en achternaam staan op het document,First and last ... are on the document
 363,naar,to,preposition,directions,Ik ga naar school om te leren,I go ... school to learn
 364,naast,next to,preposition,directions,Ik zit naast mijn vriend in de klas,I sit ... my friend in class
-365,nacht,night,noun,time_order,"Goede nacht, slaap lekker!","Good ..., sleep well!"
+365,nacht,night,noun,antonyms;day_time,"Goede nacht, slaap lekker!","Good ..., sleep well!"
 366,nadat,after,conjunction,time_order,Nadat ik eet ga ik slapen,After I eat I go to sleep
 367,nationaal,national,adjective,nature,Een nationaal park behoort tot het hele land,A ... park belongs to the whole country
 368,natuur,nature,noun,nature,"De natuur heeft bomen, dieren en rivieren","... has trees, animals and rivers"
 369,nee,no,interjection,conversation,"Wil je dit? Nee, dank je","Do you want this? ..., thank you"
 370,neef,nephew,noun,family,Mijn neef is de zoon van mijn oom of tante,My ... is the son of my uncle or aunt
-371,negatief,negative,adjective,feelings,Een negatief gevoel is niet positief of blij,A ... feeling is not positive or happy
+371,negatief,negative,adjective,mood,Een negatief gevoel is niet positief of blij,A ... feeling is not positive or happy
 372,negen,nine,numeral,numbers,Negen is het getal tussen acht en tien,... is the number between eight and ten
 373,negentien,nineteen,numeral,numbers,Negentien is het getal na achttien,... is the number after eighteen
 374,nek,neck,noun,body_parts,Mijn nek doet pijn tussen hoofd en schouders,My ... hurts between head and shoulders
@@ -388,7 +388,7 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 387,of,or,conjunction,grammar,Wil je koffie of thee drinken vandaag?,Do you want coffee ... tea to drink today?
 388,officieel,official,adjective,states,Dit is het officieel document van de overheid,This is the ... document from the government
 389,officier,officer,noun,leadership,Een officier is een militaire leider,An ... is a military leader
-390,oh,oh,interjection,mental_states,"Oh, ik begrijp het nu","..., I understand now"
+390,oh,oh,interjection,mood,"Oh, ik begrijp het nu","..., I understand now"
 391,oktober,October,noun,time_order,Oktober is de tiende maand van het jaar,... is the tenth month of the year
 392,oké,okay,interjection,society,"Oké, dat is goed","..., that is fine"
 393,olie,oil,noun,items,Olie is een vloeibare stof om mee te koken,... is a liquid substance to cook with
@@ -417,9 +417,9 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 416,ouder,parent,noun,family,Mijn ouder is mijn vader of moeder,My ... is my father or mother
 417,over,about,preposition,grammar,We praten over het weer,We talk ... the weather
 418,pad,path,noun,directions,Een smal pad loopt door het bos,A narrow ... runs through the forest
-419,papier,paper,noun,home,Papier is gemaakt van hout om op te schrijven,... is made from wood to write on
-420,partner,partner,noun,people,Mijn partner is de persoon met wie ik samenleef,My ... is the person I live with
-421,pas,just,adverb,time_order,Ik kom pas om acht uur,I come ... at eight
+419,papier,paper,noun,items,Papier is gemaakt van hout om op te schrijven,... is made from wood to write on
+420,partner,partner,noun,people;relationships,Mijn partner is de persoon met wie ik samenleef,My ... is the person I live with
+421,pas,just,adverb,grammar,Ik kom pas om acht uur,I come ... at eight
 422,pas,pass,noun,items,Ik heb mijn pas vergeten,I forgot my pass
 423,passeren,to pass,verb,actions,Ik passeer het huis op weg naar school,I ... the house on my way to school
 424,patiënt,patient,noun,health,De patiënt wordt behandeld door een dokter,The ... is treated by a doctor
@@ -427,8 +427,8 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 426,periode,period,noun,duration,Een periode is een bepaalde tijdspanne,A ... is a certain time span
 427,pers,press,noun,media,De pers zijn journalisten en kranten,The ... are journalists and newspapers
 428,persoon,person,noun,people,Een persoon is een individueel mens,A ... is an individual human
-429,persoonlijk,personally,adverb,adverbs,Ik kom persoonlijk,I come ...
-430,persoonlijkheid,personality,noun,mental_states,Zijn persoonlijkheid is vriendelijk en extravert,His ... is friendly and extroverted
+429,persoonlijk,personally,adverb,mood,Ik kom persoonlijk,I come ...
+430,persoonlijkheid,personality,noun,mood;people,Zijn persoonlijkheid is vriendelijk en extravert,His ... is friendly and extroverted
 431,pijn,pain,noun,life_experience,"Ik heb pijn in mijn been, het doet zeer","I have ... in my leg, it hurts"
 432,pijnlijk,painful,adjective,life_experience,Een pijnlijke ervaring doet emotioneel zeer,A ... experience hurts emotionally
 433,plaat,plate,noun,items,Een plaat is een vlak stuk materiaal,A ... is a flat piece of material
@@ -437,14 +437,14 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 436,plan,plan,noun,tasks,Wat is je plan voor het weekend?,What is your ... for the weekend?
 437,plant,plant,noun,nature,Een groene plant groeit in de tuin,A green ... grows in the garden
 438,planten,to plant,verb,tasks,Ik plant bloemen en groenten in de tuin,I ... flowers and vegetables in the garden
-439,plezier,pleasure,noun,feelings,Veel plezier met het feest vanavond!,Have fun at the party tonight!
+439,plezier,pleasure,noun,mood,Veel plezier met het feest vanavond!,Have fun at the party tonight!
 440,politie,police,noun,society,Bel de politie bij nood of gevaar,Call the ... in an emergency or danger
 441,positie,position,noun,directions,Een goede positie is een gunstige plek,A good ... is a favorable spot
-442,positief,positive,adjective,feelings,Een positief resultaat is goed nieuws,A ... result is good news
-443,pot,pot,noun,home,Ik kook soep in een grote pot,I cook soup in a large ...
+442,positief,positive,adjective,mood,Een positief resultaat is goed nieuws,A ... result is good news
+443,pot,pot,noun,food,Ik kook soep in een grote pot,I cook soup in a large ...
 444,prachtig,magnificent,adjective,qualities,Een prachtig uitzicht,A magnificent view
 445,praktijk,practice,noun,society,In de praktijk werkt het anders dan in theorie,In ... it works differently than in theory
-446,praktisch,practical,adjective,adverbs,Een praktische oplossing is handig en werkt goed,A ... solution is handy and works well
+446,praktisch,practical,adjective,mood,Een praktische oplossing is handig en werkt goed,A ... solution is handy and works well
 447,praten,to talk,verb,conversation,We praten over het nieuws,We talk about the news
 448,president,president,noun,leadership,De president is de leider van een land,The ... is the leader of a country
 449,prijs,price,noun,money,De prijs van dit boek is 20 euro,The ... of this book is 20 euros
@@ -454,23 +454,23 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 453,produceren,to produce,verb,actions,Fabrieken produceren goederen en artikelen,Factories ... goods and articles
 454,product,product,noun,tools,De winkel verkoopt veel producten en goederen,The store sells many ... and goods
 455,productie,production,noun,tasks,De productie van auto's stopt vandaag,The ... of cars stops today
-456,programma,program,noun,workplace,Het televisieprogramma start om acht uur,The television ... starts at eight o'clock
-457,project,project,noun,workplace,Een nieuw project begint met een plan,A new ... starts with a plan
+456,programma,program,noun,work,Het televisieprogramma start om acht uur,The television ... starts at eight o'clock
+457,project,project,noun,work,Een nieuw project begint met een plan,A new ... starts with a plan
 458,provincie,province,noun,nature,In deze provincie,In this ...
 459,psychologie,psychology,noun,education,Ik studeer psychologie,I study ...
-460,psychologisch,psychological,adjective,mental_states,Een psychologisch effect,A ... effect
+460,psychologisch,psychological,adjective,mood,Een psychologisch effect,A ... effect
 461,psycholoog,psychologist,noun,profession,De psycholoog helpt,The ... helps
 462,publiceren,to publish,verb,media,Een boek publiceren,To ... a book
 463,raar,strange,adjective,states,Dat is raar,That is strange
 464,radio,radio,noun,media,Ik luister naar de radio,I listen to the ...
 465,reactie,reaction,noun,conversation,Wat is je reactie op dit nieuws?,What is your ... to this news?
-466,realiseren,to realize,verb,mental_states,Ik realiseer het nu,I ... it now
+466,realiseren,to realize,verb,mood,Ik realiseer het nu,I ... it now
 467,reden,reason,noun,conversation,Wat is de reden?,What is the ...?
 468,regel,rule,noun,tools,De regels van het spel,The rules of the game
 469,relatie,relationship,noun,relationships,Een goede relatie,A good ...
 470,relatief,relatively,adverb,grammar,Relatief eenvoudig,... simple
 471,rennen,to run,verb,motion,Ik ren naar huis,I ... home
-472,restaurant,restaurant,noun,food,We eten in een restaurant,We eat in a ...
+472,restaurant,restaurant,noun,food;places,We eten in een restaurant,We eat in a ...
 473,resultaat,result,noun,items,Het resultaat van de test is positief,The ... of the test is positive
 474,rijk,rich,adjective,money,Hij is rijk en heeft veel geld,He is ... and has a lot of money
 475,rijk,kingdom,noun,nature,Het Koninkrijk der Nederlanden,The ... of the Netherlands
@@ -492,8 +492,8 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 491,schoonmaken,to clean,verb,tasks,Ik maak het huis schoon,I clean the house
 492,schouder,shoulder,noun,body_parts,De schouder verbindt de arm met het lichaam,The ... connects the arm to the body
 493,seconde,second,noun,schedule,Een minuut heeft 60 seconden,A minute has 60 ...
-494,sector,sector,noun,workplace,De publieke sector omvat overheid en onderwijs,The public ... includes government and education
-495,serieus,serious,adjective,feelings,"Dit is een serieus probleem, geen grapje","This is a ... problem, not a joke"
+494,sector,sector,noun,geometry;work,De publieke sector omvat overheid en onderwijs,The public ... includes government and education
+495,serieus,serious,adjective,mood,"Dit is een serieus probleem, geen grapje","This is a ... problem, not a joke"
 496,sigaret,cigarette,noun,health,Een sigaret roken is ongezond voor de longen,Smoking a ... is unhealthy for the lungs
 497,sinds,since,preposition,time_order,Sinds vorige week ben ik ziek,... last week I am sick
 498,slaap,sleep,noun,health,Ik ben moe en heb slaap nodig,I am tired and need ...
@@ -505,22 +505,22 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 504,soms,sometimes,adverb,time_order,Ik ga soms zwemmen,I go swimming ...
 505,soort,kind,noun,grammar,"Wat voor soort muziek luister je, rock of jazz?","What ... of music do you listen to, rock or jazz?"
 506,speciaal,special,adjective,qualities,Een speciaal cadeau is uniek en bijzonder,A ... gift is unique and extraordinary
-507,specifiek,specific,adjective,adverbs,Ik heb een specifiek en duidelijk antwoord,I have a ... and clear answer
+507,specifiek,specific,adjective,mood,Ik heb een specifiek en duidelijk antwoord,I have a ... and clear answer
 508,spreken,to speak,verb,conversation,Ik spreek Nederlands,I ... Dutch
-509,staan,to stand,verb,directions,Ik sta bij de deur,I ... by the door
-510,staan,stand,noun,directions,Een fruitstal op de markt,A fruit stand at the market
+509,staan,to stand,verb,actions,Ik sta bij de deur,I ... by the door
+510,staan,stand,noun,places,Een fruitstal op de markt,A fruit stand at the market
 511,staat,state,noun,properties,Mijn auto is in goede staat en werkt perfect,My car is in good ... and works perfectly
 512,stap,step,noun,motion,Nog één stap en je bent bij de deur,One more ... and you're at the door
 513,stappen,to step,verb,motion,Ik stap in de trein,I ... into the train
 514,station,station,noun,transport,Ik wacht op het station,I wait at the ...
-515,steen,stone,noun,home,Een steen is een hard stuk rots,A ... is a hard piece of rock
+515,steen,stone,noun,nature,Een steen is een hard stuk rots,A ... is a hard piece of rock
 516,ster,star,noun,nature,'s Nachts zie je sterren aan de hemel,At night you see ... in the sky
 517,stijf,stiff,adjective,senses,Mijn nek is stijf en beweegt moeilijk,My neck is ... and moves with difficulty
 518,stijl,style,noun,properties,Elke kunstenaar heeft zijn eigen stijl,Every artist has his own ...
 519,stil,quiet,adjective,senses,Het is hier stil,It is quiet here
 520,stofzuigen,to vacuum,verb,tasks,Ik stofzuig de vloer,I vacuum the floor
 521,stoppen,to stop,verb,actions,Stop hier,... here
-522,straat,street,noun,places,Auto's rijden op de straat tussen huizen,Cars drive on the ... between houses
+522,straat,street,noun,places;transport,Auto's rijden op de straat tussen huizen,Cars drive on the ... between houses
 523,strijken,to iron,verb,tasks,Ik strijk mijn overhemd,I iron my shirt
 524,structuur,structure,noun,tools,Een gebouw heeft een sterke structuur,A building has a strong ...
 525,student,student,noun,education,Ik ben student en studeer aan de universiteit,I am a ... and study at the university
@@ -531,16 +531,16 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 530,suiker,sugar,noun,food,Suiker is zoet en zit in de koffie,... is sweet and goes in the coffee
 531,symbool,symbol,noun,language,Een belangrijk symbool,An important ...
 532,systeem,system,noun,grammar,Het computersysteem werkt niet meer goed,The computer... doesn't work well anymore
-533,tafel,table,noun,home,We eten samen aan de tafel,We eat together at the ...
+533,tafel,table,noun,home;food,We eten samen aan de tafel,We eat together at the ...
 534,tante,aunt,noun,family,Mijn tante komt,My ... is coming
 535,te,to,particle,grammar,Ik ga te laat komen,I am going ... arrive late
 536,te,too,adverb,grammar,Dit is te moeilijk voor mij,This is ... difficult for me
 537,techniek,technique,noun,properties,Een goede techniek,A good ...
-538,technisch,technical,adjective,adverbs,Een technisch probleem,A ... problem
+538,technisch,technical,adjective,physics,Een technisch probleem,A ... problem
 539,tegen,against,preposition,society,De ladder staat tegen de muur,The ladder stands ... the wall
 540,tegenwoordig,nowadays,adverb,schedule,Tegenwoordig werk ik thuis,Nowadays I work from home
 541,tekst,text,noun,media,Ik lees de tekst in het boek,I read the ... in the book
-542,telefoon,phone,noun,conversation,Ik bel mijn moeder met de telefoon,I call my mother with the ...
+542,telefoon,phone,noun,items:home,Ik bel mijn moeder met de telefoon,I call my mother with the ...
 543,televisie,television,noun,media,Ik kijk televisie,I watch ...
 544,tentamen,exam,noun,education,Het tentamen is moeilijk,The exam is difficult
 545,term,term,noun,language,Een technische term,A technical ...
@@ -549,8 +549,8 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 548,terug,back,adverb,position,Ik kom terug om vijf uur,I come back at five o clock
 549,terwijl,while,conjunction,time_order,Ik luister muziek terwijl ik werk,I listen to music ... I work
 550,thee,tea,noun,food,Ik drink thee,I drink ...
-551,theoretisch,theoretical,adjective,mental_states,Theoretisch mogelijk,... possible
-552,theorie,theory,noun,mental_states,Een interessante theorie,An interesting ...
+551,theoretisch,theoretical,adjective,mood,Theoretisch mogelijk,... possible
+552,theorie,theory,noun,mood,Een interessante theorie,An interesting ...
 553,tien,ten,numeral,numbers,Tien is het getal tussen negen en elf,... is the number between nine and eleven
 554,titel,title,noun,culture,Elk boek heeft een titel bovenaan,Every book has a ... at the top
 555,toch,still,particle,grammar,Het is toch waar wat ik zeg,It is ... true what I say
@@ -588,7 +588,7 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 587,verjaardag,birthday,noun,relationships,Morgen is mijn verjaardag,Tomorrow is my birthday
 588,verspreiden,to spread,verb,actions,Het nieuws verspreidt zich snel via internet,The news ... quickly via internet
 589,vertellen,to tell,verb,conversation,Vertel me een verhaal,... me a story
-590,vervelend,annoying,adjective,feelings,Dat is vervelend,That is annoying
+590,vervelend,annoying,adjective,mood,Dat is vervelend,That is annoying
 591,vervullen,to fulfill,verb,items,Ik wil mijn droom vervullen om de wereld te zien,I want to ... my dream to see the world
 592,vier,four,numeral,numbers,Ik heb vier appels,I have ... apples
 593,vies,dirty,adjective,health,Mijn handen zijn vies,My hands are dirty
@@ -597,8 +597,8 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 596,vijftig,fifty,numeral,numbers,Vijftig is het getal na veertig,... is the number after forty
 597,vinden,to find,verb,nature,Ik kan mijn sleutel niet vinden,I cannot ... my key
 598,vinger,finger,noun,body_parts,Mijn vinger is gebroken,My ... is broken
-599,vis,fish,noun,food,Ik eet vis,I eat ...
-600,visie,vision,noun,mental_states,Een visie is een duidelijk toekomstbeeld,A ... is a clear future image
+599,vis,fish,noun,food;nature,Ik eet vis,I eat ...
+600,visie,vision,noun,mood,Een visie is een duidelijk toekomstbeeld,A ... is a clear future image
 601,vissen,to fish,verb,actions,Ik ga vissen in de rivier,I go ... in the river
 602,vlakbij,very close,adverb,position,De school is vlakbij,The school is very close
 603,vliegen,to fly,verb,transport,Vogels vliegen,Birds ...
@@ -610,15 +610,15 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 609,volgende,next,adjective,time_order,De volgende keer,The next time
 610,voor,before,preposition,time_order,Kom voor acht uur,Come ... eight o'clock
 611,voor,for,preposition,grammar,Dit cadeau is voor jou,This gift is ... you
-612,vooral,especially,adverb,adverbs,Vooral in de zomer,Especially in summer
+612,vooral,especially,adverb,grammar,Vooral in de zomer,Especially in summer
 613,vorming,formation,noun,actions,De vorming van een mening duurt tijd,The ... of an opinion takes time
 614,vreemd,strange,adjective,states,Een vreemd geluid,A strange sound
 615,vriend,friend,noun,people,Hij is mijn beste vriend,He is my best ...
-616,vriendelijk,friendly,adjective,feelings,Een vriendelijke man helpt anderen graag,A ... man likes to help others
+616,vriendelijk,friendly,adjective,mood,Een vriendelijke man helpt anderen graag,A ... man likes to help others
 617,vriendin,girlfriend,noun,people,Zij is mijn vriendin,She is my girlfriend
 618,vrij,free,adjective,states,Ben je morgen vrij?,Are you ... tomorrow?
 619,vroeg,early,adjective,time_order,Ik sta vroeg op,I get up early
-620,vrolijk,cheerful,adjective,feelings,Een vrolijk kind,A cheerful child
+620,vrolijk,cheerful,adjective,mood,Een vrolijk kind,A cheerful child
 621,vuilnis,garbage,noun,tasks,Ik zet het vuilnis buiten,I put the garbage outside
 622,vullen,to fill,verb,actions,Vul het glas met water tot de rand,... the glass with water to the rim
 623,vuur,fire,noun,home,Het vuur brandt,The ... burns
@@ -633,7 +633,7 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 632,wasmachine,washing machine,noun,home,De wasmachine is kapot,The washing machine is broken
 633,wassen,to wash,verb,tasks,Ik was mijn handen,I ... my hands
 634,wat,what,pronoun,conversation,Wat wil je eten?,... do you want to eat?
-635,water,water,noun,food,Water is belangrijk voor ons leven,... is important for our life
+635,water,water,noun,food;nature,Water is belangrijk voor ons leven,... is important for our life
 636,we,we,pronoun,grammar,We gaan naar de bioscoop,... are going to the cinema
 637,week,week,noun,schedule,Een week heeft zeven dagen,A ... has seven days
 638,weer,weather,noun,nature,Het weer is mooi vandaag,The weather is nice today
@@ -642,8 +642,8 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 641,wens,wish,noun,life_experience,Mijn grootste wens is de wereld rondreizen,My biggest ... is to travel the world
 642,wensen,to wish,verb,life_experience,Ik wens je succes,I ... you success
 643,wereld,world,noun,nature,De wereld heeft zeven continenten en oceanen,The ... has seven continents and oceans
-644,werk,work,noun,tasks,Ik ga naar mijn werk,I go to my ...
-645,werken,to work,verb,tasks,Ik werk in een kantoor,I ... in an office
+644,werk,work,noun,work,Ik ga naar mijn werk,I go to my ...
+645,werken,to work,verb,work,Ik werk in een kantoor,I ... in an office
 646,westen,west,noun,position,In het westen gaat de zon onder,In the ... the sun sets
 647,westers,western,adjective,position,Westers denken komt uit Europa en Amerika,... thinking comes from Europe and America
 648,weten,to know,verb,education,Ik weet het antwoord,I know the answer
@@ -658,9 +658,9 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 657,wit,white,adjective,color,Sneeuw en melk zijn wit van kleur,Snow and milk are ... in color
 658,woord,word,noun,language,Wat betekent dit woord?,What does this ... mean?
 659,worden,to become,verb,actions,Ik word arts,I become a doctor
-660,wow,wow,interjection,mental_states,"Wow, wat mooi!","..., how beautiful!"
+660,wow,wow,interjection,mood,"Wow, wat mooi!","..., how beautiful!"
 661,zacht,soft,adjective,senses,Een zacht kussen,A soft pillow
-662,zaken,business,noun,workplace,Ik doe zaken met hem,I do business with him
+662,zaken,business,noun,work,Ik doe zaken met hem,I do business with him
 663,zand,sand,noun,nature,Op het strand ligt geel zand,On the beach lies yellow ...
 664,zee,sea,noun,nature,De zee is groot en zout water,The ... is large and salt water
 665,zeggen,to say,verb,conversation,Wat zeg je?,What do you say?
@@ -675,7 +675,7 @@ number,dutch,english,part_of_speech,category,example_dutch,example_english
 674,zij,she,pronoun,grammar,Zij is mijn zus,... is my sister
 675,zingen,to sing,verb,people,Ik zing een lied met mijn stem,I ... a song with my voice
 676,zitten,to sit,verb,directions,Ik zit op een stoel,I ... on a chair
-677,zo,so,adverb,adverbs,Deze taart is zo lekker en zoet,This cake is ... delicious and sweet
+677,zo,so,adverb,grammar,Deze taart is zo lekker en zoet,This cake is ... delicious and sweet
 678,zodat,so that,conjunction,grammar,Ik ren snel zodat ik op tijd kom,I run fast ... I arrive on time
 679,zoet,sweet,adjective,senses,Deze cake is zoet,This cake is sweet
 680,zomer,summer,noun,schedule,In de zomer is het warm en schijnt de zon,In the ... it is warm and the sun shines

@@ -11,7 +11,7 @@ from ..db import get_session
 from ..services.word_pool import WordPool
 
 async def get_app_user_words(user_id: int, limit: int):
-   try:
+    try:
         # 1) load the user (and level)
         session = await get_session()
         app_user = await get_app_user(user_id, session)
@@ -20,11 +20,10 @@ async def get_app_user_words(user_id: int, limit: int):
             raise HTTPException(404, "User not found")
             
         rows = []
-        print(app_user.app_user_words)
         if len(app_user.app_user_words) == 0:
-            print("user doesn't have words")
+            print("get_app_user_words: user doesn't have words")
             # 2) fetch random words for that level when user has no words
-            result = await get_random_words([Word.level_id == app_user.level_id], limit, session)
+            result = await get_random_words([Word.level_id == app_user.level_id], limit or 15, session)
             words_only = [row[0] for row in result]
             rows = [
                 {"app_user_id": user_id, "word_id": item.id, "rank": 0}
@@ -38,9 +37,9 @@ async def get_app_user_words(user_id: int, limit: int):
             # 3) return words for the user
             result = await get_user_ranked_words(limit, app_user, session)
             return result
-   except SQLAlchemyError:
-       await session.rollback()
-       raise HTTPException(500, "Database error")
+    except SQLAlchemyError:
+        await session.rollback()
+        raise HTTPException(500, "Database error")
     
 async def get_user_ranked_words(limit: int, app_user: AppUser, session: AsyncSession = Depends(get_session)):
     # user_words = await session.execute(
@@ -167,7 +166,7 @@ async def update_app_words(user_id: int, body: AppUserWords, limit: int):
         await session.rollback()
         await session.close()
         raise HTTPException(500, f"Database error: {str(e)}")
-       
+
 async def remove_app_user_words(user_id: int, body: AppUserWords, limit: int):
     try:
         session = await get_session()
@@ -190,7 +189,7 @@ async def remove_app_user_words(user_id: int, body: AppUserWords, limit: int):
         await session.rollback()
         await session.close()
         raise HTTPException(500, f"Database error: {str(e)}")
- 
+
 async def sentences_with_app_user_words(user_id: int, limit: int):
     try:
         session = await get_session()

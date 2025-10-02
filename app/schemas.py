@@ -19,7 +19,7 @@ class PromptExampleRead(PromptExampleBase):
 # Word schemas
 class WordBase(BaseModel):
     word: str
-    part_of_speech: str
+    pos: str
     meaning: str
 
 class WordCreate(WordBase):

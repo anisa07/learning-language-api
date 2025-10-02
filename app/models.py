@@ -12,10 +12,10 @@ class PromptExample(Base):
 
 class Word(Base):
     __tablename__ = "words"
-    __table_args__ = (UniqueConstraint("word", "part_of_speech", name="uq_words_token_pos"), CheckConstraint("part_of_speech IN ('verb','noun','adjective','numeral')", name="ck_pos"),)
+    __table_args__ = (UniqueConstraint("word", "pos", name="uq_words_token_pos"), CheckConstraint("pos IN ('verb','noun','adjective','numeral')", name="ck_pos"),)
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     word: Mapped[str] = mapped_column(String(150), nullable=False) # if ite's verb - infinitive, noun - singular form with definite article, adjective - het form w/o e at the end
-    part_of_speech: Mapped[str] = mapped_column(String(25), nullable=False) # e.g adjective, noun, verb
+    pos: Mapped[str] = mapped_column(String(25), nullable=False) # e.g adjective, noun, verb
     
     # Foreign key to Level (many words can have the same level)
     level_id: Mapped[int] = mapped_column(ForeignKey("levels.id"))
@@ -42,8 +42,8 @@ class Meaning(Base):
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     meaning = mapped_column(String(200), nullable=False)
     usage = mapped_column(Text, nullable=True) # context
-    example = mapped_column(Text, nullable=True)
-    example_translation = mapped_column(Text, nullable=True)
+    example_dutch = mapped_column(Text, nullable=True)
+    example_english = mapped_column(Text, nullable=True)
     # One-to-many relationship with Word
     word_id: Mapped[int] = mapped_column(ForeignKey("words.id"), nullable=False, index=True)
     word: Mapped["Word"] = relationship("Word", back_populates="meanings")
@@ -177,4 +177,3 @@ class Level(Base):
     
     # One-to-many relationship with Word
     words: Mapped[List["Word"]] = relationship("Word", back_populates="level")
-

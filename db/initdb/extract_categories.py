@@ -9,7 +9,10 @@ with open('easy-vocabulary.csv', 'r', encoding='utf-8') as f:
     for row in reader:
         cat = row['category'].strip()
         if cat:
-            category_counts[cat] += 1
+            # Split by semicolon and process each category
+            categories = [c.strip() for c in cat.split(';') if c.strip()]
+            for category in categories:
+                category_counts[category] += 1
 
 # Sort by category name alphabetically
 sorted_categories = sorted(category_counts.items())

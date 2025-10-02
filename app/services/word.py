@@ -1,6 +1,7 @@
 from enum import Enum
 from fastapi import Depends
 from math import floor
+import logging
 from sqlalchemy import ColumnElement, case, exists, select, delete, func, and_, update
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload, selectinload
@@ -138,7 +139,12 @@ async def get_random_words(conditions: list[ColumnElement[bool]], limit: int, se
         stmt = stmt.limit(limit)
     
     result = await session.execute(stmt)
-    return result.all()
+    words = result.all()
+    
+    # Log the number of words returned
+    print(f"get_random_words: Retrieved {len(words)} words (limit: {limit})")
+    
+    return words
 
 async def save_user_words(rows: list[dict[str, int]], session: AsyncSession = Depends(get_session)):
     insert_stmt = pg_insert(AppUserWord).values(rows)
@@ -237,15 +243,15 @@ def serialize(w: Word, rank: int, category: str):
     out = {
         "id": w.id,
         "word": w.word,
-        "part_of_speech": w.part_of_speech,
+        "pos": w.pos,
         # "meaning": w.meaning,
         "meanings": [m for m in w.meanings],
         "rank": rank,  # 0 if user doesn't have it yet
         "category": category
     }
-    pos = w.part_of_speech
-    print(pos)
-    print(w)
+    pos = w.pos
+    # print(pos)
+    #print(w)
     if pos == "verb" and w.verb_form:
         v = w.verb_form
         out["verb_form"] = {
