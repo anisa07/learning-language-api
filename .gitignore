@@ -174,3 +174,12 @@ cython_debug/
 .vscode/launch.json
 .vscode/extensions.json
 .vscode/tasks.json
+
+dutch_words.json
+dutch-learning-backup.json
+generate_seed.py
+analyze_sources.py
+
+use_cases.md
+
+words

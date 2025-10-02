@@ -7,6 +7,12 @@ services:
       - .:/app:cached
     environment:
       ENVIRONMENT: dev
+      PYTHONPATH: /app
+      DEBUGPY: "1"
+      DEBUGPY_PORT: "5678"
+    ports:
+      - "8000:8000" # app
+      - "5678:5678" # debugger
     restart: unless-stopped
 
   db:
