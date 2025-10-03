@@ -882,16 +882,26 @@ ON CONFLICT (username) DO NOTHING;
 
 -- Insert app_user_meanings for demo user
 -- Read words from selected-words.txt file (comma-separated)
+CREATE TEMP TABLE t_selected_words_raw (
+    content TEXT
+);
+
+-- Copy the entire content as a single text field
+COPY t_selected_words_raw (content)
+FROM '/docker-entrypoint-initdb.d/selected-words.txt';
+
+-- Create a table to hold individual words
 CREATE TEMP TABLE t_selected_words (
     word TEXT
 );
 
-COPY t_selected_words (word)
-FROM '/docker-entrypoint-initdb.d/selected-words.txt'
-DELIMITER ',';
+-- Split the comma-separated content into individual words
+INSERT INTO t_selected_words (word)
+SELECT TRIM(unnest(string_to_array(content, ','))) as word
+FROM t_selected_words_raw;
 
 INSERT INTO app_user_meanings (app_user_id, meaning_id, rank, is_selected)
-SELECT 
+SELECT DISTINCT
 (SELECT id FROM app_users WHERE username = 'demo_user') as app_user_id,
 m.id as meaning_id,
 0 as rank,
@@ -903,5 +913,6 @@ ON CONFLICT (app_user_id, meaning_id) DO UPDATE SET
 is_selected = EXCLUDED.is_selected,
 rank = EXCLUDED.rank;
 
--- Clean up temporary table
+-- Clean up temporary tables
+DROP TABLE t_selected_words_raw;
 DROP TABLE t_selected_words;

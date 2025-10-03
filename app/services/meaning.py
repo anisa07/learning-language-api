@@ -160,15 +160,18 @@ async def pick_from_bucket(cond, n: int, user_id: int, selected_ids: set, sessio
         return []
 
     stmt = (
-        select(Meaning, Word.word, AppUserMeaning.rank)
+        select(Meaning, Word.word, AppUserMeaning.rank, Category)
         .join(Word, Meaning.word_id == Word.id)
         .join(AppUserMeaning, AppUserMeaning.meaning_id == Meaning.id, isouter=True)
+        .join(CategoryMeaning, CategoryMeaning.meaning_id == Meaning.id, isouter=True)
+        .join(Category, Category.id == CategoryMeaning.category_id, isouter=True)
         .where(AppUserMeaning.app_user_id == user_id, cond, ~Meaning.id.in_(selected_ids))
         .options(
             selectinload(Meaning.verb_form), 
             selectinload(Meaning.noun_form),
             selectinload(Meaning.adjective_form),
             selectinload(Meaning.numeral_form),
+            selectinload(Meaning.category_meanings).selectinload(CategoryMeaning.category),
         )
         .order_by(func.random())  # PostgreSQL
     )
