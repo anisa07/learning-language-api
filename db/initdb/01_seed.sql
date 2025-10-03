@@ -93,6 +93,12 @@ BEGIN
   INSERT INTO category_meanings (category_id, meaning_id)
   SELECT DISTINCT c.id, m.id 
   FROM categories c, meanings m
+  WHERE c.category = 'nouns' AND m.pos = 'noun'
+  ON CONFLICT (category_id, meaning_id) DO NOTHING;
+
+  INSERT INTO category_meanings (category_id, meaning_id)
+  SELECT DISTINCT c.id, m.id 
+  FROM categories c, meanings m
   WHERE c.category = 'verbs' AND m.pos = 'verb'
   ON CONFLICT (category_id, meaning_id) DO NOTHING;
 
@@ -875,6 +881,15 @@ INSERT INTO app_users (username, email, level_id) VALUES
 ON CONFLICT (username) DO NOTHING;
 
 -- Insert app_user_meanings for demo user
+-- Read words from selected-words.txt file (comma-separated)
+CREATE TEMP TABLE t_selected_words (
+    word TEXT
+);
+
+COPY t_selected_words (word)
+FROM '/docker-entrypoint-initdb.d/selected-words.txt'
+DELIMITER ',';
+
 INSERT INTO app_user_meanings (app_user_id, meaning_id, rank, is_selected)
 SELECT 
 (SELECT id FROM app_users WHERE username = 'demo_user') as app_user_id,
@@ -883,7 +898,10 @@ m.id as meaning_id,
 true as is_selected
 FROM meanings m
 JOIN words w ON w.id = m.word_id
-WHERE w.word IN ('aanstaande','draaien','dankzij','tegenwoordig','houden','klagen','weer','praten','liever','ontmoeten','kennis','roepnaam','aanwezig','stil','worden','oefenen','eenzaam','zeggen','wetenschap','logeren','nou','nu','sturen','ontvangen','beroep','volgende','uitstekend','bijbaantje','vriend','vriendin','vooral','afkomst','baan','examen','toets','bedrijf','dan','nadat','zaken','avondeten','organiseren','terug','ieder','doordeweeks','bijna','duidelijk','bezoeken','ontspannen','moeilijk','mooi','beroemd','vrolijk','vuilnis','tuin','stofzuigen','afwasmachine','wasmachine','opruimen','vervelend','rommel','rommelig','maaltijd','gerecht','druk','dichtbij','vlakbij','verjaardag','lente','herfst','toetje','eten','bestellen','regel','aardappel','ei','brood','zoet','smerig','vies','prachtig','schoonmaken','duur','goedkoop','keer','iedere','moe','weten','zacht','raar','vreemd','gewoon','eigenlijk','opschieten','boos','algemeen','borrelen','ophalen','gezond','afbeelding','tentamen','strijken','behalve')
+JOIN t_selected_words t ON t.word = w.word
 ON CONFLICT (app_user_id, meaning_id) DO UPDATE SET 
 is_selected = EXCLUDED.is_selected,
 rank = EXCLUDED.rank;
+
+-- Clean up temporary table
+DROP TABLE t_selected_words;

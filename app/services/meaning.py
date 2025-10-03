@@ -56,10 +56,8 @@ async def get_app_user(user_id: int, session: AsyncSession):
 
 async def get_meaning_list(limit: int, session: AsyncSession = Depends(get_session)):
     stmt = (
-        select(Meaning, Word.word, Category.category)
+        select(Meaning, Word.word)
         .join(Word, Meaning.word_id == Word.id)
-        .join(CategoryMeaning, CategoryMeaning.meaning_id == Meaning.id, isouter=True)
-        .join(Category, CategoryMeaning.category_id == Category.id, isouter=True)
         .options(
             selectinload(Meaning.verb_form),
             selectinload(Meaning.noun_form),
@@ -123,11 +121,9 @@ async def remove_app_user_meaning_list(user_id: int, meanings: List[int], sessio
 
 async def get_random_meanings(conditions: list[ColumnElement[bool]], limit: int, session: AsyncSession = Depends(get_session)):
     stmt = (
-        select(Meaning, Word.word, AppUserMeaning.rank, Category.category)
+        select(Meaning, Word.word, AppUserMeaning.rank)
         .join(Word, Meaning.word_id == Word.id)
         .join(AppUserMeaning, AppUserMeaning.meaning_id == Meaning.id, isouter=True)
-        .join(CategoryMeaning, CategoryMeaning.meaning_id == Meaning.id, isouter=True)
-        .join(Category, CategoryMeaning.category_id == Category.id, isouter=True)
         .where(*conditions)
         .options(
             selectinload(Meaning.verb_form),
@@ -164,11 +160,9 @@ async def pick_from_bucket(cond, n: int, user_id: int, selected_ids: set, sessio
         return []
 
     stmt = (
-        select(Meaning, Word.word, AppUserMeaning.rank, Category.category)
+        select(Meaning, Word.word, AppUserMeaning.rank)
         .join(Word, Meaning.word_id == Word.id)
         .join(AppUserMeaning, AppUserMeaning.meaning_id == Meaning.id, isouter=True)
-        .join(CategoryMeaning, CategoryMeaning.meaning_id == Meaning.id, isouter=True)
-        .join(Category, CategoryMeaning.category_id == Category.id, isouter=True)
         .where(AppUserMeaning.app_user_id == user_id, cond, ~Meaning.id.in_(selected_ids))
         .options(
             selectinload(Meaning.verb_form), 
@@ -210,11 +204,9 @@ async def select_new_meanings(app_user: AppUser, limit: int, selected_ids: set, 
 async def select_user_meanings_from_list(user_id: int, limit: int, session: AsyncSession = Depends(get_session)):
     # Get the user's meanings directly from database after insertion
     stmt = (
-        select(Meaning, Word.word, AppUserMeaning.rank, Category.category)
+        select(Meaning, Word.word, AppUserMeaning.rank)
         .join(Word, Meaning.word_id == Word.id)
         .join(AppUserMeaning, AppUserMeaning.meaning_id == Meaning.id)
-        .join(CategoryMeaning, CategoryMeaning.meaning_id == Meaning.id, isouter=True)
-        .join(Category, CategoryMeaning.category_id == Category.id, isouter=True)
         .where(AppUserMeaning.app_user_id == user_id)
         .options(
             selectinload(Meaning.verb_form),
@@ -235,11 +227,9 @@ async def select_user_meanings_from_list(user_id: int, limit: int, session: Asyn
 async def get_selected_meanings(user_id: int, limit: int, session: AsyncSession = Depends(get_session)):
     """Get only meanings that are selected (is_selected = true) for the user"""
     stmt = (
-        select(Meaning, Word.word, AppUserMeaning.rank, Category.category)
+        select(Meaning, Word.word, AppUserMeaning.rank)
         .join(Word, Meaning.word_id == Word.id)
         .join(AppUserMeaning, AppUserMeaning.meaning_id == Meaning.id)
-        .join(CategoryMeaning, CategoryMeaning.meaning_id == Meaning.id, isouter=True)
-        .join(Category, CategoryMeaning.category_id == Category.id, isouter=True)
         .where(
             AppUserMeaning.app_user_id == user_id,
             AppUserMeaning.is_selected == True
@@ -279,7 +269,7 @@ async def update_selected_meanings(user_id: int, meaning_ids: List[int], is_sele
     
     return result.rowcount
 
-def serialize_meaning(m: Meaning, word: str, rank: int, category: str = None):
+def serialize_meaning(m: Meaning, word: str, rank: int):
     # Get categories for this meaning
     meaning_categories = []
     for category_meaning in m.category_meanings:
